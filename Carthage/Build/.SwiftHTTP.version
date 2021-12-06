@@ -1,0 +1,60 @@
+{
+  "Mac" : [
+    {
+      "swiftToolchainVersion" : "5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)",
+      "hash" : "73783781445f7d6e319c3ca97bd5d5db04dec9f348050d203699c5d79c3d764a",
+      "name" : "SwiftHTTP",
+      "container" : "SwiftHTTP.xcframework",
+      "identifier" : "macos-arm64_x86_64"
+    }
+  ],
+  "watchOS" : [
+    {
+      "swiftToolchainVersion" : "5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)",
+      "hash" : "2e6ee8c91181f3c2557c3ee0c0e236a2dc3cae5c19d969757211f0f08a7cbce3",
+      "name" : "SwiftHTTP",
+      "container" : "SwiftHTTP.xcframework",
+      "identifier" : "watchos-armv7k"
+    },
+    {
+      "swiftToolchainVersion" : "5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)",
+      "hash" : "3b6d799597f109d170345df02ccf81d39d992dc265b78bacc1e5b3b072044977",
+      "name" : "SwiftHTTP",
+      "container" : "SwiftHTTP.xcframework",
+      "identifier" : "watchos-arm64_i386_x86_64-simulator"
+    }
+  ],
+  "tvOS" : [
+    {
+      "swiftToolchainVersion" : "5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)",
+      "hash" : "b1b4aa0d437f637cc82f54a5660f77d15699ddabe1e49fd1da9c52ab59540b1f",
+      "name" : "SwiftHTTP",
+      "container" : "SwiftHTTP.xcframework",
+      "identifier" : "tvos-arm64"
+    },
+    {
+      "swiftToolchainVersion" : "5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)",
+      "hash" : "c9a800192e678a81a5790367a02822267841c179060c81dd0ebc30ae5c49ff3b",
+      "name" : "SwiftHTTP",
+      "container" : "SwiftHTTP.xcframework",
+      "identifier" : "tvos-arm64_x86_64-simulator"
+    }
+  ],
+  "commitish" : "3.0.1",
+  "iOS" : [
+    {
+      "swiftToolchainVersion" : "5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)",
+      "hash" : "b3feb7af1cfac28f06d515466cd1bfba4995b7edcb9b94fed17ee3501c54fc4f",
+      "name" : "SwiftHTTP",
+      "container" : "SwiftHTTP.xcframework",
+      "identifier" : "ios-arm64_armv7"
+    },
+    {
+      "swiftToolchainVersion" : "5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)",
+      "hash" : "5fcb6c4c4813155bfcfe15322199aa7918dd14441e00accdb52de1ee5371ab29",
+      "name" : "SwiftHTTP",
+      "container" : "SwiftHTTP.xcframework",
+      "identifier" : "ios-arm64_i386_x86_64-simulator"
+    }
+  ]
+}
