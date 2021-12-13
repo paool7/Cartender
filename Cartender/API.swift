@@ -12,6 +12,8 @@ let baseURL = "https://api.owners.kia.com/apigw/v1/"
 class API {
     static let shared = API()
     
+    var logoutHandler: (() -> ())?
+    
     //Generate a fake but consistent UUID
     var uuid: String {
         get {
@@ -69,20 +71,25 @@ class API {
         if let body = body {
             req.httpBody = body.json
         }
-        HTTP(req).run { response in
-            guard let responseHeaders = response.headers else {
-                return
-            }
-            if let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any], let status = json["status"] as? [String: Any] {
-                print(status["errorMessage"]!)
-                if status["errorMessage"] as! String == "Incorrect request payload format" {
-                    print(endpoint)
+        HTTP(req).run { [weak self] response in
+            if let text = response.text, text.contains(":1003") {
+                self?.sessionId = nil
+                self?.logoutHandler?()
+            } else {
+                guard let responseHeaders = response.headers else {
+                    return
                 }
+                if let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any], let status = json["status"] as? [String: Any] {
+                    print(status["errorMessage"]!)
+                    if status["errorMessage"] as! String == "Incorrect request payload format" {
+                        print(endpoint)
+                    }
+                }
+                if !authorized, let sid = responseHeaders["Sid"] {
+                    self?.sessionId = sid
+                }
+                completion?(response)
             }
-            if !authorized, let sid = responseHeaders["Sid"] {
-                self.sessionId = sid
-            }
-            completion?(response)
         }
     }
     
@@ -90,14 +97,19 @@ class API {
         var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
         req.httpMethod = "GET"
         req.allHTTPHeaderFields = authorizedHeaders
-        HTTP(req).run { response in
-            if let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any], let status = json["status"] as? [String: Any] {
-                print(status["errorMessage"]!)
-                if status["errorMessage"] as! String == "Incorrect request payload format" {
-                    print(endpoint)
+        HTTP(req).run { [weak self] response in
+            if let text = response.text, text.contains(":1003") {
+                self?.sessionId = nil
+                self?.logoutHandler?()
+            } else {
+                if let json = try? JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any], let status = json["status"] as? [String: Any] {
+                    print(status["errorMessage"]!)
+                    if status["errorMessage"] as! String == "Incorrect request payload format" {
+                        print(endpoint)
+                    }
                 }
+                completion?(response)
             }
-            completion?(response)
         }
     }
 }

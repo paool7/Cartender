@@ -35,12 +35,11 @@ class ViewController: UIViewController {
     @IBOutlet var doorLabel: UILabel!
     @IBOutlet var setButton: UIButton!
     @IBOutlet var locationLabel: UILabel!
-    @IBOutlet var chargeSetButton: UIButton!
-
+    
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var syncTimeLabel: UILabel!
     @IBOutlet var syncButton: UIButton!
-
+    
     @IBOutlet var containerView: UIView!
     @IBOutlet var containerView2: UIView!
     @IBOutlet var containerView3: UIView!
@@ -104,7 +103,7 @@ class ViewController: UIViewController {
     let redColor = UIColor(red: 222/255.0, green: 26/255.0, blue: 26/255.0, alpha: 0.80)
     let blueColor = UIColor(red: 158/255.0, green: 183/255.0, blue: 229/255.0, alpha: 0.80)
     let yellowColor = UIColor(red: 247/255.0, green: 231/255.0, blue: 51/255.0, alpha: 0.80)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let backgroundColor = UserDefaults.standard.colorFor(key: "BackgroundColor") {
@@ -118,9 +117,15 @@ class ViewController: UIViewController {
             self.containerView5.backgroundColor = secondaryBackgroundColor
         }
         
+        API.shared.logoutHandler = {
+            self.login {
+                self.getVehicles(completion: nil)
+            }
+        }
+        
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] notification in
             if API.shared.sessionId == nil {
-                APIRouter.shared.login {
+                self.login {
                     self.getVehicles(completion: nil)
                 }
             } else {
@@ -194,18 +199,22 @@ class ViewController: UIViewController {
         if isLocked {
             self.lockLabel.text = "Unlocking..."
             self.unlock {
-                self.isLocked = false
+                DispatchQueue.main.async {
+                    self.isLocked = false
+                }
             }
         } else {
             self.lockLabel.text = "Locking..."
             self.lock {
-                self.isLocked = true
+                DispatchQueue.main.async {
+                    self.isLocked = true
+                }
             }
         }
     }
     
     @IBAction func stepperChanged(_ sender: Any) {
-        self.chargeSetButton.isHidden = false
+        self.setButton.isHidden = false
         let chargeRatio = Int(chargeStepper.value)
         chargeRatioLabel.text = "\(chargeRatio)%"
     }
@@ -219,6 +228,35 @@ class ViewController: UIViewController {
             self.stopCharge {
                 self.setChargeStatus(false)
             }
+        }
+    }
+    
+    func login(completion: (() -> ())?) {
+        DispatchQueue.main.async {
+            var username = UITextField()
+            var password = UITextField()
+            
+            let alert = UIAlertController(title: "Login", message: "", preferredStyle: .alert)
+            alert.addTextField { alertTextField in
+                alertTextField.placeholder = "Username"
+                username = alertTextField
+            }
+            alert.addTextField { alertTextField in
+                alertTextField.placeholder = "Password"
+                alertTextField.isSecureTextEntry = true
+                password = alertTextField
+            }
+            
+            let action = UIAlertAction(title: "Done", style: .default) { action in
+                if let username = username.text, let password = password.text {
+                    APIRouter.shared.login(username: username, password: password) {
+                        self.getVehicles(completion: completion)
+                    }
+                }
+            }
+            
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -282,7 +320,7 @@ class ViewController: UIViewController {
             seatButton.alpha = 1.0
             wheelButton.alpha = 1.0
             tempLabel.alpha = 1.0
-
+            
             tempUpButton.isEnabled = true
             tempDownButton.isEnabled = true
             defrostButton.isEnabled = true
@@ -295,7 +333,7 @@ class ViewController: UIViewController {
             seatButton.alpha = 0.5
             wheelButton.alpha = 0.5
             tempLabel.alpha = 0.5
-
+            
             tempLabel.isEnabled = false
             tempUpButton.isEnabled = false
             tempDownButton.isEnabled = false
@@ -308,30 +346,23 @@ class ViewController: UIViewController {
     func getVehicles(completion: (() -> ())?) {
         self.isSyncing = true
         API.shared.get(endpoint: .vehicles) { response in
-            if let text = response.text, text.contains(":1003") {
-                API.shared.sessionId = nil
-                APIRouter.shared.login {
-                    self.getVehicles(completion: completion)
-                }
-            } else {
-                if let vehicles = try? self.jsonDecoder.decode(VehiclesResponse.self, from: response.data) {
-                    if let imageName = vehicles.payload?.vehicleSummary?.first?.imagePath?.imageName, let imagePath = vehicles.payload?.vehicleSummary?.first?.imagePath?.imagePath {
-                        let urlString = APIRouter().getImage(name: imageName, path: imagePath)
-                        if let url = URL(string: urlString) {
-                            DispatchQueue.global().async {
-                                let data = try? Data(contentsOf: url)
-                                DispatchQueue.main.async {
-                                    self.carView.contentMode = .scaleAspectFill
-                                    self.carView.image = UIImage(data: data!)
-                                }
+            if let vehicles = try? self.jsonDecoder.decode(VehiclesResponse.self, from: response.data) {
+                if let imageName = vehicles.payload?.vehicleSummary?.first?.imagePath?.imageName, let imagePath = vehicles.payload?.vehicleSummary?.first?.imagePath?.imagePath {
+                    let urlString = APIRouter().getImage(name: imageName, path: imagePath)
+                    if let url = URL(string: urlString) {
+                        DispatchQueue.global().async {
+                            let data = try? Data(contentsOf: url)
+                            DispatchQueue.main.async {
+                                self.carView.contentMode = .scaleAspectFill
+                                self.carView.image = UIImage(data: data!)
                             }
                         }
-                        completion?()
                     }
-                    if let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
-                        API.shared.vinKey = vinKey
-                        self.vehicleStatus(token: vinKey)
-                    }
+                    completion?()
+                }
+                if let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
+                    API.shared.vinKey = vinKey
+                    self.vehicleStatus(token: vinKey)
                 }
             }
         }
@@ -353,7 +384,7 @@ class ViewController: UIViewController {
             }
         }
     }
-
+    
     func vehicleStatus(token: String) {
         self.isSyncing = true
         API.shared.post(endpoint: .status, body: ["vehicleConfigReq": [
@@ -362,27 +393,16 @@ class ViewController: UIViewController {
             "seatHeatCoolOption": "1",
             "vehicle": "1",
             "vehicleFeature": "0"
-        ],
-        "vehicleInfoReq": [
+        ], "vehicleInfoReq": [
             "drivingActivty": "1",
             "dtc": "1",
             "enrollment": "1",
             "functionalCards": "0",
             "location": "1",
             "vehicleStatus": "1",
-            "weather": "0"
-        ],
-        "vinKey": [token]], authorized: true) { response in
-            if let text = response.text, text.contains(":1003") {
-                API.shared.sessionId = nil
-                APIRouter.shared.login {
-                    self.getVehicles {
-                        if let vinKey = API.shared.vinKey {
-                            self.vehicleStatus(token: vinKey)
-                        }
-                    }
-                }
-            } else if let vehicle = try? self.jsonDecoder.decode(StatusResponse.self, from: response.data) {
+            "weather": "0"],
+            "vinKey": [token]], authorized: true) { response in
+            if let vehicle = try? self.jsonDecoder.decode(StatusResponse.self, from: response.data) {
                 self.updateStatus()
                 DispatchQueue.main.async {
                     guard let report = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleStatusRpt, let vehicleStatus = report.vehicleStatus else { return }
@@ -473,7 +493,7 @@ class ViewController: UIViewController {
         API.shared.get(endpoint: .lock) { response in
             if let text = response.text, text.contains(":1003") {
                 API.shared.sessionId = nil
-                APIRouter.shared.login {
+                self.login {
                     self.getVehicles {
                         self.lock(completion: completion)
                     }
@@ -494,7 +514,7 @@ class ViewController: UIViewController {
         API.shared.get(endpoint: .unlock) { response in
             if let text = response.text, text.contains(":1003") {
                 API.shared.sessionId = nil
-                APIRouter.shared.login {
+                self.login {
                     self.getVehicles {
                         self.unlock(completion: completion)
                     }
@@ -603,41 +623,40 @@ class ViewController: UIViewController {
     }
     
     func getAddress(latitude: Double, longitude: Double, completion: @escaping (String) -> ()) {
-            var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
-            let ceo: CLGeocoder = CLGeocoder()
-            center.latitude = latitude
-            center.longitude = longitude
-
-            let loc: CLLocation = CLLocation(latitude:center.latitude, longitude: center.longitude)
-
-            ceo.reverseGeocodeLocation(loc, completionHandler:
-                {(placemarks, error) in
-                    if (error != nil)
-                    {
-                        print("reverse geodcode fail: \(error!.localizedDescription)")
-                    }
-                    let pm = placemarks! as [CLPlacemark]
-
-                    if pm.count > 0 {
-                        let pm = placemarks![0]
-                        if let subThoroughfare = pm.subThoroughfare, let thoroughfare = pm.thoroughfare {
-                            completion("\(subThoroughfare) \(thoroughfare)")
-                        } else {
-                            completion("")
-                        }
-                  }
-            })
-
-        }
+        var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
+        let ceo: CLGeocoder = CLGeocoder()
+        center.latitude = latitude
+        center.longitude = longitude
+        
+        let loc: CLLocation = CLLocation(latitude:center.latitude, longitude: center.longitude)
+        
+        ceo.reverseGeocodeLocation(loc, completionHandler:
+                                    {(placemarks, error) in
+            if (error != nil)
+            {
+                print("reverse geodcode fail: \(error!.localizedDescription)")
+            }
+            let pm = placemarks! as [CLPlacemark]
+            
+            if pm.count > 0 {
+                let pm = placemarks![0]
+                if let subThoroughfare = pm.subThoroughfare, let thoroughfare = pm.thoroughfare {
+                    completion("\(subThoroughfare) \(thoroughfare)")
+                } else {
+                    completion("")
+                }
+            }
+        })
+        
+    }
 }
 
 extension Dictionary {
     var json: Data? {
-        guard let theJSONData = try? JSONSerialization.data(withJSONObject: self,
-                                                            options: [.prettyPrinted]) else {
+        guard let theJSONData = try? JSONSerialization.data(withJSONObject: self, options: [.prettyPrinted]) else {
             return nil
         }
-
+        
         return theJSONData
         //return String(data: theJSONData, encoding: .ascii)
     }

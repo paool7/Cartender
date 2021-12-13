@@ -31,11 +31,11 @@ class APIRouter {
         }
     }
     
-    func login(completion: @escaping () -> ()) {
+    func login(username: String, password: String, completion: @escaping () -> ()) {
         API.shared.post(endpoint: .login, body: ["deviceKey": "",
                                                  "deviceType": 2,
-                                                 "userCredential": ["userId": "***REMOVED***",
-                                                                    "password": "***REMOVED***"]], authorized: false) { response in
+                                                 "userCredential": ["userId": username,
+                                                                    "password": password]], authorized: false) { response in
             if let responseHeaders = response.headers, let sid = responseHeaders["Sid"] {
                 API.shared.sessionId = sid
             }
