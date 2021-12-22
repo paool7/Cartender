@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224FD02C27722663006CFE08 /* SwiftKeychainWrapper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FD02A2772265C006CFE08 /* SwiftKeychainWrapper.xcframework */; };
+		224FD02D27722663006CFE08 /* SwiftKeychainWrapper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224FD02A2772265C006CFE08 /* SwiftKeychainWrapper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		225701052748526300D4ED45 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225701042748526300D4ED45 /* SettingsViewController.swift */; };
 		2257017F274D229700D4ED45 /* VehicleSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22570175274D229600D4ED45 /* VehicleSummary.swift */; };
 		22570184274D229700D4ED45 /* VehiclesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257017A274D229700D4ED45 /* VehiclesResponse.swift */; };
@@ -15,7 +17,6 @@
 		22819DD027449A8100D21EED /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DCF27449A8100D21EED /* Endpoint.swift */; };
 		22819DD527449B9400D21EED /* SwiftHTTP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22819DD327449B8E00D21EED /* SwiftHTTP.xcframework */; };
 		22819DD627449B9400D21EED /* SwiftHTTP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22819DD327449B8E00D21EED /* SwiftHTTP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22819DD827449BA700D21EED /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DD727449BA700D21EED /* API.swift */; };
 		22819DFA27468BA900D21EED /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DF927468BA900D21EED /* ProgressBar.swift */; };
 		22921DF02743500F0092526E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22921DEF2743500F0092526E /* AppDelegate.swift */; };
 		22921DF22743500F0092526E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22921DF12743500F0092526E /* SceneDelegate.swift */; };
@@ -83,6 +84,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				224FD02D27722663006CFE08 /* SwiftKeychainWrapper.xcframework in Embed Frameworks */,
 				22819DD627449B9400D21EED /* SwiftHTTP.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -91,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		224FD02A2772265C006CFE08 /* SwiftKeychainWrapper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftKeychainWrapper.xcframework; path = Carthage/Build/SwiftKeychainWrapper.xcframework; sourceTree = SOURCE_ROOT; };
 		225701042748526300D4ED45 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		22570175274D229600D4ED45 /* VehicleSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleSummary.swift; sourceTree = "<group>"; };
 		2257017A274D229700D4ED45 /* VehiclesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesResponse.swift; sourceTree = "<group>"; };
@@ -98,7 +101,6 @@
 		22819DCD2743792500D21EED /* BatteryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryView.swift; sourceTree = "<group>"; };
 		22819DCF27449A8100D21EED /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		22819DD327449B8E00D21EED /* SwiftHTTP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SwiftHTTP.xcframework; sourceTree = "<group>"; };
-		22819DD727449BA700D21EED /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		22819DF927468BA900D21EED /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		22921DEC2743500F0092526E /* Cartender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cartender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22921DEF2743500F0092526E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224FD02C27722663006CFE08 /* SwiftKeychainWrapper.xcframework in Frameworks */,
 				22819DD527449B9400D21EED /* SwiftHTTP.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +209,7 @@
 			children = (
 				22819DCD2743792500D21EED /* BatteryView.swift */,
 				22819DD327449B8E00D21EED /* SwiftHTTP.xcframework */,
+				224FD02A2772265C006CFE08 /* SwiftKeychainWrapper.xcframework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -236,7 +240,6 @@
 				22819DD127449B6100D21EED /* Enums */,
 				22921DEF2743500F0092526E /* AppDelegate.swift */,
 				22819DF927468BA900D21EED /* ProgressBar.swift */,
-				22819DD727449BA700D21EED /* API.swift */,
 				22B3E863274DB4CC00906FE2 /* APIRouter.swift */,
 				22921DF12743500F0092526E /* SceneDelegate.swift */,
 				22921DF32743500F0092526E /* ViewController.swift */,
@@ -425,7 +428,6 @@
 				22819DFA27468BA900D21EED /* ProgressBar.swift in Sources */,
 				22570184274D229700D4ED45 /* VehiclesResponse.swift in Sources */,
 				229B94CC274D688300E73CEE /* Accuracy.swift in Sources */,
-				22819DD827449BA700D21EED /* API.swift in Sources */,
 				229B94C0274D688300E73CEE /* HeatingAccessory.swift in Sources */,
 				229B94D0274D688300E73CEE /* SyncDate.swift in Sources */,
 				229B94AB274D688300E73CEE /* TirePressure.swift in Sources */,

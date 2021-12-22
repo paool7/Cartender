@@ -9,6 +9,7 @@ import UIKit
 import SwiftHTTP
 import MapKit
 import Contacts
+import SwiftKeychainWrapper
 
 class ViewController: UIViewController {
     @IBOutlet var batteryContainer: ProgressBar!
@@ -51,16 +52,13 @@ class ViewController: UIViewController {
     var isSyncing = false {
         didSet {
             DispatchQueue.main.async {
+                self.activityIndicator.isHidden = !self.isSyncing
+                self.syncTimeLabel.isHidden = self.isSyncing
+                self.syncButton.isHidden = self.isSyncing
                 if !self.isSyncing {
                     self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
-                    self.syncTimeLabel.isHidden = false
-                    self.syncButton.isHidden = false
                 } else {
                     self.activityIndicator.startAnimating()
-                    self.activityIndicator.isHidden = false
-                    self.syncTimeLabel.isHidden = true
-                    self.syncButton.isHidden = true
                 }
             }
         }
@@ -71,15 +69,9 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 self.lockUnlockButton.alpha = 1.0
                 self.lockUnlockButton.isEnabled = true
-                if !self.isLocked {
-                    self.lockUnlockButton.setImage(UIImage(named: "Lock"), for: .normal)
-                    self.lockLabel.text = "Unlocked"
-                    self.lockLabel.textColor = self.redColor
-                } else {
-                    self.lockUnlockButton.setImage(UIImage(named: "Unlock"), for: .normal)
-                    self.lockLabel.text = "Locked"
-                    self.lockLabel.textColor = UIColor(named: "BodyColor")
-                }
+                self.lockUnlockButton.setImage(UIImage(named: !self.isLocked ? "Lock" : "Unlock"), for: .normal)
+                self.lockLabel.text = !self.isLocked ? "Unlocked" : "Locked"
+                self.lockLabel.textColor = !self.isLocked ? self.redColor : UIColor(named: "BodyColor")
             }
         }
     }
@@ -90,11 +82,7 @@ class ViewController: UIViewController {
                     self.tempLabel.setTitle("", for: .normal)
                 } else {
                     self.tempLabel.setTitle(" \(self.temp)°", for: .normal)
-                    if self.temp > 69 {
-                        self.climateSwitch.onTintColor = self.redColor
-                    } else {
-                        self.climateSwitch.onTintColor = self.blueColor
-                    }
+                    self.climateSwitch.onTintColor = self.temp > 69 ? self.redColor : self.blueColor
                 }
             }
         }
@@ -117,14 +105,14 @@ class ViewController: UIViewController {
             self.containerView5.backgroundColor = secondaryBackgroundColor
         }
         
-        API.shared.logoutHandler = {
+        APIRouter.shared.logoutHandler = {
             self.login {
                 self.getVehicles(completion: nil)
             }
         }
         
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] notification in
-            if API.shared.sessionId == nil {
+            if APIRouter.shared.sessionId == nil {
                 self.login {
                     self.getVehicles(completion: nil)
                 }
@@ -196,26 +184,14 @@ class ViewController: UIViewController {
     @IBAction func tappedLockUnlock(_ sender: UIButton) {
         self.lockUnlockButton.alpha = 0.5
         self.lockUnlockButton.isEnabled = false
-        if isLocked {
-            self.lockLabel.text = "Unlocking..."
-            self.unlock {
-                DispatchQueue.main.async {
-                    self.isLocked = false
-                }
-            }
-        } else {
-            self.lockLabel.text = "Locking..."
-            self.lock {
-                DispatchQueue.main.async {
-                    self.isLocked = true
-                }
-            }
-        }
+        self.lockLabel.text = isLocked ? "Unlocking..." : "Locking..."
+        self.setLock(lock: !isLocked)
     }
     
     @IBAction func stepperChanged(_ sender: Any) {
         self.setButton.isHidden = false
         let chargeRatio = Int(chargeStepper.value)
+        self.batteryContainer.target = chargeStepper.value/100
         chargeRatioLabel.text = "\(chargeRatio)%"
     }
     
@@ -232,45 +208,71 @@ class ViewController: UIViewController {
     }
     
     func login(completion: (() -> ())?) {
-        DispatchQueue.main.async {
-            var username = UITextField()
-            var password = UITextField()
-            
-            let alert = UIAlertController(title: "Login", message: "", preferredStyle: .alert)
-            alert.addTextField { alertTextField in
-                alertTextField.placeholder = "Username"
-                username = alertTextField
-            }
-            alert.addTextField { alertTextField in
-                alertTextField.placeholder = "Password"
-                alertTextField.isSecureTextEntry = true
-                password = alertTextField
-            }
-            
-            let action = UIAlertAction(title: "Done", style: .default) { action in
-                if let username = username.text, let password = password.text {
-                    APIRouter.shared.login(username: username, password: password) {
-                        self.getVehicles(completion: completion)
+            if let username = KeychainWrapper.standard.string(forKey: .usernameKey), let password = KeychainWrapper.standard.string(forKey: .passwordKey) {
+                APIRouter.shared.login(username: username, password: password) { [weak self] error in
+                    if let error = error {
+                        let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+                        let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                            self?.login(completion: completion)
+                        }
+                        errorAlert.addAction(errorAction)
+                        
+                        DispatchQueue.main.async {
+                            self?.present(errorAlert, animated: true, completion: nil)
+                        }
+                    } else {
+                        self?.getVehicles(completion: completion)
                     }
                 }
+            } else {
+                var usernameField = UITextField()
+                var passwordField = UITextField()
+                
+                let alert = UIAlertController(title: "Login", message: "Your login information is stored securely on your device is only sent to Kia to login.", preferredStyle: .alert)
+                alert.addTextField { alertTextField in
+                    alertTextField.placeholder = "Username"
+                    usernameField = alertTextField
+                }
+                alert.addTextField { alertTextField in
+                    alertTextField.placeholder = "Password"
+                    alertTextField.isSecureTextEntry = true
+                    passwordField = alertTextField
+                }
+                
+                let action = UIAlertAction(title: "Done", style: .default) { action in
+                    if let username = usernameField.text, let password = passwordField.text {
+                        APIRouter.shared.login(username: username, password: password) { [weak self] error in
+                            if let error = error {
+                                let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+                                let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                                    self?.login(completion: completion)
+                                }
+                                errorAlert.addAction(errorAction)
+                                
+                                DispatchQueue.main.async {
+                                    self?.present(errorAlert, animated: true, completion: nil)
+                                }
+                            } else {
+                                KeychainWrapper.standard.set(username, forKey: .usernameKey)
+                                KeychainWrapper.standard.set(password, forKey: .passwordKey)
+                                self?.getVehicles(completion: completion)
+                            }
+                        }
+                    }
+                }
+                
+                alert.addAction(action)
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
-            
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
-        }
     }
     
     func setChargeStatus(_ isOn: Bool) {
         DispatchQueue.main.async {
-            if isOn {
-                self.chargeIcon.isHidden = false
-                self.chargeStepper.alpha = 1.0
-                self.chargeStepper.isEnabled = true
-            } else {
-                self.chargeIcon.isHidden = true
-                self.chargeStepper.alpha = 0.5
-                self.chargeStepper.isEnabled = false
-            }
+            self.chargeIcon.isHidden = isOn ? false : true
+            self.chargeStepper.alpha = isOn ? 1.0 : 0.5
+            self.chargeStepper.isEnabled = isOn ? true : false
         }
     }
     
@@ -282,7 +284,7 @@ class ViewController: UIViewController {
             chargeSwitch.isEnabled = true
             if charging {
                 if chargeTime == 0 {
-                    chargeString.append("Finished charging to: \(ratio)%")
+                    chargeString.append("Charged to: \(ratio)%")
                 } else {
                     chargeRatioLabel.text = "\(ratio)%"
                     let chargeHours = chargeTime/60
@@ -345,24 +347,24 @@ class ViewController: UIViewController {
     
     func getVehicles(completion: (() -> ())?) {
         self.isSyncing = true
-        API.shared.get(endpoint: .vehicles) { response in
-            if let vehicles = try? self.jsonDecoder.decode(VehiclesResponse.self, from: response.data) {
+        APIRouter.shared.get(endpoint: .vehicles) { [weak self] response in
+            if let vehicles = try? self?.jsonDecoder.decode(VehiclesResponse.self, from: response.data) {
                 if let imageName = vehicles.payload?.vehicleSummary?.first?.imagePath?.imageName, let imagePath = vehicles.payload?.vehicleSummary?.first?.imagePath?.imagePath {
                     let urlString = APIRouter().getImage(name: imageName, path: imagePath)
                     if let url = URL(string: urlString) {
                         DispatchQueue.global().async {
                             let data = try? Data(contentsOf: url)
                             DispatchQueue.main.async {
-                                self.carView.contentMode = .scaleAspectFill
-                                self.carView.image = UIImage(data: data!)
+                                self?.carView.contentMode = .scaleAspectFill
+                                self?.carView.image = UIImage(data: data!)
                             }
                         }
                     }
                     completion?()
                 }
                 if let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
-                    API.shared.vinKey = vinKey
-                    self.vehicleStatus(token: vinKey)
+                    APIRouter.shared.vinKey = vinKey
+                    self?.vehicleStatus(token: vinKey)
                 }
             }
         }
@@ -374,12 +376,12 @@ class ViewController: UIViewController {
     
     func updateStatus() {
         self.isSyncing = true
-        API.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true) { response in
-            if let vehicle = try? self.jsonDecoder.decode(UpdateStatusResponse.self, from: response.data) {
+        APIRouter.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true) { [weak self] response in
+            if let vehicle = try? self?.jsonDecoder.decode(UpdateStatusResponse.self, from: response.data) {
                 DispatchQueue.main.async {
                     guard let report = vehicle.payload?.vehicleStatusRpt, let vehicleStatus = report.vehicleStatus else { return }
-                    self.set(vehicleStatus: vehicleStatus, syncDateUTC: report.reportDate?.utc)
-                    self.isSyncing = false
+                    self?.set(vehicleStatus: vehicleStatus, syncDateUTC: report.reportDate?.utc)
+                    self?.isSyncing = false
                 }
             }
         }
@@ -387,7 +389,7 @@ class ViewController: UIViewController {
     
     func vehicleStatus(token: String) {
         self.isSyncing = true
-        API.shared.post(endpoint: .status, body: ["vehicleConfigReq": [
+        APIRouter.shared.post(endpoint: .status, body: ["vehicleConfigReq": [
             "airTempRange": "0",
             "maintenance": "0",
             "seatHeatCoolOption": "1",
@@ -401,7 +403,8 @@ class ViewController: UIViewController {
             "location": "1",
             "vehicleStatus": "1",
             "weather": "0"],
-            "vinKey": [token]], authorized: true) { response in
+            "vinKey": [token]], authorized: true) { [weak self] response in
+            guard let self = self else { return }
             if let vehicle = try? self.jsonDecoder.decode(StatusResponse.self, from: response.data) {
                 self.updateStatus()
                 DispatchQueue.main.async {
@@ -488,42 +491,21 @@ class ViewController: UIViewController {
         }
     }
     
-    func lock(completion: @escaping () -> ()) {
+    func setLock(lock: Bool) {
         self.isSyncing = true
-        API.shared.get(endpoint: .lock) { response in
+        APIRouter.shared.get(endpoint: lock ? .lock : .unlock) { [weak self] response in
             if let text = response.text, text.contains(":1003") {
-                API.shared.sessionId = nil
-                self.login {
-                    self.getVehicles {
-                        self.lock(completion: completion)
+                APIRouter.shared.sessionId = nil
+                self?.login {
+                    self?.getVehicles {
+                        self?.setLock(lock: lock)
                     }
                 }
             } else {
                 if let headers = response.headers, let xid = headers["Xid"] {
-                    APIRouter.shared.checkActionStatus(xid: xid) {
-                        self.isSyncing = false
-                        completion()
-                    }
-                }
-            }
-        }
-    }
-    
-    func unlock(completion: @escaping () -> ()) {
-        self.isSyncing = true
-        API.shared.get(endpoint: .unlock) { response in
-            if let text = response.text, text.contains(":1003") {
-                API.shared.sessionId = nil
-                self.login {
-                    self.getVehicles {
-                        self.unlock(completion: completion)
-                    }
-                }
-            } else {
-                if let headers = response.headers, let xid = headers["Xid"] {
-                    APIRouter.shared.checkActionStatus(xid: xid) {
-                        self.isSyncing = false
-                        completion()
+                    APIRouter.shared.checkActionStatus(xid: xid) { [weak self] in
+                        self?.isSyncing = false
+                        self?.isLocked = lock
                     }
                 }
             }
@@ -533,7 +515,7 @@ class ViewController: UIViewController {
     func setChargeLimit(completion: @escaping () -> ()) {
         self.isSyncing = true
         let chargeLimit = Int(self.chargeStepper.value*100)
-        API.shared.post(endpoint: .setChargeLimit, body: [
+        APIRouter.shared.post(endpoint: .setChargeLimit, body: [
             "targetSOClist": [
                 [
                     "plugType": 0,
@@ -544,10 +526,10 @@ class ViewController: UIViewController {
                     "targetSOClevel": chargeLimit,
                 ],
             ]
-        ], authorized: true) { response in
+        ], authorized: true) { [weak self] response in
             if let headers = response.headers, let xid = headers["Xid"] {
                 APIRouter.shared.checkActionStatus(xid: xid) {
-                    self.isSyncing = false
+                    self?.isSyncing = false
                     completion()
                 }
             }
@@ -556,10 +538,10 @@ class ViewController: UIViewController {
     
     func startCharge(completion: @escaping () -> ()) {
         self.isSyncing = true
-        API.shared.post(endpoint: .startCharge, body: ["chargeRatio": 100], authorized: true) { response in
+        APIRouter.shared.post(endpoint: .startCharge, body: ["chargeRatio": 100], authorized: true) { [weak self] response in
             if let headers = response.headers, let xid = headers["Xid"] {
                 APIRouter.shared.checkActionStatus(xid: xid) {
-                    self.isSyncing = false
+                    self?.isSyncing = false
                     completion()
                 }
             }
@@ -568,10 +550,10 @@ class ViewController: UIViewController {
     
     func stopCharge(completion: @escaping () -> ()) {
         self.isSyncing = true
-        API.shared.get(endpoint: .stopCharge) { response in
+        APIRouter.shared.get(endpoint: .stopCharge) { [weak self] response in
             if let headers = response.headers, let xid = headers["Xid"] {
                 APIRouter.shared.checkActionStatus(xid: xid) {
-                    self.isSyncing = false
+                    self?.isSyncing = false
                     completion()
                 }
             }
@@ -600,10 +582,10 @@ class ViewController: UIViewController {
                 ],
             ]
         ]
-        API.shared.post(endpoint: .startClimate, body: body, authorized: true) { response in
+        APIRouter.shared.post(endpoint: .startClimate, body: body, authorized: true) { [weak self] response in
             if let headers = response.headers, let xid = headers["Xid"] {
                 APIRouter.shared.checkActionStatus(xid: xid) {
-                    self.isSyncing = false
+                    self?.isSyncing = false
                     completion()
                 }
             }
@@ -612,10 +594,10 @@ class ViewController: UIViewController {
     
     func stopClimate(completion: @escaping () -> ()) {
         self.isSyncing = true
-        API.shared.get(endpoint: .stopClimate) { response in
+        APIRouter.shared.get(endpoint: .stopClimate) { [weak self] response in
             if let headers = response.headers, let xid = headers["Xid"] {
                 APIRouter.shared.checkActionStatus(xid: xid) {
-                    self.isSyncing = false
+                    self?.isSyncing = false
                     completion()
                 }
             }
@@ -660,4 +642,9 @@ extension Dictionary {
         return theJSONData
         //return String(data: theJSONData, encoding: .ascii)
     }
+}
+
+extension String {
+    static let usernameKey = "CartenderUserId"
+    static let passwordKey = "CartenderUserPass"
 }

@@ -1,1 +1,2 @@
 github "daltoniam/SwiftHTTP" "3.0.1"
+github "jrendel/SwiftKeychainWrapper" "4.0.1"
