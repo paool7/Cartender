@@ -7,17 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		224FD02C27722663006CFE08 /* SwiftKeychainWrapper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224FD02A2772265C006CFE08 /* SwiftKeychainWrapper.xcframework */; };
-		224FD02D27722663006CFE08 /* SwiftKeychainWrapper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224FD02A2772265C006CFE08 /* SwiftKeychainWrapper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		225701052748526300D4ED45 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225701042748526300D4ED45 /* SettingsViewController.swift */; };
 		2257017F274D229700D4ED45 /* VehicleSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22570175274D229600D4ED45 /* VehicleSummary.swift */; };
 		22570184274D229700D4ED45 /* VehiclesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257017A274D229700D4ED45 /* VehiclesResponse.swift */; };
 		22570186274D229700D4ED45 /* VehiclesPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257017C274D229700D4ED45 /* VehiclesPayload.swift */; };
-		22819DCE2743792500D21EED /* BatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DCD2743792500D21EED /* BatteryView.swift */; };
 		22819DD027449A8100D21EED /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DCF27449A8100D21EED /* Endpoint.swift */; };
-		22819DD527449B9400D21EED /* SwiftHTTP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22819DD327449B8E00D21EED /* SwiftHTTP.xcframework */; };
-		22819DD627449B9400D21EED /* SwiftHTTP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22819DD327449B8E00D21EED /* SwiftHTTP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22819DFA27468BA900D21EED /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DF927468BA900D21EED /* ProgressBar.swift */; };
+		228C82CD27FF11A3000C95D6 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DF927468BA900D21EED /* ProgressBar.swift */; };
+		228C82CE27FF1438000C95D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22921DF82743500F0092526E /* Assets.xcassets */; };
+		228C82D127FF318E000C95D6 /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949D274D688300E73CEE /* Speed.swift */; };
+		228C82D227FF318E000C95D6 /* Accuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9496274D688200E73CEE /* Accuracy.swift */; };
+		228C82D327FF318E000C95D6 /* SyncDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949A274D688200E73CEE /* SyncDate.swift */; };
+		228C82D427FF318E000C95D6 /* EvModeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B947E274D688100E73CEE /* EvModeRange.swift */; };
+		228C82D527FF318E000C95D6 /* ActiveDTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949F274D688300E73CEE /* ActiveDTC.swift */; };
+		228C82D627FF318E000C95D6 /* Dte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948C274D688100E73CEE /* Dte.swift */; };
+		228C82D727FF318E000C95D6 /* HeatingAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948A274D688100E73CEE /* HeatingAccessory.swift */; };
+		228C82D827FF318E000C95D6 /* TirePressure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9475274D688000E73CEE /* TirePressure.swift */; };
+		228C82D927FF318E000C95D6 /* Climate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9499274D688200E73CEE /* Climate.swift */; };
+		228C82DA27FF318E000C95D6 /* FreeTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9473274D688000E73CEE /* FreeTrial.swift */; };
+		228C82DB27FF318E000C95D6 /* FreeTrialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949E274D688300E73CEE /* FreeTrialExtension.swift */; };
+		228C82DC27FF318E000C95D6 /* GasModeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9494274D688200E73CEE /* GasModeRange.swift */; };
+		228C82DD27FF318E000C95D6 /* TargetSOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9495274D688200E73CEE /* TargetSOC.swift */; };
+		228C82DE27FF318E000C95D6 /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9493274D688200E73CEE /* Enrollment.swift */; };
+		228C82DF27FF318E000C95D6 /* ReportDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9492274D688200E73CEE /* ReportDate.swift */; };
+		228C82E027FF318E000C95D6 /* AirTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9491274D688200E73CEE /* AirTemp.swift */; };
+		228C82E127FF318E000C95D6 /* ServicePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9497274D688200E73CEE /* ServicePeriod.swift */; };
+		228C82E227FF318E000C95D6 /* StatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A7274D688300E73CEE /* StatusResponse.swift */; };
+		228C82E327FF318E000C95D6 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9485274D688100E73CEE /* TimeInterval.swift */; };
+		228C82E427FF318E000C95D6 /* VehicleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9472274D688000E73CEE /* VehicleDetail.swift */; };
+		228C82E527FF318E000C95D6 /* BillingPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9486274D688100E73CEE /* BillingPeriod.swift */; };
+		228C82E627FF318E000C95D6 /* VehicleStatusRpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9487274D688100E73CEE /* VehicleStatusRpt.swift */; };
+		228C82E727FF318E000C95D6 /* SupportedApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949C274D688200E73CEE /* SupportedApps.swift */; };
+		228C82E827FF318E000C95D6 /* BatteryStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948D274D688100E73CEE /* BatteryStatus.swift */; };
+		228C82E927FF318E000C95D6 /* FreeServiceDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948B274D688100E73CEE /* FreeServiceDate.swift */; };
+		228C82EA27FF318E000C95D6 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9474274D688000E73CEE /* Status.swift */; };
+		228C82EB27FF318E000C95D6 /* VehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9484274D688100E73CEE /* VehicleStatus.swift */; };
+		228C82EC27FF318E000C95D6 /* DrvDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A5274D688300E73CEE /* DrvDistance.swift */; };
+		228C82ED27FF318E000C95D6 /* Telematics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A6274D688300E73CEE /* Telematics.swift */; };
+		228C82EE27FF318E000C95D6 /* RangeByFuel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9482274D688100E73CEE /* RangeByFuel.swift */; };
+		228C82EF27FF318E000C95D6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9479274D688000E73CEE /* Device.swift */; };
+		228C82F027FF318E000C95D6 /* VehicleInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9480274D688100E73CEE /* VehicleInfoList.swift */; };
+		228C82F127FF318E000C95D6 /* LastVehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9481274D688100E73CEE /* LastVehicleInfo.swift */; };
+		228C82F227FF318E000C95D6 /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A1274D688300E73CEE /* Coord.swift */; };
+		228C82F327FF318E000C95D6 /* RemainChargeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9483274D688100E73CEE /* RemainChargeTime.swift */; };
+		228C82F427FF318E000C95D6 /* VehicleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9478274D688000E73CEE /* VehicleConfig.swift */; };
+		228C82F527FF318E000C95D6 /* DoorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9476274D688000E73CEE /* DoorStatus.swift */; };
+		228C82F627FF318E000C95D6 /* EvStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948F274D688200E73CEE /* EvStatus.swift */; };
+		228C82F727FF318E000C95D6 /* TotalAvailableRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9488274D688100E73CEE /* TotalAvailableRange.swift */; };
+		228C82F827FF318E000C95D6 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A2274D688300E73CEE /* DateTime.swift */; };
+		228C82F927FF318E000C95D6 /* Modem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A0274D688300E73CEE /* Modem.swift */; };
+		228C82FA27FF318E000C95D6 /* StatusPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9477274D688000E73CEE /* StatusPayload.swift */; };
+		228C82FB27FF318E000C95D6 /* Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9498274D688200E73CEE /* Trim.swift */; };
+		228C82FC27FF318E000C95D6 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949B274D688200E73CEE /* Vehicle.swift */; };
+		228C82FD27FF318E000C95D6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9490274D688200E73CEE /* Location.swift */; };
+		228C82FE27FF3193000C95D6 /* ImagePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E860274DAB2600906FE2 /* ImagePath.swift */; };
+		228C82FF27FF3193000C95D6 /* VehiclesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257017A274D229700D4ED45 /* VehiclesResponse.swift */; };
+		228C830027FF3193000C95D6 /* VehicleSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22570175274D229600D4ED45 /* VehicleSummary.swift */; };
+		228C830127FF3193000C95D6 /* VehiclesPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257017C274D229700D4ED45 /* VehiclesPayload.swift */; };
+		228C830227FF3197000C95D6 /* UpdatePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9437274D642200E73CEE /* UpdatePayload.swift */; };
+		228C830327FF3197000C95D6 /* UpdateStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9441274D642300E73CEE /* UpdateStatusResponse.swift */; };
+		228C830427FF319A000C95D6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DCF27449A8100D21EED /* Endpoint.swift */; };
+		228C830527FF31F4000C95D6 /* ActionStatusPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E867274DD4D700906FE2 /* ActionStatusPayload.swift */; };
+		228C830627FF31F4000C95D6 /* ActionStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E866274DD4D700906FE2 /* ActionStatusResponse.swift */; };
 		22921DF02743500F0092526E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22921DEF2743500F0092526E /* AppDelegate.swift */; };
 		22921DF22743500F0092526E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22921DF12743500F0092526E /* SceneDelegate.swift */; };
 		22921DF42743500F0092526E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22921DF32743500F0092526E /* ViewController.swift */; };
@@ -75,7 +126,108 @@
 		22B3E864274DB4CD00906FE2 /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E863274DB4CC00906FE2 /* APIRouter.swift */; };
 		22B3E869274DD4D700906FE2 /* ActionStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E866274DD4D700906FE2 /* ActionStatusResponse.swift */; };
 		22B3E86A274DD4D700906FE2 /* ActionStatusPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E867274DD4D700906FE2 /* ActionStatusPayload.swift */; };
+		22BEDD412800BDA300785D3D /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDD402800BDA300785D3D /* Shortcut.swift */; };
+		22BEDD422800C9E800785D3D /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDD402800BDA300785D3D /* Shortcut.swift */; };
+		22BEDD442803480200785D3D /* MaxCharge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDD432803480200785D3D /* MaxCharge.swift */; };
+		22BEDD47280621E300785D3D /* ActionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDD45280621E300785D3D /* ActionError.swift */; };
+		22BEDD4A2806256800785D3D /* ActionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDD45280621E300785D3D /* ActionError.swift */; };
+		22BEDD4C2806256900785D3D /* ActionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEDD45280621E300785D3D /* ActionError.swift */; };
+		22ECC88827FE8C3500955AC7 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22ECC88727FE8C3500955AC7 /* Intents.framework */; };
+		22ECC88B27FE8C3500955AC7 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ECC88A27FE8C3500955AC7 /* IntentHandler.swift */; };
+		22ECC89327FE8C3600955AC7 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22ECC89227FE8C3600955AC7 /* IntentsUI.framework */; };
+		22ECC89627FE8C3600955AC7 /* IntentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ECC89527FE8C3600955AC7 /* IntentViewController.swift */; };
+		22ECC89927FE8C3600955AC7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22ECC89727FE8C3600955AC7 /* MainInterface.storyboard */; };
+		22ECC89D27FE8C3600955AC7 /* CartenderIntentsUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22ECC89127FE8C3600955AC7 /* CartenderIntentsUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22ECC8A027FE8C3600955AC7 /* CartenderIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22ECC88627FE8C3500955AC7 /* CartenderIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22ECC8A927FE8C6500955AC7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 22ECC8A827FE8C6500955AC7 /* Intents.intentdefinition */; };
+		22ECC8AA27FE931000955AC7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 22ECC8A827FE8C6500955AC7 /* Intents.intentdefinition */; };
+		22ECC8AB27FE931100955AC7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 22ECC8A827FE8C6500955AC7 /* Intents.intentdefinition */; };
+		22ECC8AD27FE9D8F00955AC7 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DCF27449A8100D21EED /* Endpoint.swift */; };
+		22ECC8AE27FE9D9600955AC7 /* VehiclesPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257017C274D229700D4ED45 /* VehiclesPayload.swift */; };
+		22ECC8AF27FE9D9600955AC7 /* VehicleSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22570175274D229600D4ED45 /* VehicleSummary.swift */; };
+		22ECC8B027FE9D9600955AC7 /* VehiclesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257017A274D229700D4ED45 /* VehiclesResponse.swift */; };
+		22ECC8B127FE9D9600955AC7 /* ImagePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E860274DAB2600906FE2 /* ImagePath.swift */; };
+		22ECC8B227FE9D9C00955AC7 /* UpdatePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9437274D642200E73CEE /* UpdatePayload.swift */; };
+		22ECC8B327FE9D9C00955AC7 /* UpdateStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9441274D642300E73CEE /* UpdateStatusResponse.swift */; };
+		22ECC8B427FE9DA500955AC7 /* ActionStatusPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E867274DD4D700906FE2 /* ActionStatusPayload.swift */; };
+		22ECC8B527FE9DA500955AC7 /* ActionStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E866274DD4D700906FE2 /* ActionStatusResponse.swift */; };
+		22ECC8B627FE9F2E00955AC7 /* VehicleStatusRpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9487274D688100E73CEE /* VehicleStatusRpt.swift */; };
+		22ECC8B727FE9F3B00955AC7 /* DrvDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A5274D688300E73CEE /* DrvDistance.swift */; };
+		22ECC8B827FE9F3B00955AC7 /* Dte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948C274D688100E73CEE /* Dte.swift */; };
+		22ECC8B927FE9F3B00955AC7 /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9493274D688200E73CEE /* Enrollment.swift */; };
+		22ECC8BA27FE9F3B00955AC7 /* SupportedApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949C274D688200E73CEE /* SupportedApps.swift */; };
+		22ECC8BB27FE9F3B00955AC7 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9474274D688000E73CEE /* Status.swift */; };
+		22ECC8BC27FE9F3B00955AC7 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9485274D688100E73CEE /* TimeInterval.swift */; };
+		22ECC8BD27FE9F3B00955AC7 /* ServicePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9497274D688200E73CEE /* ServicePeriod.swift */; };
+		22ECC8BE27FE9F3B00955AC7 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9479274D688000E73CEE /* Device.swift */; };
+		22ECC8BF27FE9F3B00955AC7 /* RemainChargeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9483274D688100E73CEE /* RemainChargeTime.swift */; };
+		22ECC8C027FE9F3B00955AC7 /* FreeTrialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949E274D688300E73CEE /* FreeTrialExtension.swift */; };
+		22ECC8C127FE9F3B00955AC7 /* Climate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9499274D688200E73CEE /* Climate.swift */; };
+		22ECC8C227FE9F3B00955AC7 /* LastVehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9481274D688100E73CEE /* LastVehicleInfo.swift */; };
+		22ECC8C327FE9F3B00955AC7 /* ReportDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9492274D688200E73CEE /* ReportDate.swift */; };
+		22ECC8C427FE9F3B00955AC7 /* TargetSOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9495274D688200E73CEE /* TargetSOC.swift */; };
+		22ECC8C527FE9F3B00955AC7 /* TirePressure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9475274D688000E73CEE /* TirePressure.swift */; };
+		22ECC8C627FE9F3B00955AC7 /* HeatingAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948A274D688100E73CEE /* HeatingAccessory.swift */; };
+		22ECC8C727FE9F3B00955AC7 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A2274D688300E73CEE /* DateTime.swift */; };
+		22ECC8C827FE9F3B00955AC7 /* BatteryStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948D274D688100E73CEE /* BatteryStatus.swift */; };
+		22ECC8C927FE9F3B00955AC7 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949B274D688200E73CEE /* Vehicle.swift */; };
+		22ECC8CA27FE9F3B00955AC7 /* VehicleInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9480274D688100E73CEE /* VehicleInfoList.swift */; };
+		22ECC8CB27FE9F3B00955AC7 /* GasModeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9494274D688200E73CEE /* GasModeRange.swift */; };
+		22ECC8CC27FE9F3B00955AC7 /* Accuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9496274D688200E73CEE /* Accuracy.swift */; };
+		22ECC8CD27FE9F3B00955AC7 /* EvStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948F274D688200E73CEE /* EvStatus.swift */; };
+		22ECC8CE27FE9F3B00955AC7 /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949D274D688300E73CEE /* Speed.swift */; };
+		22ECC8CF27FE9F3B00955AC7 /* TotalAvailableRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9488274D688100E73CEE /* TotalAvailableRange.swift */; };
+		22ECC8D027FE9F3B00955AC7 /* EvModeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B947E274D688100E73CEE /* EvModeRange.swift */; };
+		22ECC8D127FE9F3B00955AC7 /* StatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A7274D688300E73CEE /* StatusResponse.swift */; };
+		22ECC8D227FE9F3B00955AC7 /* DoorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9476274D688000E73CEE /* DoorStatus.swift */; };
+		22ECC8D327FE9F3B00955AC7 /* StatusPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9477274D688000E73CEE /* StatusPayload.swift */; };
+		22ECC8D427FE9F3B00955AC7 /* SyncDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949A274D688200E73CEE /* SyncDate.swift */; };
+		22ECC8D527FE9F3B00955AC7 /* Telematics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A6274D688300E73CEE /* Telematics.swift */; };
+		22ECC8D627FE9F3B00955AC7 /* VehicleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9472274D688000E73CEE /* VehicleDetail.swift */; };
+		22ECC8D727FE9F3B00955AC7 /* VehicleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9484274D688100E73CEE /* VehicleStatus.swift */; };
+		22ECC8D827FE9F3B00955AC7 /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A1274D688300E73CEE /* Coord.swift */; };
+		22ECC8D927FE9F3B00955AC7 /* FreeServiceDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948B274D688100E73CEE /* FreeServiceDate.swift */; };
+		22ECC8DA27FE9F3B00955AC7 /* AirTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9491274D688200E73CEE /* AirTemp.swift */; };
+		22ECC8DB27FE9F3B00955AC7 /* RangeByFuel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9482274D688100E73CEE /* RangeByFuel.swift */; };
+		22ECC8DC27FE9F3B00955AC7 /* VehicleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9478274D688000E73CEE /* VehicleConfig.swift */; };
+		22ECC8DD27FE9F3B00955AC7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9490274D688200E73CEE /* Location.swift */; };
+		22ECC8DE27FE9F3B00955AC7 /* Modem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A0274D688300E73CEE /* Modem.swift */; };
+		22ECC8DF27FE9F3B00955AC7 /* BillingPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9486274D688100E73CEE /* BillingPeriod.swift */; };
+		22ECC8E027FE9F3B00955AC7 /* FreeTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9473274D688000E73CEE /* FreeTrial.swift */; };
+		22ECC8E127FE9F3B00955AC7 /* ActiveDTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949F274D688300E73CEE /* ActiveDTC.swift */; };
+		22ECC8E227FE9F3B00955AC7 /* Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9498274D688200E73CEE /* Trim.swift */; };
+		22F955B4280A30260064FCFB /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B3280A30260064FCFB /* Secrets.swift */; };
+		22F955B5280A486D0064FCFB /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B3280A30260064FCFB /* Secrets.swift */; };
+		22F955B6280A486E0064FCFB /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B3280A30260064FCFB /* Secrets.swift */; };
+		22F955B8280A48800064FCFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B7280A48800064FCFB /* Logger.swift */; };
+		22F955B9280A48A70064FCFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B7280A48800064FCFB /* Logger.swift */; };
+		22F955BA280A48A80064FCFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B7280A48800064FCFB /* Logger.swift */; };
+		22F955BE280A5D770064FCFB /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BD280A5D770064FCFB /* ResponseError.swift */; };
+		22F955C1280A60AF0064FCFB /* ExtensionAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BF280A60AC0064FCFB /* ExtensionAPIRouter.swift */; };
+		22F955C2280A60AF0064FCFB /* ExtensionAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BF280A60AC0064FCFB /* ExtensionAPIRouter.swift */; };
+		22F955C3280A60D70064FCFB /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BD280A5D770064FCFB /* ResponseError.swift */; };
+		22F955C4280A60D80064FCFB /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BD280A5D770064FCFB /* ResponseError.swift */; };
+		292260682CE8E7682F72C688 /* Pods_CartenderIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */; };
+		3D5CA75C921E302C09F57D82 /* Pods_Cartender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */; };
+		A9CAF911D3F244499E75846D /* Pods_CartenderIntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22ECC89B27FE8C3600955AC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22921DE42743500F0092526E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22ECC89027FE8C3600955AC7;
+			remoteInfo = CartenderIntentsUI;
+		};
+		22ECC89E27FE8C3600955AC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22921DE42743500F0092526E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22ECC88527FE8C3500955AC7;
+			remoteInfo = CartenderIntents;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		22921E072743686D0092526E /* Embed Frameworks */ = {
@@ -84,24 +236,37 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				224FD02D27722663006CFE08 /* SwiftKeychainWrapper.xcframework in Embed Frameworks */,
-				22819DD627449B9400D21EED /* SwiftHTTP.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22ECC8A727FE8C3600955AC7 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				22ECC89D27FE8C3600955AC7 /* CartenderIntentsUI.appex in Embed App Extensions */,
+				22ECC8A027FE8C3600955AC7 /* CartenderIntents.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		224FD02A2772265C006CFE08 /* SwiftKeychainWrapper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftKeychainWrapper.xcframework; path = Carthage/Build/SwiftKeychainWrapper.xcframework; sourceTree = SOURCE_ROOT; };
+		1133EC380745CB15CE0C489C /* Pods-Cartender-CartenderIntents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntents.debug.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntents/Pods-Cartender-CartenderIntents.debug.xcconfig"; sourceTree = "<group>"; };
+		183CE37A3A6F8F3715FD53CD /* Pods-Cartender-CartenderIntents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntents.release.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntents/Pods-Cartender-CartenderIntents.release.xcconfig"; sourceTree = "<group>"; };
+		18ECD011F70A863D85A010B0 /* Pods-Cartender.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender.release.xcconfig"; path = "Target Support Files/Pods-Cartender/Pods-Cartender.release.xcconfig"; sourceTree = "<group>"; };
+		1BF3ACE97BE2C5AE46E06AD3 /* Pods-Cartender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender.debug.xcconfig"; path = "Target Support Files/Pods-Cartender/Pods-Cartender.debug.xcconfig"; sourceTree = "<group>"; };
 		225701042748526300D4ED45 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		22570175274D229600D4ED45 /* VehicleSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleSummary.swift; sourceTree = "<group>"; };
 		2257017A274D229700D4ED45 /* VehiclesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesResponse.swift; sourceTree = "<group>"; };
 		2257017C274D229700D4ED45 /* VehiclesPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesPayload.swift; sourceTree = "<group>"; };
-		22819DCD2743792500D21EED /* BatteryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryView.swift; sourceTree = "<group>"; };
 		22819DCF27449A8100D21EED /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		22819DD327449B8E00D21EED /* SwiftHTTP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SwiftHTTP.xcframework; sourceTree = "<group>"; };
 		22819DF927468BA900D21EED /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		228C82CC27FEB054000C95D6 /* CartenderIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CartenderIntents.entitlements; sourceTree = "<group>"; };
+		228C82CF27FF26D6000C95D6 /* CartenderIntentsUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CartenderIntentsUI.entitlements; sourceTree = "<group>"; };
 		22921DEC2743500F0092526E /* Cartender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cartender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22921DEF2743500F0092526E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22921DF12743500F0092526E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +326,38 @@
 		22B3E863274DB4CC00906FE2 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		22B3E866274DD4D700906FE2 /* ActionStatusResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionStatusResponse.swift; sourceTree = "<group>"; };
 		22B3E867274DD4D700906FE2 /* ActionStatusPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionStatusPayload.swift; sourceTree = "<group>"; };
+		22BEDD402800BDA300785D3D /* Shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
+		22BEDD432803480200785D3D /* MaxCharge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxCharge.swift; sourceTree = "<group>"; };
+		22BEDD45280621E300785D3D /* ActionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionError.swift; sourceTree = "<group>"; };
+		22BEDD5328088FE100785D3D /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		22BEDD5528088FE100785D3D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		22ECC88127FE8AE000955AC7 /* Cartender.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cartender.entitlements; sourceTree = "<group>"; };
+		22ECC88627FE8C3500955AC7 /* CartenderIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CartenderIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		22ECC88727FE8C3500955AC7 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		22ECC88A27FE8C3500955AC7 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		22ECC88C27FE8C3500955AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22ECC89127FE8C3600955AC7 /* CartenderIntentsUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CartenderIntentsUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		22ECC89227FE8C3600955AC7 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		22ECC89527FE8C3600955AC7 /* IntentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewController.swift; sourceTree = "<group>"; };
+		22ECC89827FE8C3600955AC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		22ECC89A27FE8C3600955AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22ECC8A827FE8C6500955AC7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		22F955B3280A30260064FCFB /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		22F955B7280A48800064FCFB /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		22F955BD280A5D770064FCFB /* ResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
+		22F955BF280A60AC0064FCFB /* ExtensionAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionAPIRouter.swift; sourceTree = "<group>"; };
+		3AA505A4127B010A96792AFA /* Pods-Cartender-CartenderIntentsUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntentsUI.debug.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntentsUI/Pods-Cartender-CartenderIntentsUI.debug.xcconfig"; sourceTree = "<group>"; };
+		43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartenderIntentsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50C5F6826EB8A2C5ADFDA620 /* Pods-BatteryExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryExtension.debug.xcconfig"; path = "Target Support Files/Pods-BatteryExtension/Pods-BatteryExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cartender.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98B190B9A1E422B5F06BF924 /* Pods-BatteryExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryExtension.release.xcconfig"; path = "Target Support Files/Pods-BatteryExtension/Pods-BatteryExtension.release.xcconfig"; sourceTree = "<group>"; };
+		9BD312AD5BFE1CD399E24B9A /* Pods_BatteryExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BatteryExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartenderIntents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A59692475BE2CD7A4427BC33 /* Pods-CartenderIntentsUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntentsUI.debug.xcconfig"; path = "Target Support Files/Pods-CartenderIntentsUI/Pods-CartenderIntentsUI.debug.xcconfig"; sourceTree = "<group>"; };
+		A87E86CA94F7DEB01D606686 /* Pods-CartenderIntents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntents.debug.xcconfig"; path = "Target Support Files/Pods-CartenderIntents/Pods-CartenderIntents.debug.xcconfig"; sourceTree = "<group>"; };
+		EA46EE65E3545C870B0C89C2 /* Pods-Cartender-CartenderIntentsUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntentsUI.release.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntentsUI/Pods-Cartender-CartenderIntentsUI.release.xcconfig"; sourceTree = "<group>"; };
+		EDC72CFD96118B6657F31B35 /* Pods-CartenderIntents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntents.release.xcconfig"; path = "Target Support Files/Pods-CartenderIntents/Pods-CartenderIntents.release.xcconfig"; sourceTree = "<group>"; };
+		FFD43E123148662B9FE23282 /* Pods-CartenderIntentsUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntentsUI.release.xcconfig"; path = "Target Support Files/Pods-CartenderIntentsUI/Pods-CartenderIntentsUI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,8 +365,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				224FD02C27722663006CFE08 /* SwiftKeychainWrapper.xcframework in Frameworks */,
-				22819DD527449B9400D21EED /* SwiftHTTP.xcframework in Frameworks */,
+				3D5CA75C921E302C09F57D82 /* Pods_Cartender.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22ECC88327FE8C3500955AC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22ECC88827FE8C3500955AC7 /* Intents.framework in Frameworks */,
+				292260682CE8E7682F72C688 /* Pods_CartenderIntents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22ECC88E27FE8C3600955AC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22ECC89327FE8C3600955AC7 /* IntentsUI.framework in Frameworks */,
+				A9CAF911D3F244499E75846D /* Pods_CartenderIntentsUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,26 +413,22 @@
 		22819DD127449B6100D21EED /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				22F955BD280A5D770064FCFB /* ResponseError.swift */,
 				22819DCF27449A8100D21EED /* Endpoint.swift */,
+				22BEDD402800BDA300785D3D /* Shortcut.swift */,
 			);
 			path = Enums;
-			sourceTree = "<group>";
-		};
-		22819DD227449B6F00D21EED /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				22819DCD2743792500D21EED /* BatteryView.swift */,
-				22819DD327449B8E00D21EED /* SwiftHTTP.xcframework */,
-				224FD02A2772265C006CFE08 /* SwiftKeychainWrapper.xcframework */,
-			);
-			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		22921DE32743500F0092526E = {
 			isa = PBXGroup;
 			children = (
 				22921DEE2743500F0092526E /* Cartender */,
+				22ECC88927FE8C3500955AC7 /* CartenderIntents */,
+				22ECC89427FE8C3600955AC7 /* CartenderIntentsUI */,
 				22921DED2743500F0092526E /* Products */,
+				959209F4A9241229766056F1 /* Pods */,
+				D42321935E29DF758C5B79F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -226,6 +436,8 @@
 			isa = PBXGroup;
 			children = (
 				22921DEC2743500F0092526E /* Cartender.app */,
+				22ECC88627FE8C3500955AC7 /* CartenderIntents.appex */,
+				22ECC89127FE8C3600955AC7 /* CartenderIntentsUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,22 +445,24 @@
 		22921DEE2743500F0092526E /* Cartender */ = {
 			isa = PBXGroup;
 			children = (
-				22B3E865274DCADE00906FE2 /* ActionStatus Response */,
-				229B9471274D686200E73CEE /* Status Response */,
-				22570173274D228B00D4ED45 /* Vehicles Response */,
-				22570106274D1FC400D4ED45 /* UpdateStatus Response */,
+				22ECC88127FE8AE000955AC7 /* Cartender.entitlements */,
+				22ECC8A827FE8C6500955AC7 /* Intents.intentdefinition */,
+				22F955BC280A5D340064FCFB /* Structs */,
 				22819DD127449B6100D21EED /* Enums */,
 				22921DEF2743500F0092526E /* AppDelegate.swift */,
 				22819DF927468BA900D21EED /* ProgressBar.swift */,
 				22B3E863274DB4CC00906FE2 /* APIRouter.swift */,
+				22F955BF280A60AC0064FCFB /* ExtensionAPIRouter.swift */,
 				22921DF12743500F0092526E /* SceneDelegate.swift */,
 				22921DF32743500F0092526E /* ViewController.swift */,
 				225701042748526300D4ED45 /* SettingsViewController.swift */,
+				22BEDD432803480200785D3D /* MaxCharge.swift */,
+				22F955B3280A30260064FCFB /* Secrets.swift */,
+				22F955B7280A48800064FCFB /* Logger.swift */,
 				22921DF52743500F0092526E /* Main.storyboard */,
 				22921DF82743500F0092526E /* Assets.xcassets */,
 				22921DFA2743500F0092526E /* LaunchScreen.storyboard */,
 				22921DFD2743500F0092526E /* Info.plist */,
-				22819DD227449B6F00D21EED /* Frameworks */,
 			);
 			path = Cartender;
 			sourceTree = "<group>";
@@ -285,7 +499,6 @@
 				229B9492274D688200E73CEE /* ReportDate.swift */,
 				229B9497274D688200E73CEE /* ServicePeriod.swift */,
 				229B949D274D688300E73CEE /* Speed.swift */,
-				229B9474274D688000E73CEE /* Status.swift */,
 				229B949C274D688200E73CEE /* SupportedApps.swift */,
 				229B949A274D688200E73CEE /* SyncDate.swift */,
 				229B9495274D688200E73CEE /* TargetSOC.swift */,
@@ -314,6 +527,82 @@
 			path = "ActionStatus Response";
 			sourceTree = "<group>";
 		};
+		22BEDD49280621EB00785D3D /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				22BEDD45280621E300785D3D /* ActionError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		22ECC88927FE8C3500955AC7 /* CartenderIntents */ = {
+			isa = PBXGroup;
+			children = (
+				228C82CC27FEB054000C95D6 /* CartenderIntents.entitlements */,
+				22ECC88A27FE8C3500955AC7 /* IntentHandler.swift */,
+				22ECC88C27FE8C3500955AC7 /* Info.plist */,
+			);
+			path = CartenderIntents;
+			sourceTree = "<group>";
+		};
+		22ECC89427FE8C3600955AC7 /* CartenderIntentsUI */ = {
+			isa = PBXGroup;
+			children = (
+				228C82CF27FF26D6000C95D6 /* CartenderIntentsUI.entitlements */,
+				22ECC89527FE8C3600955AC7 /* IntentViewController.swift */,
+				22ECC89727FE8C3600955AC7 /* MainInterface.storyboard */,
+				22ECC89A27FE8C3600955AC7 /* Info.plist */,
+			);
+			path = CartenderIntentsUI;
+			sourceTree = "<group>";
+		};
+		22F955BC280A5D340064FCFB /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				229B9474274D688000E73CEE /* Status.swift */,
+				22BEDD49280621EB00785D3D /* Error */,
+				22B3E865274DCADE00906FE2 /* ActionStatus Response */,
+				229B9471274D686200E73CEE /* Status Response */,
+				22570173274D228B00D4ED45 /* Vehicles Response */,
+				22570106274D1FC400D4ED45 /* UpdateStatus Response */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		959209F4A9241229766056F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1BF3ACE97BE2C5AE46E06AD3 /* Pods-Cartender.debug.xcconfig */,
+				18ECD011F70A863D85A010B0 /* Pods-Cartender.release.xcconfig */,
+				1133EC380745CB15CE0C489C /* Pods-Cartender-CartenderIntents.debug.xcconfig */,
+				183CE37A3A6F8F3715FD53CD /* Pods-Cartender-CartenderIntents.release.xcconfig */,
+				3AA505A4127B010A96792AFA /* Pods-Cartender-CartenderIntentsUI.debug.xcconfig */,
+				EA46EE65E3545C870B0C89C2 /* Pods-Cartender-CartenderIntentsUI.release.xcconfig */,
+				A87E86CA94F7DEB01D606686 /* Pods-CartenderIntents.debug.xcconfig */,
+				EDC72CFD96118B6657F31B35 /* Pods-CartenderIntents.release.xcconfig */,
+				A59692475BE2CD7A4427BC33 /* Pods-CartenderIntentsUI.debug.xcconfig */,
+				FFD43E123148662B9FE23282 /* Pods-CartenderIntentsUI.release.xcconfig */,
+				50C5F6826EB8A2C5ADFDA620 /* Pods-BatteryExtension.debug.xcconfig */,
+				98B190B9A1E422B5F06BF924 /* Pods-BatteryExtension.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D42321935E29DF758C5B79F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */,
+				22ECC88727FE8C3500955AC7 /* Intents.framework */,
+				22ECC89227FE8C3600955AC7 /* IntentsUI.framework */,
+				9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */,
+				43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */,
+				22BEDD5328088FE100785D3D /* WidgetKit.framework */,
+				22BEDD5528088FE100785D3D /* SwiftUI.framework */,
+				9BD312AD5BFE1CD399E24B9A /* Pods_BatteryExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -321,19 +610,60 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22921E002743500F0092526E /* Build configuration list for PBXNativeTarget "Cartender" */;
 			buildPhases = (
+				C1BA27DEF8257D8AAF1D0770 /* [CP] Check Pods Manifest.lock */,
 				22921DE82743500F0092526E /* Sources */,
 				22921DE92743500F0092526E /* Frameworks */,
 				22921DEA2743500F0092526E /* Resources */,
 				22921E072743686D0092526E /* Embed Frameworks */,
+				AE8F2F4C6EF1C7457D18BBBF /* [CP] Embed Pods Frameworks */,
+				22ECC8A727FE8C3600955AC7 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				22ECC89C27FE8C3600955AC7 /* PBXTargetDependency */,
+				22ECC89F27FE8C3600955AC7 /* PBXTargetDependency */,
 			);
 			name = Cartender;
 			productName = Cartender;
 			productReference = 22921DEC2743500F0092526E /* Cartender.app */;
 			productType = "com.apple.product-type.application";
+		};
+		22ECC88527FE8C3500955AC7 /* CartenderIntents */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22ECC8A427FE8C3600955AC7 /* Build configuration list for PBXNativeTarget "CartenderIntents" */;
+			buildPhases = (
+				68A1C37650067DD71FABD5E6 /* [CP] Check Pods Manifest.lock */,
+				22ECC88227FE8C3500955AC7 /* Sources */,
+				22ECC88327FE8C3500955AC7 /* Frameworks */,
+				22ECC88427FE8C3500955AC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CartenderIntents;
+			productName = CartenderIntents;
+			productReference = 22ECC88627FE8C3500955AC7 /* CartenderIntents.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		22ECC89027FE8C3600955AC7 /* CartenderIntentsUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22ECC8A127FE8C3600955AC7 /* Build configuration list for PBXNativeTarget "CartenderIntentsUI" */;
+			buildPhases = (
+				DCFD77BAE2C8A36CB920E3D9 /* [CP] Check Pods Manifest.lock */,
+				22ECC88D27FE8C3600955AC7 /* Sources */,
+				22ECC88E27FE8C3600955AC7 /* Frameworks */,
+				22ECC88F27FE8C3600955AC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CartenderIntentsUI;
+			productName = CartenderIntentsUI;
+			productReference = 22ECC89127FE8C3600955AC7 /* CartenderIntentsUI.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -346,6 +676,12 @@
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					22921DEB2743500F0092526E = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					22ECC88527FE8C3500955AC7 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					22ECC89027FE8C3600955AC7 = {
 						CreatedOnToolsVersion = 13.0;
 					};
 				};
@@ -364,6 +700,8 @@
 			projectRoot = "";
 			targets = (
 				22921DEB2743500F0092526E /* Cartender */,
+				22ECC88527FE8C3500955AC7 /* CartenderIntents */,
+				22ECC89027FE8C3600955AC7 /* CartenderIntentsUI */,
 			);
 		};
 /* End PBXProject section */
@@ -379,7 +717,109 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22ECC88427FE8C3500955AC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22ECC88F27FE8C3600955AC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				228C82CE27FF1438000C95D6 /* Assets.xcassets in Resources */,
+				22ECC89927FE8C3600955AC7 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68A1C37650067DD71FABD5E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CartenderIntents-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE8F2F4C6EF1C7457D18BBBF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1BA27DEF8257D8AAF1D0770 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cartender-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCFD77BAE2C8A36CB920E3D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CartenderIntentsUI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		22921DE82743500F0092526E /* Sources */ = {
@@ -392,6 +832,7 @@
 				229B94A8274D688300E73CEE /* VehicleDetail.swift in Sources */,
 				229B94AF274D688300E73CEE /* Device.swift in Sources */,
 				229B94A9274D688300E73CEE /* FreeTrial.swift in Sources */,
+				22ECC8A927FE8C6500955AC7 /* Intents.intentdefinition in Sources */,
 				229B94CE274D688300E73CEE /* Trim.swift in Sources */,
 				229B94D7274D688300E73CEE /* Coord.swift in Sources */,
 				229B94B4274D688300E73CEE /* EvModeRange.swift in Sources */,
@@ -406,8 +847,8 @@
 				229B94B6274D688300E73CEE /* VehicleInfoList.swift in Sources */,
 				22921DF02743500F0092526E /* AppDelegate.swift in Sources */,
 				229B94BB274D688300E73CEE /* TimeInterval.swift in Sources */,
+				22BEDD412800BDA300785D3D /* Shortcut.swift in Sources */,
 				229B94AE274D688300E73CEE /* VehicleConfig.swift in Sources */,
-				22819DCE2743792500D21EED /* BatteryView.swift in Sources */,
 				229B94C8274D688300E73CEE /* ReportDate.swift in Sources */,
 				229B94D3274D688300E73CEE /* Speed.swift in Sources */,
 				229B94BA274D688300E73CEE /* VehicleStatus.swift in Sources */,
@@ -428,13 +869,16 @@
 				22819DFA27468BA900D21EED /* ProgressBar.swift in Sources */,
 				22570184274D229700D4ED45 /* VehiclesResponse.swift in Sources */,
 				229B94CC274D688300E73CEE /* Accuracy.swift in Sources */,
+				22F955B4280A30260064FCFB /* Secrets.swift in Sources */,
 				229B94C0274D688300E73CEE /* HeatingAccessory.swift in Sources */,
 				229B94D0274D688300E73CEE /* SyncDate.swift in Sources */,
 				229B94AB274D688300E73CEE /* TirePressure.swift in Sources */,
 				22570186274D229700D4ED45 /* VehiclesPayload.swift in Sources */,
 				229B94CF274D688300E73CEE /* Climate.swift in Sources */,
+				22BEDD47280621E300785D3D /* ActionError.swift in Sources */,
 				229B94C2274D688300E73CEE /* Dte.swift in Sources */,
 				229B94DC274D688300E73CEE /* Telematics.swift in Sources */,
+				22BEDD442803480200785D3D /* MaxCharge.swift in Sources */,
 				229B94B9274D688300E73CEE /* RemainChargeTime.swift in Sources */,
 				229B94C7274D688300E73CEE /* AirTemp.swift in Sources */,
 				229B94B8274D688300E73CEE /* RangeByFuel.swift in Sources */,
@@ -442,15 +886,168 @@
 				229B94AC274D688300E73CEE /* DoorStatus.swift in Sources */,
 				22819DD027449A8100D21EED /* Endpoint.swift in Sources */,
 				229B94CD274D688300E73CEE /* ServicePeriod.swift in Sources */,
+				22F955BE280A5D770064FCFB /* ResponseError.swift in Sources */,
 				229B94DD274D688300E73CEE /* StatusResponse.swift in Sources */,
 				229B94C5274D688300E73CEE /* EvStatus.swift in Sources */,
 				229B94D1274D688300E73CEE /* Vehicle.swift in Sources */,
 				225701052748526300D4ED45 /* SettingsViewController.swift in Sources */,
 				229B94D8274D688300E73CEE /* DateTime.swift in Sources */,
+				22F955B8280A48800064FCFB /* Logger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22ECC88227FE8C3500955AC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22ECC8CE27FE9F3B00955AC7 /* Speed.swift in Sources */,
+				22ECC8AA27FE931000955AC7 /* Intents.intentdefinition in Sources */,
+				22ECC8BC27FE9F3B00955AC7 /* TimeInterval.swift in Sources */,
+				22BEDD4A2806256800785D3D /* ActionError.swift in Sources */,
+				22ECC8D827FE9F3B00955AC7 /* Coord.swift in Sources */,
+				22ECC8C027FE9F3B00955AC7 /* FreeTrialExtension.swift in Sources */,
+				22ECC8B727FE9F3B00955AC7 /* DrvDistance.swift in Sources */,
+				22ECC8DD27FE9F3B00955AC7 /* Location.swift in Sources */,
+				22ECC8AF27FE9D9600955AC7 /* VehicleSummary.swift in Sources */,
+				22ECC8CF27FE9F3B00955AC7 /* TotalAvailableRange.swift in Sources */,
+				22BEDD422800C9E800785D3D /* Shortcut.swift in Sources */,
+				22ECC8BF27FE9F3B00955AC7 /* RemainChargeTime.swift in Sources */,
+				22ECC8B527FE9DA500955AC7 /* ActionStatusResponse.swift in Sources */,
+				22ECC8DB27FE9F3B00955AC7 /* RangeByFuel.swift in Sources */,
+				22ECC8C127FE9F3B00955AC7 /* Climate.swift in Sources */,
+				22ECC8C927FE9F3B00955AC7 /* Vehicle.swift in Sources */,
+				22F955B5280A486D0064FCFB /* Secrets.swift in Sources */,
+				22ECC8CA27FE9F3B00955AC7 /* VehicleInfoList.swift in Sources */,
+				22ECC8C427FE9F3B00955AC7 /* TargetSOC.swift in Sources */,
+				22ECC8B127FE9D9600955AC7 /* ImagePath.swift in Sources */,
+				22ECC8BB27FE9F3B00955AC7 /* Status.swift in Sources */,
+				22ECC8C327FE9F3B00955AC7 /* ReportDate.swift in Sources */,
+				22F955C1280A60AF0064FCFB /* ExtensionAPIRouter.swift in Sources */,
+				22ECC8C227FE9F3B00955AC7 /* LastVehicleInfo.swift in Sources */,
+				22ECC8D127FE9F3B00955AC7 /* StatusResponse.swift in Sources */,
+				22ECC8CD27FE9F3B00955AC7 /* EvStatus.swift in Sources */,
+				22ECC8AD27FE9D8F00955AC7 /* Endpoint.swift in Sources */,
+				22ECC8B227FE9D9C00955AC7 /* UpdatePayload.swift in Sources */,
+				22ECC8B827FE9F3B00955AC7 /* Dte.swift in Sources */,
+				22ECC8D627FE9F3B00955AC7 /* VehicleDetail.swift in Sources */,
+				22ECC8C827FE9F3B00955AC7 /* BatteryStatus.swift in Sources */,
+				22F955C3280A60D70064FCFB /* ResponseError.swift in Sources */,
+				22F955B9280A48A70064FCFB /* Logger.swift in Sources */,
+				22ECC8CB27FE9F3B00955AC7 /* GasModeRange.swift in Sources */,
+				22ECC8B027FE9D9600955AC7 /* VehiclesResponse.swift in Sources */,
+				22ECC8DF27FE9F3B00955AC7 /* BillingPeriod.swift in Sources */,
+				22ECC8D527FE9F3B00955AC7 /* Telematics.swift in Sources */,
+				22ECC8C527FE9F3B00955AC7 /* TirePressure.swift in Sources */,
+				22ECC8BE27FE9F3B00955AC7 /* Device.swift in Sources */,
+				22ECC8D227FE9F3B00955AC7 /* DoorStatus.swift in Sources */,
+				22ECC8D027FE9F3B00955AC7 /* EvModeRange.swift in Sources */,
+				22ECC8D927FE9F3B00955AC7 /* FreeServiceDate.swift in Sources */,
+				22ECC8CC27FE9F3B00955AC7 /* Accuracy.swift in Sources */,
+				22ECC8BA27FE9F3B00955AC7 /* SupportedApps.swift in Sources */,
+				22ECC88B27FE8C3500955AC7 /* IntentHandler.swift in Sources */,
+				22ECC8DE27FE9F3B00955AC7 /* Modem.swift in Sources */,
+				22ECC8C727FE9F3B00955AC7 /* DateTime.swift in Sources */,
+				22ECC8DA27FE9F3B00955AC7 /* AirTemp.swift in Sources */,
+				22ECC8D727FE9F3B00955AC7 /* VehicleStatus.swift in Sources */,
+				22ECC8D327FE9F3B00955AC7 /* StatusPayload.swift in Sources */,
+				22ECC8E027FE9F3B00955AC7 /* FreeTrial.swift in Sources */,
+				22ECC8D427FE9F3B00955AC7 /* SyncDate.swift in Sources */,
+				22ECC8DC27FE9F3B00955AC7 /* VehicleConfig.swift in Sources */,
+				22ECC8E227FE9F3B00955AC7 /* Trim.swift in Sources */,
+				22ECC8BD27FE9F3B00955AC7 /* ServicePeriod.swift in Sources */,
+				22ECC8E127FE9F3B00955AC7 /* ActiveDTC.swift in Sources */,
+				22ECC8B927FE9F3B00955AC7 /* Enrollment.swift in Sources */,
+				22ECC8B627FE9F2E00955AC7 /* VehicleStatusRpt.swift in Sources */,
+				22ECC8B427FE9DA500955AC7 /* ActionStatusPayload.swift in Sources */,
+				22ECC8C627FE9F3B00955AC7 /* HeatingAccessory.swift in Sources */,
+				22ECC8AE27FE9D9600955AC7 /* VehiclesPayload.swift in Sources */,
+				22ECC8B327FE9D9C00955AC7 /* UpdateStatusResponse.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22ECC88D27FE8C3600955AC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				228C82FF27FF3193000C95D6 /* VehiclesResponse.swift in Sources */,
+				228C82E227FF318E000C95D6 /* StatusResponse.swift in Sources */,
+				228C82DA27FF318E000C95D6 /* FreeTrial.swift in Sources */,
+				22BEDD4C2806256900785D3D /* ActionError.swift in Sources */,
+				228C82DE27FF318E000C95D6 /* Enrollment.swift in Sources */,
+				228C82EC27FF318E000C95D6 /* DrvDistance.swift in Sources */,
+				22ECC8AB27FE931100955AC7 /* Intents.intentdefinition in Sources */,
+				228C82E727FF318E000C95D6 /* SupportedApps.swift in Sources */,
+				228C82F927FF318E000C95D6 /* Modem.swift in Sources */,
+				228C82E327FF318E000C95D6 /* TimeInterval.swift in Sources */,
+				228C82DD27FF318E000C95D6 /* TargetSOC.swift in Sources */,
+				228C82FB27FF318E000C95D6 /* Trim.swift in Sources */,
+				228C82F127FF318E000C95D6 /* LastVehicleInfo.swift in Sources */,
+				228C82F327FF318E000C95D6 /* RemainChargeTime.swift in Sources */,
+				228C82F827FF318E000C95D6 /* DateTime.swift in Sources */,
+				228C82F627FF318E000C95D6 /* EvStatus.swift in Sources */,
+				22F955B6280A486E0064FCFB /* Secrets.swift in Sources */,
+				228C82D427FF318E000C95D6 /* EvModeRange.swift in Sources */,
+				228C82D827FF318E000C95D6 /* TirePressure.swift in Sources */,
+				228C82F427FF318E000C95D6 /* VehicleConfig.swift in Sources */,
+				228C82E527FF318E000C95D6 /* BillingPeriod.swift in Sources */,
+				228C82E627FF318E000C95D6 /* VehicleStatusRpt.swift in Sources */,
+				228C82FA27FF318E000C95D6 /* StatusPayload.swift in Sources */,
+				22F955C2280A60AF0064FCFB /* ExtensionAPIRouter.swift in Sources */,
+				228C82FE27FF3193000C95D6 /* ImagePath.swift in Sources */,
+				228C82EA27FF318E000C95D6 /* Status.swift in Sources */,
+				228C82F727FF318E000C95D6 /* TotalAvailableRange.swift in Sources */,
+				228C82DF27FF318E000C95D6 /* ReportDate.swift in Sources */,
+				228C82FC27FF318E000C95D6 /* Vehicle.swift in Sources */,
+				228C82D627FF318E000C95D6 /* Dte.swift in Sources */,
+				228C82CD27FF11A3000C95D6 /* ProgressBar.swift in Sources */,
+				22F955C4280A60D80064FCFB /* ResponseError.swift in Sources */,
+				22F955BA280A48A80064FCFB /* Logger.swift in Sources */,
+				228C82D127FF318E000C95D6 /* Speed.swift in Sources */,
+				228C82EB27FF318E000C95D6 /* VehicleStatus.swift in Sources */,
+				228C82EF27FF318E000C95D6 /* Device.swift in Sources */,
+				228C82D927FF318E000C95D6 /* Climate.swift in Sources */,
+				228C82D727FF318E000C95D6 /* HeatingAccessory.swift in Sources */,
+				228C82F227FF318E000C95D6 /* Coord.swift in Sources */,
+				228C830127FF3193000C95D6 /* VehiclesPayload.swift in Sources */,
+				228C82DC27FF318E000C95D6 /* GasModeRange.swift in Sources */,
+				228C82E927FF318E000C95D6 /* FreeServiceDate.swift in Sources */,
+				228C830027FF3193000C95D6 /* VehicleSummary.swift in Sources */,
+				228C830327FF3197000C95D6 /* UpdateStatusResponse.swift in Sources */,
+				228C830627FF31F4000C95D6 /* ActionStatusResponse.swift in Sources */,
+				228C82F527FF318E000C95D6 /* DoorStatus.swift in Sources */,
+				228C82F027FF318E000C95D6 /* VehicleInfoList.swift in Sources */,
+				228C830427FF319A000C95D6 /* Endpoint.swift in Sources */,
+				228C830227FF3197000C95D6 /* UpdatePayload.swift in Sources */,
+				228C82E027FF318E000C95D6 /* AirTemp.swift in Sources */,
+				228C82E427FF318E000C95D6 /* VehicleDetail.swift in Sources */,
+				228C82E827FF318E000C95D6 /* BatteryStatus.swift in Sources */,
+				228C82EE27FF318E000C95D6 /* RangeByFuel.swift in Sources */,
+				228C82ED27FF318E000C95D6 /* Telematics.swift in Sources */,
+				228C82D227FF318E000C95D6 /* Accuracy.swift in Sources */,
+				228C82DB27FF318E000C95D6 /* FreeTrialExtension.swift in Sources */,
+				22ECC89627FE8C3600955AC7 /* IntentViewController.swift in Sources */,
+				228C82E127FF318E000C95D6 /* ServicePeriod.swift in Sources */,
+				228C82D327FF318E000C95D6 /* SyncDate.swift in Sources */,
+				228C82D527FF318E000C95D6 /* ActiveDTC.swift in Sources */,
+				228C82FD27FF318E000C95D6 /* Location.swift in Sources */,
+				228C830527FF31F4000C95D6 /* ActionStatusPayload.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22ECC89C27FE8C3600955AC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22ECC89027FE8C3600955AC7 /* CartenderIntentsUI */;
+			targetProxy = 22ECC89B27FE8C3600955AC7 /* PBXContainerItemProxy */;
+		};
+		22ECC89F27FE8C3600955AC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22ECC88527FE8C3500955AC7 /* CartenderIntents */;
+			targetProxy = 22ECC89E27FE8C3600955AC7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		22921DF52743500F0092526E /* Main.storyboard */ = {
@@ -467,6 +1064,14 @@
 				22921DFB2743500F0092526E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		22ECC89727FE8C3600955AC7 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22ECC89827FE8C3600955AC7 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -590,9 +1195,13 @@
 		};
 		22921E012743500F0092526E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BF3ACE97BE2C5AE46E06AD3 /* Pods-Cartender.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cartender/Cartender.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2RHGHNZ58B;
@@ -609,37 +1218,155 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.paool.Cartender;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		22921E022743500F0092526E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18ECD011F70A863D85A010B0 /* Pods-Cartender.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cartender/Cartender.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2RHGHNZ58B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cartender/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		22ECC8A227FE8C3600955AC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A59692475BE2CD7A4427BC33 /* Pods-CartenderIntentsUI.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CartenderIntentsUI/CartenderIntentsUI.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2RHGHNZ58B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CartenderIntentsUI/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CartenderIntentsUI;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender.CartenderIntentsUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		22921E022743500F0092526E /* Release */ = {
+		22ECC8A327FE8C3600955AC7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFD43E123148662B9FE23282 /* Pods-CartenderIntentsUI.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CartenderIntentsUI/CartenderIntentsUI.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2RHGHNZ58B;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Cartender/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_FILE = CartenderIntentsUI/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CartenderIntentsUI;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.paool.Cartender;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender.CartenderIntentsUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22ECC8A527FE8C3600955AC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A87E86CA94F7DEB01D606686 /* Pods-CartenderIntents.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CartenderIntents/CartenderIntents.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2RHGHNZ58B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CartenderIntents/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CartenderIntents;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender.CartenderIntents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22ECC8A627FE8C3600955AC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDC72CFD96118B6657F31B35 /* Pods-CartenderIntents.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CartenderIntents/CartenderIntents.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2RHGHNZ58B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CartenderIntents/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CartenderIntents;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender.CartenderIntents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -663,6 +1390,24 @@
 			buildConfigurations = (
 				22921E012743500F0092526E /* Debug */,
 				22921E022743500F0092526E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22ECC8A127FE8C3600955AC7 /* Build configuration list for PBXNativeTarget "CartenderIntentsUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22ECC8A227FE8C3600955AC7 /* Debug */,
+				22ECC8A327FE8C3600955AC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22ECC8A427FE8C3600955AC7 /* Build configuration list for PBXNativeTarget "CartenderIntents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22ECC8A527FE8C3600955AC7 /* Debug */,
+				22ECC8A627FE8C3600955AC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 @IBDesignable
 class ProgressBar: UIView {
@@ -40,7 +41,7 @@ class ProgressBar: UIView {
     }
 
     private func setupLayers() {
-        self.backgroundColor = .gray
+        self.backgroundColor = UIColor(named: "BackgroundColor")
         self.insertSubview(progressView, at: 0)
         self.insertSubview(targetView, at: 0)
     }
