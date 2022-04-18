@@ -204,10 +204,7 @@
 		22F955C2280A60AF0064FCFB /* ExtensionAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BF280A60AC0064FCFB /* ExtensionAPIRouter.swift */; };
 		22F955C3280A60D70064FCFB /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BD280A5D770064FCFB /* ResponseError.swift */; };
 		22F955C4280A60D80064FCFB /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BD280A5D770064FCFB /* ResponseError.swift */; };
-		22F955C6280DB4860064FCFB /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955C5280DB4860064FCFB /* Credentials.swift */; };
 		22F955C8280DB4CC0064FCFB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 22F955C7280DB4CC0064FCFB /* .gitignore */; };
-		22FBB857280DB559009AA75F /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955C5280DB4860064FCFB /* Credentials.swift */; };
-		22FBB858280DB559009AA75F /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955C5280DB4860064FCFB /* Credentials.swift */; };
 		292260682CE8E7682F72C688 /* Pods_CartenderIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */; };
 		3D5CA75C921E302C09F57D82 /* Pods_Cartender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */; };
 		A9CAF911D3F244499E75846D /* Pods_CartenderIntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */; };
@@ -346,7 +343,6 @@
 		22F955B7280A48800064FCFB /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		22F955BD280A5D770064FCFB /* ResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
 		22F955BF280A60AC0064FCFB /* ExtensionAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionAPIRouter.swift; sourceTree = "<group>"; };
-		22F955C5280DB4860064FCFB /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		22F955C7280DB4CC0064FCFB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		3AA505A4127B010A96792AFA /* Pods-Cartender-CartenderIntentsUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntentsUI.debug.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntentsUI/Pods-Cartender-CartenderIntentsUI.debug.xcconfig"; sourceTree = "<group>"; };
 		43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartenderIntentsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -460,7 +456,6 @@
 				225701042748526300D4ED45 /* SettingsViewController.swift */,
 				22BEDD432803480200785D3D /* MaxCharge.swift */,
 				22F955B7280A48800064FCFB /* Logger.swift */,
-				22F955C5280DB4860064FCFB /* Credentials.swift */,
 				22F955C7280DB4CC0064FCFB /* .gitignore */,
 				22921DF52743500F0092526E /* Main.storyboard */,
 				22921DF82743500F0092526E /* Assets.xcassets */,
@@ -847,7 +842,6 @@
 				229B94CA274D688300E73CEE /* GasModeRange.swift in Sources */,
 				22B3E86A274DD4D700906FE2 /* ActionStatusPayload.swift in Sources */,
 				229B94C1274D688300E73CEE /* FreeServiceDate.swift in Sources */,
-				22F955C6280DB4860064FCFB /* Credentials.swift in Sources */,
 				229B945F274D642400E73CEE /* UpdateStatusResponse.swift in Sources */,
 				229B94B6274D688300E73CEE /* VehicleInfoList.swift in Sources */,
 				22921DF02743500F0092526E /* AppDelegate.swift in Sources */,
@@ -928,7 +922,6 @@
 				22F955C1280A60AF0064FCFB /* ExtensionAPIRouter.swift in Sources */,
 				22ECC8C227FE9F3B00955AC7 /* LastVehicleInfo.swift in Sources */,
 				22ECC8D127FE9F3B00955AC7 /* StatusResponse.swift in Sources */,
-				22FBB857280DB559009AA75F /* Credentials.swift in Sources */,
 				22ECC8CD27FE9F3B00955AC7 /* EvStatus.swift in Sources */,
 				22ECC8AD27FE9D8F00955AC7 /* Endpoint.swift in Sources */,
 				22ECC8B227FE9D9C00955AC7 /* UpdatePayload.swift in Sources */,
@@ -997,7 +990,6 @@
 				228C82FA27FF318E000C95D6 /* StatusPayload.swift in Sources */,
 				22F955C2280A60AF0064FCFB /* ExtensionAPIRouter.swift in Sources */,
 				228C82FE27FF3193000C95D6 /* ImagePath.swift in Sources */,
-				22FBB858280DB559009AA75F /* Credentials.swift in Sources */,
 				228C82EA27FF318E000C95D6 /* Status.swift in Sources */,
 				228C82F727FF318E000C95D6 /* TotalAvailableRange.swift in Sources */,
 				228C82DF27FF318E000C95D6 /* ReportDate.swift in Sources */,
