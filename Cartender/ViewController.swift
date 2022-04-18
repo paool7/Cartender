@@ -159,9 +159,9 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         syncButton.tintColor = .systemCyan
         heatedButton.layer.cornerRadius = heatedButton.frame.width/2
         tempUpButton.layer.cornerRadius = tempUpButton.frame.width/2
+        tempDownButton.layer.cornerRadius = tempDownButton.frame.width/2
         chargeButton.layer.cornerRadius = chargeButton.frame.height/2
         defrostButton.layer.cornerRadius = defrostButton.frame.width/2
-        tempDownButton.layer.cornerRadius = defrostButton.frame.width/2
         climateButton.layer.cornerRadius = climateButton.frame.height/2
         lockUnlockButton.layer.cornerRadius = lockUnlockButton.frame.height/2
         backgroundImageView.image = UIImage(named: "Drive-\(Calendar.current.component(.weekday, from: Date()))")

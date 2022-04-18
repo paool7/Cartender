@@ -208,6 +208,7 @@
 		22FBB85A280DB7D4009AA75F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB859280DB7D4009AA75F /* Secrets.swift */; };
 		22FBB85B280DB9F8009AA75F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB859280DB7D4009AA75F /* Secrets.swift */; };
 		22FBB85C280DB9F8009AA75F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB859280DB7D4009AA75F /* Secrets.swift */; };
+		22FBB85F280E066A009AA75F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB85E280E066A009AA75F /* Reachability.swift */; };
 		292260682CE8E7682F72C688 /* Pods_CartenderIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */; };
 		3D5CA75C921E302C09F57D82 /* Pods_Cartender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */; };
 		A9CAF911D3F244499E75846D /* Pods_CartenderIntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */; };
@@ -349,6 +350,7 @@
 		22F955C7280DB4CC0064FCFB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		22FBB859280DB7D4009AA75F /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		22FBB85D280DF12B009AA75F /* PrivacyPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
+		22FBB85E280E066A009AA75F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3AA505A4127B010A96792AFA /* Pods-Cartender-CartenderIntentsUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntentsUI.debug.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntentsUI/Pods-Cartender-CartenderIntentsUI.debug.xcconfig"; sourceTree = "<group>"; };
 		43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartenderIntentsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C5F6826EB8A2C5ADFDA620 /* Pods-BatteryExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryExtension.debug.xcconfig"; path = "Target Support Files/Pods-BatteryExtension/Pods-BatteryExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				22BEDD432803480200785D3D /* MaxCharge.swift */,
 				22F955B7280A48800064FCFB /* Logger.swift */,
 				22FBB859280DB7D4009AA75F /* Secrets.swift */,
+				22FBB85E280E066A009AA75F /* Reachability.swift */,
 				22FBB85D280DF12B009AA75F /* PrivacyPolicy.md */,
 				22F955C7280DB4CC0064FCFB /* .gitignore */,
 				22921DF52743500F0092526E /* Main.storyboard */,
@@ -838,6 +841,7 @@
 				229B94A8274D688300E73CEE /* VehicleDetail.swift in Sources */,
 				229B94AF274D688300E73CEE /* Device.swift in Sources */,
 				229B94A9274D688300E73CEE /* FreeTrial.swift in Sources */,
+				22FBB85F280E066A009AA75F /* Reachability.swift in Sources */,
 				22ECC8A927FE8C6500955AC7 /* Intents.intentdefinition in Sources */,
 				229B94CE274D688300E73CEE /* Trim.swift in Sources */,
 				229B94D7274D688300E73CEE /* Coord.swift in Sources */,

@@ -115,31 +115,39 @@ class APIRouter {
 
 extension APIRouter {
     func post(endpoint: Endpoint, body: [String : Any]?, authorized: Bool = false, completion: ((Response?, (code: Int, message: String)?) -> ())?) {
-        var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
-        req.httpMethod = "POST"
-        req.allHTTPHeaderFields = authorized ? authorizedHeaders : headers
-        if let body = body {
-            req.httpBody = body.json
-        }
-        HTTP(req).run { [weak self] response in
-            if let error = self?.error(response: response) {
-                completion?(nil, error)
-            } else {
-                completion?(response, nil)
+        if Reachability.isConnectedToNetwork() {
+            var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
+            req.httpMethod = "POST"
+            req.allHTTPHeaderFields = authorized ? authorizedHeaders : headers
+            if let body = body {
+                req.httpBody = body.json
             }
+            HTTP(req).run { [weak self] response in
+                if let error = self?.error(response: response) {
+                    completion?(nil, error)
+                } else {
+                    completion?(response, nil)
+                }
+            }
+        } else {
+            self.showError(message: "No internet connection. Make sure your device is connected to the internet and try again.")
         }
     }
     
     func get(endpoint: Endpoint, _ retry: Bool = true, completion: ((Response?, (code: Int, message: String)?) -> ())?) {
-        var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
-        req.httpMethod = "GET"
-        req.allHTTPHeaderFields = authorizedHeaders
-        HTTP(req).run { [weak self] response in
-            if let error = self?.error(response: response) {
-                completion?(nil, error)
-            } else {
-                completion?(response, nil)
+        if Reachability.isConnectedToNetwork() {
+            var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
+            req.httpMethod = "GET"
+            req.allHTTPHeaderFields = authorizedHeaders
+            HTTP(req).run { [weak self] response in
+                if let error = self?.error(response: response) {
+                    completion?(nil, error)
+                } else {
+                    completion?(response, nil)
+                }
             }
+        } else {
+            self.showError(message: "No internet connection. Make sure your device is connected to the internet and try again.")
         }
     }
     
