@@ -206,6 +206,8 @@
 		22F955C4280A60D80064FCFB /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955BD280A5D770064FCFB /* ResponseError.swift */; };
 		22F955C8280DB4CC0064FCFB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 22F955C7280DB4CC0064FCFB /* .gitignore */; };
 		22FBB85A280DB7D4009AA75F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB859280DB7D4009AA75F /* Secrets.swift */; };
+		22FBB85B280DB9F8009AA75F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB859280DB7D4009AA75F /* Secrets.swift */; };
+		22FBB85C280DB9F8009AA75F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB859280DB7D4009AA75F /* Secrets.swift */; };
 		292260682CE8E7682F72C688 /* Pods_CartenderIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */; };
 		3D5CA75C921E302C09F57D82 /* Pods_Cartender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */; };
 		A9CAF911D3F244499E75846D /* Pods_CartenderIntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */; };
@@ -947,6 +949,7 @@
 				22ECC8BA27FE9F3B00955AC7 /* SupportedApps.swift in Sources */,
 				22ECC88B27FE8C3500955AC7 /* IntentHandler.swift in Sources */,
 				22ECC8DE27FE9F3B00955AC7 /* Modem.swift in Sources */,
+				22FBB85B280DB9F8009AA75F /* Secrets.swift in Sources */,
 				22ECC8C727FE9F3B00955AC7 /* DateTime.swift in Sources */,
 				22ECC8DA27FE9F3B00955AC7 /* AirTemp.swift in Sources */,
 				22ECC8D727FE9F3B00955AC7 /* VehicleStatus.swift in Sources */,
@@ -1015,6 +1018,7 @@
 				228C830327FF3197000C95D6 /* UpdateStatusResponse.swift in Sources */,
 				228C830627FF31F4000C95D6 /* ActionStatusResponse.swift in Sources */,
 				228C82F527FF318E000C95D6 /* DoorStatus.swift in Sources */,
+				22FBB85C280DB9F8009AA75F /* Secrets.swift in Sources */,
 				228C82F027FF318E000C95D6 /* VehicleInfoList.swift in Sources */,
 				228C830427FF319A000C95D6 /* Endpoint.swift in Sources */,
 				228C830227FF3197000C95D6 /* UpdatePayload.swift in Sources */,
