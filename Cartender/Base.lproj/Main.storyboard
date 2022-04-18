@@ -272,7 +272,7 @@
                                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                                                                 <connections>
-                                                                                    <action selector="switchedCharge:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TkB-Uz-DMn"/>
+                                                                                    <action selector="tappedCharge:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aNy-Y2-l9N"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -434,7 +434,7 @@
                                                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
                                                                                             </state>
                                                                                             <connections>
-                                                                                                <action selector="switchedClimate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FrA-xW-9gQ"/>
+                                                                                                <action selector="tappedClimate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PoY-Ux-9Yv"/>
                                                                                             </connections>
                                                                                         </button>
                                                                                     </subviews>
@@ -716,10 +716,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="05s-xY-Id2">
-                                <rect key="frame" x="16" y="47" width="382" height="236"/>
+                                <rect key="frame" x="16" y="47" width="382" height="410"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ahu-89-22y">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="53"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ahu-89-22y">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="61"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Climate Control" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0W-Eh-0jk">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
@@ -728,7 +728,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VlS-RM-3z5">
-                                                <rect key="frame" x="0.0" y="21" width="382" height="32"/>
+                                                <rect key="frame" x="0.0" y="29" width="382" height="32"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="On duration:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-E1-73H">
                                                         <rect key="frame" x="0.0" y="0.0" width="211" height="32"/>
@@ -753,14 +753,14 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Srx-27-UQI">
-                                        <rect key="frame" x="0.0" y="69" width="382" height="1"/>
+                                        <rect key="frame" x="0.0" y="77" width="382" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="oZF-Jm-Sc2"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ama-Zy-Rb7">
-                                        <rect key="frame" x="0.0" y="86" width="382" height="133"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ama-Zy-Rb7">
+                                        <rect key="frame" x="0.0" y="94" width="382" height="141"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charging" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqc-tj-req">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
@@ -768,75 +768,126 @@
                                                 <color key="textColor" name="BodyColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="miW-jT-K7i">
-                                                <rect key="frame" x="0.0" y="21" width="382" height="32"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="32a-Dk-tzI">
+                                                <rect key="frame" x="0.0" y="29" width="382" height="112"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="AC max charge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPZ-qV-xZH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="235.5" height="32"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="80%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTt-4q-PCT">
-                                                        <rect key="frame" x="243.5" y="0.0" width="36.5" height="32"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="80" minimumValue="10" maximumValue="100" stepValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="Btp-gg-qdj">
-                                                        <rect key="frame" x="288" y="0.0" width="94" height="32"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="miW-jT-K7i">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="32"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="AC max charge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPZ-qV-xZH">
+                                                                <rect key="frame" x="0.0" y="0.0" width="235.5" height="32"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="80%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTt-4q-PCT">
+                                                                <rect key="frame" x="243.5" y="0.0" width="36.5" height="32"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="80" minimumValue="10" maximumValue="100" stepValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="Btp-gg-qdj">
+                                                                <rect key="frame" x="288" y="0.0" width="94" height="32"/>
+                                                                <connections>
+                                                                    <action selector="acMaxChanged" destination="xVH-PH-UYG" eventType="valueChanged" id="DWG-xE-Q2v"/>
+                                                                </connections>
+                                                            </stepper>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RfA-uq-qHf">
+                                                        <rect key="frame" x="0.0" y="36" width="382" height="32"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DC max charge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28Q-hB-7OX">
+                                                                <rect key="frame" x="0.0" y="0.0" width="235.5" height="32"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="80%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYK-W3-bg4">
+                                                                <rect key="frame" x="243.5" y="0.0" width="36.5" height="32"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="80" minimumValue="10" maximumValue="100" stepValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="s9D-ZQ-5jk">
+                                                                <rect key="frame" x="288" y="0.0" width="94" height="32"/>
+                                                                <connections>
+                                                                    <action selector="dcMaxChanged" destination="xVH-PH-UYG" eventType="valueChanged" id="cdP-Gc-fhJ"/>
+                                                                </connections>
+                                                            </stepper>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Oy-3q-foh">
+                                                        <rect key="frame" x="0.0" y="72" width="382" height="40"/>
+                                                        <color key="backgroundColor" name="ButtonColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="8Oq-qm-9tT"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                                        <state key="normal" title="Set Charge Limits"/>
                                                         <connections>
-                                                            <action selector="acMaxChanged" destination="xVH-PH-UYG" eventType="valueChanged" id="DWG-xE-Q2v"/>
+                                                            <action selector="saveCharge" destination="xVH-PH-UYG" eventType="touchUpInside" id="sfR-50-AwC"/>
                                                         </connections>
-                                                    </stepper>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RfA-uq-qHf">
-                                                <rect key="frame" x="0.0" y="57" width="382" height="32"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DC max charge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28Q-hB-7OX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="235.5" height="32"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="80%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYK-W3-bg4">
-                                                        <rect key="frame" x="243.5" y="0.0" width="36.5" height="32"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="80" minimumValue="10" maximumValue="100" stepValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="s9D-ZQ-5jk">
-                                                        <rect key="frame" x="288" y="0.0" width="94" height="32"/>
-                                                        <connections>
-                                                            <action selector="dcMaxChanged" destination="xVH-PH-UYG" eventType="valueChanged" id="cdP-Gc-fhJ"/>
-                                                        </connections>
-                                                    </stepper>
-                                                </subviews>
-                                            </stackView>
-                                            <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Oy-3q-foh">
-                                                <rect key="frame" x="0.0" y="93" width="382" height="40"/>
-                                                <color key="backgroundColor" name="ButtonColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="8Oq-qm-9tT"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
-                                                <state key="normal" title="Set Charge Limits"/>
-                                                <connections>
-                                                    <action selector="saveCharge" destination="xVH-PH-UYG" eventType="touchUpInside" id="sfR-50-AwC"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gk1-nD-3zq">
-                                        <rect key="frame" x="0.0" y="235" width="382" height="1"/>
+                                        <rect key="frame" x="0.0" y="251" width="382" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="pE9-BQ-k3b"/>
                                         </constraints>
                                     </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RTO-t1-22g">
+                                        <rect key="frame" x="0.0" y="268" width="382" height="69"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kT-Vc-TB0">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <color key="textColor" name="BodyColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Voh-6t-dAI">
+                                                <rect key="frame" x="0.0" y="29" width="382" height="40"/>
+                                                <color key="backgroundColor" name="ButtonColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="alw-gk-bpo"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                                <state key="normal" title="Submit Issue or Idea"/>
+                                                <connections>
+                                                    <action selector="tappedEmail" destination="xVH-PH-UYG" eventType="touchUpInside" id="rSC-zw-O92"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1A9-02-bjF">
+                                        <rect key="frame" x="0.0" y="353" width="382" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Erp-jL-8eB"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaN-kB-wtA">
+                                        <rect key="frame" x="0.0" y="370" width="382" height="40"/>
+                                        <color key="backgroundColor" name="ButtonColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="roP-hl-hHX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                        <state key="normal" title="Logout"/>
+                                        <connections>
+                                            <action selector="tappedLogout" destination="xVH-PH-UYG" eventType="touchUpInside" id="Qbt-Ex-rYz"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -862,6 +913,8 @@
                         <outlet property="chargeDCLabel" destination="vYK-W3-bg4" id="yDR-iL-agu"/>
                         <outlet property="chargeDCStepper" destination="s9D-ZQ-5jk" id="ag0-Lk-E2d"/>
                         <outlet property="closeButton" destination="vgN-54-UWt" id="Sah-IV-zse"/>
+                        <outlet property="contactButton" destination="Voh-6t-dAI" id="yGd-L5-Qk9"/>
+                        <outlet property="logoutButton" destination="JaN-kB-wtA" id="8wK-Lu-pqd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7oz-ux-0oU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

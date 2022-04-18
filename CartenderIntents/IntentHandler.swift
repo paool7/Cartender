@@ -119,6 +119,8 @@ class IntentHandler: INExtension, CurrentChargeIntentHandling, CurrentLocationIn
     }
     
     func startClimate(temp: Int, defrost: Bool, wheel: Bool, rearDefrost: Bool, completion: @escaping (SetTemperatureIntentResponse) -> Void) {
+        var climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
+        climateDuration = climateDuration == 0 ? 30 : climateDuration
         let body = [
             "remoteClimate": [
                 "airCtrl": true,
@@ -134,7 +136,7 @@ class IntentHandler: INExtension, CurrentChargeIntentHandling, CurrentLocationIn
                 ],
                 "ignitionOnDuration": [
                     "unit": 4,
-                    "value": 5
+                    "value": climateDuration
                 ],
             ]
         ]

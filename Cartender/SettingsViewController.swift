@@ -8,8 +8,9 @@
 import UIKit
 import SwiftHTTP
 import NotificationBannerSwift
+import MessageUI
 
-class SettingsViewController: UIViewController, UIColorPickerViewControllerDelegate {
+class SettingsViewController: UIViewController, UIColorPickerViewControllerDelegate, MFMailComposeViewControllerDelegate {
     @IBOutlet var airDurationStepper: UIStepper!
     @IBOutlet var airDurationLabel: UILabel!
     
@@ -18,6 +19,10 @@ class SettingsViewController: UIViewController, UIColorPickerViewControllerDeleg
     @IBOutlet var chargeDCStepper: UIStepper!
     @IBOutlet var chargeDCLabel: UILabel!
     @IBOutlet var chargeButton: UIButton!
+    
+    @IBOutlet var contactButton: UIButton!
+
+    @IBOutlet var logoutButton: UIButton!
 
     @IBOutlet var accentButton: UIButton!
     
@@ -29,15 +34,35 @@ class SettingsViewController: UIViewController, UIColorPickerViewControllerDeleg
         closeButton.tintColor = UserDefaults.standard.colorFor(key: "AccentColor") ?? .systemTeal
 
         chargeButton.layer.cornerRadius = chargeButton.frame.height/2
-        
+        contactButton.layer.cornerRadius = contactButton.frame.height/2
+        logoutButton.layer.cornerRadius = logoutButton.frame.height/2
+
         chargeACStepper.value = Double(MaxCharge.AC)
         chargeACLabel.text = "\(MaxCharge.AC)%"
         chargeDCStepper.value = Double(MaxCharge.DC)
         chargeDCLabel.text = "\(MaxCharge.DC)%"
         
-        let climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
+        var climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
+        climateDuration = climateDuration == 0 ? 30 : climateDuration
         airDurationStepper.value = Double(climateDuration)
         airDurationLabel.text = "\(climateDuration) mins"
+    }
+    
+    @IBAction func tappedLogout() {
+        keychain.removeObject(forKey: .usernameKey)
+        keychain.removeObject(forKey: .passwordKey)
+        APIRouter.shared.sessionId = nil
+        APIRouter.shared.logoutHandler?()
+    }
+    
+    @IBAction func tappedEmail() {
+        if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = self
+                mail.setToRecipients(["paoolideas@gmail.com"])
+                mail.setSubject("Cartender")
+            present(mail, animated: true, completion: nil)
+        }
     }
     
     @IBAction func dismiss() {
@@ -132,6 +157,10 @@ class SettingsViewController: UIViewController, UIColorPickerViewControllerDeleg
             let banner = FloatingNotificationBanner(title: "Success!", subtitle: endpoint.successMessage(), style: .success)
             banner.show()
         }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

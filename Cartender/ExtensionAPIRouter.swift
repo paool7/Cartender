@@ -151,8 +151,8 @@ extension APIRouter {
                     self.sessionId = nil
                     self.logoutHandler?()
                 } else if rError == .logout {
-                    KeychainWrapper.standard.removeObject(forKey: .usernameKey)
-                    KeychainWrapper.standard.removeObject(forKey: .passwordKey)
+                    keychain.removeObject(forKey: .usernameKey)
+                    keychain.removeObject(forKey: .passwordKey)
                 }
             }
             log.error(message)

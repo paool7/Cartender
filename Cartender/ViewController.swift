@@ -16,37 +16,51 @@ import NotificationBannerSwift
 
 class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUIAddVoiceShortcutViewControllerDelegate, INUIEditVoiceShortcutViewControllerDelegate {
     
+    // MARK: Outlets
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+
     @IBOutlet var batteryContainer: ProgressBar!
-    @IBOutlet var mapView: MKMapView!
-    @IBOutlet var climateButton: UIButton!
-    @IBOutlet var chargeButton: UIButton!
-    @IBOutlet var chargeTimeLabel: UILabel!
+    
     @IBOutlet var chargeStatusLabel: UILabel!
+    @IBOutlet var chargeTimeLabel: UILabel!
+    @IBOutlet var nicknameLabel: UILabel!
     @IBOutlet var odometerLabel: UILabel!
+    @IBOutlet var syncTimeLabel: UILabel!
     @IBOutlet var rangeLabel: UILabel!
+    @IBOutlet var lockLabel: UILabel!
+    @IBOutlet var doorLabel: UILabel!
+    
     @IBOutlet var lockUnlockButton: UIButton!
     @IBOutlet var tempDownButton: UIButton!
-    @IBOutlet var tempLabel: UIButton!
-    @IBOutlet var tempUpButton: UIButton!
-    @IBOutlet var lockLabel: UILabel!
-    @IBOutlet var nicknameLabel: UILabel!
-    @IBOutlet var doorLabel: UILabel!
-    @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var settingsButton: UIButton!
+    @IBOutlet var climateButton: UIButton!
+    @IBOutlet var defrostButton: UIButton!
+    @IBOutlet var chargeButton: UIButton!
+    @IBOutlet var tempUpButton: UIButton!
+    @IBOutlet var heatedButton: UIButton!
+    @IBOutlet var syncButton: UIButton!
+    @IBOutlet var tempLabel: UIButton!
+
+    @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var shortcutStackView: UIStackView!
     @IBOutlet var showMoreArrow: UIImageView!
-    @IBOutlet var heatedButton: UIButton!
-    @IBOutlet var defrostButton: UIButton!
-
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var syncTimeLabel: UILabel!
-    @IBOutlet var syncButton: UIButton!
     
+    @IBOutlet var mapView: MKMapView!
+    
+    // MARK: Variables
     var name = "Niro"
     var latitude: Double?
     var longitude: Double?
     var showAllShortcuts = false
-    var climateOn = false
+    
+    var climateOn = false {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.climateButton.setTitle(self.climateOn ? "Stop" : "Start", for: .normal)
+            }
+        }
+    }
     
     var isSyncing = false {
         didSet {
@@ -54,6 +68,25 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 self.activityIndicator.isHidden = !self.isSyncing
                 self.syncTimeLabel.isHidden = self.isSyncing
                 self.syncButton.isHidden = self.isSyncing
+                self.shortcutStackView.alpha = self.isSyncing ? 0.5 : 1.0
+                self.shortcutStackView.isUserInteractionEnabled = !self.isSyncing
+                
+                self.tempUpButton.alpha = self.isSyncing ? 0.5 : 1.0
+                self.tempDownButton.alpha = self.isSyncing ? 0.5 : 1.0
+                self.heatedButton.alpha = self.isSyncing ? 0.5 : 1.0
+                self.defrostButton.alpha = self.isSyncing ? 0.5 : 1.0
+                self.settingsButton.alpha = self.isSyncing ? 0.5 : 1.0
+                self.lockUnlockButton.alpha = self.isSyncing ? 0.5 : 1.0
+                self.climateButton.alpha = self.isSyncing ? 0.5 : 1.0
+
+                self.heatedButton.isEnabled = !self.isSyncing
+                self.defrostButton.isEnabled = !self.isSyncing
+                self.tempUpButton.isEnabled = !self.isSyncing
+                self.tempDownButton.isEnabled = !self.isSyncing
+                self.settingsButton.isEnabled = !self.isSyncing
+                self.lockUnlockButton.isEnabled = !self.isSyncing
+                self.climateButton.isEnabled = !self.isSyncing
+
                 if !self.isSyncing {
                     self.activityIndicator.stopAnimating()
                 } else {
@@ -66,8 +99,6 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     var isLocked = true {
         didSet {
             DispatchQueue.main.async {
-                self.lockUnlockButton.alpha = 1.0
-                self.lockUnlockButton.isEnabled = true
                 let config = UIImage.SymbolConfiguration(scale: .medium)
                 self.lockUnlockButton.setImage(UIImage(systemName: !self.isLocked ? "lock" : "lock.open", withConfiguration: config), for: .normal)
                 self.lockUnlockButton.setTitle(self.isLocked ? "Unlock" : "Lock", for: .normal)
@@ -84,7 +115,6 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                     self.tempLabel.setTitle("", for: .normal)
                 } else {
                     self.tempLabel.setTitle(" \(self.temp)°", for: .normal)
-                    //self.climateSwitch.onTintColor = self.temp > 69 ? self.redColor : self.blueColor
                 }
             }
         }
@@ -98,19 +128,22 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         }
     }
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] notification in
+        //
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] notification in
+            guard let self = self else { return }
             if APIRouter.shared.sessionId == nil {
-                self.login {}
+                self.login(completion: nil)
             } else {
                 self.getVehicles(completion: nil)
             }
         }
         
         APIRouter.shared.logoutHandler = {
-            self.login {}
+            self.login(completion: nil)
         }
         
         for i in 0..<Shortcut.allCases.count {
@@ -119,21 +152,56 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 self.shortcutStackView.arrangedSubviews[i].isHidden = false
             }
         }
-        
-        self.backgroundImageView.image = UIImage(named: "Drive-\(Calendar.current.component(.weekday, from: Date()))")
-
-        syncButton.tintColor = .systemCyan
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        syncButton.tintColor = .systemCyan
+        heatedButton.layer.cornerRadius = heatedButton.frame.width/2
+        tempUpButton.layer.cornerRadius = tempUpButton.frame.width/2
         chargeButton.layer.cornerRadius = chargeButton.frame.height/2
+        defrostButton.layer.cornerRadius = defrostButton.frame.width/2
+        tempDownButton.layer.cornerRadius = defrostButton.frame.width/2
         climateButton.layer.cornerRadius = climateButton.frame.height/2
         lockUnlockButton.layer.cornerRadius = lockUnlockButton.frame.height/2
-        heatedButton.layer.cornerRadius = heatedButton.frame.width/2
-        defrostButton.layer.cornerRadius = defrostButton.frame.width/2
-        tempUpButton.layer.cornerRadius = tempUpButton.frame.width/2
-        tempDownButton.layer.cornerRadius = defrostButton.frame.width/2
+        backgroundImageView.image = UIImage(named: "Drive-\(Calendar.current.component(.weekday, from: Date()))")
+    }
+    
+    // MARK: Actions
+    @IBAction func sync() {
+        self.updateStatus()
+    }
+    
+    @IBAction func tappedCharge(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            self.startCharge {
+                self.setChargeStatus(true, true)
+            }
+        } else {
+            self.stopCharge {
+                self.setChargeStatus(false, true)
+            }
+        }
+    }
+    
+    @IBAction func tappedClimate(_ sender: UIButton) {
+        if !climateOn {
+            self.startClimate(completion: nil)
+        } else {
+            if !sender.isSelected {
+                self.stopClimate(completion: nil)
+            }
+        }
+    }
+    
+    @IBAction func tappedDefrost(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if !sender.isSelected {
+            self.defrostButton.tintColor = .white
+        } else {
+            self.defrostButton.tintColor = .systemRed
+        }
     }
     
     @IBAction func tappedHeatedWheel(_ sender: UIButton) {
@@ -145,13 +213,9 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         }
     }
     
-    @IBAction func tappedDefrost(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        if !sender.isSelected {
-            self.defrostButton.tintColor = .white
-        } else {
-            self.defrostButton.tintColor = .systemRed
-        }
+    @IBAction func tappedLockUnlock(_ sender: UIButton) {
+        self.lockLabel.text = isLocked ? "Unlocking..." : "Locking..."
+        self.setLock(lock: !isLocked)
     }
     
     @IBAction func tappedTempDown(_ sender: UIButton) {
@@ -166,100 +230,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         }
     }
     
-    @IBAction func tappedLockUnlock(_ sender: UIButton) {
-        self.lockUnlockButton.alpha = 0.5
-        self.lockUnlockButton.isEnabled = false
-        self.lockLabel.text = isLocked ? "Unlocking..." : "Locking..."
-        self.setLock(lock: !isLocked)
-    }
-    
-    @IBAction func switchedCharge(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        if sender.isSelected {
-            self.startCharge {
-                self.setChargeStatus(true, true)
-            }
-        } else {
-            self.stopCharge {
-                self.setChargeStatus(false, true)
-            }
-        }
-    }
-    
-    func login(completion: (() -> ())?) {
-        if let username = keychain.string(forKey: .usernameKey), let password = keychain.string(forKey: .passwordKey) {
-                APIRouter.shared.login(username: username, password: password) { [weak self] error in
-                    if let error = error {
-                        let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-                        let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
-                            self?.login(completion: completion)
-                        }
-                        errorAlert.addAction(errorAction)
-                        
-                        DispatchQueue.main.async {
-                            self?.present(errorAlert, animated: true, completion: nil)
-                        }
-                    } else {
-                        self?.getVehicles(completion: completion)
-                    }
-                }
-            } else {
-                var usernameField = UITextField()
-                var passwordField = UITextField()
-                
-                let alert = UIAlertController(title: "Login", message: "Your login information is stored securely on your device and is only sent to Kia to login.", preferredStyle: .alert)
-                alert.addTextField { alertTextField in
-                    alertTextField.placeholder = "Username"
-                    usernameField = alertTextField
-                }
-                alert.addTextField { alertTextField in
-                    alertTextField.placeholder = "Password"
-                    alertTextField.isSecureTextEntry = true
-                    passwordField = alertTextField
-                }
-                
-                let action = UIAlertAction(title: "Done", style: .default) { action in
-                    if let username = usernameField.text, let password = passwordField.text {
-                        APIRouter.shared.login(username: username, password: password) { [weak self] error in
-                            if let error = error {
-                                let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-                                let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
-                                    self?.login(completion: completion)
-                                }
-                                errorAlert.addAction(errorAction)
-                                
-                                DispatchQueue.main.async {
-                                    self?.present(errorAlert, animated: true, completion: nil)
-                                }
-                            } else {
-                                self?.getVehicles(completion: completion)
-                            }
-                        }
-                    }
-                }
-                
-                alert.addAction(action)
-                DispatchQueue.main.async {
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-    }
-    
-    func setChargeStatus(_ isOn: Bool, _ pluggedIn: Bool) {
-        DispatchQueue.main.async {
-            let config = UIImage.SymbolConfiguration(scale: .medium)
-            if pluggedIn {
-                self.chargeButton.setImage(UIImage(systemName: !isOn ? "bolt" : "bolt.slash", withConfiguration: config), for: .normal)
-                self.chargeButton.setTitle(!isOn ? "Start" : "Stop", for: .normal)
-            } else {
-                self.chargeButton.setImage(nil, for: .normal)
-                self.chargeButton.setTitle("Unplugged", for: .normal)
-            }
-            self.chargeButton.alpha = isOn ? 1.0 : 0.5
-            self.chargeButton.isEnabled = isOn ? true : false
-        }
-    }
-    
+    // MARK: API Helpers
     func setChargeDetails(charging: Bool, pluggedIn: Bool, ratio: Int, chargeTime: Int) {
         var chargeString = ""
         self.chargeMax = ratio
@@ -282,42 +253,186 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             self.chargeTimeLabel.isHidden = false
         } else {
             self.chargeTimeLabel.isHidden = true
-            self.chargeButton.alpha = 0.5
-            self.chargeButton.isEnabled = false
         }
         chargeTimeLabel.text = chargeString
     }
     
-    @IBAction func switchedClimate(_ sender: UIButton) {
-        self.chargeButton.alpha = 0.5
-        self.chargeButton.isEnabled = false
-        if !climateOn {
-            self.startClimate(completion: nil)
-        } else {
-            if !sender.isSelected {
-                self.stopClimate(completion: nil)
+    func setChargeStatus(_ isOn: Bool, _ pluggedIn: Bool) {
+        DispatchQueue.main.async {
+            let config = UIImage.SymbolConfiguration(scale: .medium)
+            if pluggedIn {
+                self.chargeButton.setImage(UIImage(systemName: !isOn ? "bolt" : "bolt.slash", withConfiguration: config), for: .normal)
+                self.chargeButton.setTitle(!isOn ? "Start" : "Stop", for: .normal)
+            } else {
+                self.chargeButton.setImage(nil, for: .normal)
+                self.chargeButton.setTitle("Unplugged", for: .normal)
             }
+            self.chargeButton.alpha = isOn ? 1.0 : 0.5
+            self.chargeButton.isEnabled = isOn ? true : false
         }
     }
     
-    func setClimateStatus(_ isOn: Bool) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.climateButton.isEnabled = true
-            self.climateButton.alpha = 1.0
-            self.climateButton.setTitle(isOn ? "Stop" : "Start", for: .normal)
-            self.climateOn = isOn
-            self.tempUpButton.alpha = 1.0
-            self.tempDownButton.alpha = 1.0
-            self.tempLabel.alpha = 1.0
-            self.heatedButton.alpha = 1.0
-            self.defrostButton.alpha = 1.0
-            
-            self.heatedButton.isEnabled = true
-            self.defrostButton.isEnabled = true
-            self.tempUpButton.isEnabled = true
-            self.tempDownButton.isEnabled = true
+    func set(vehicleStatus: VehicleStatus, syncDateUTC: String?) {
+        if let evStatus = vehicleStatus.evStatus, let dcTargetSoc = evStatus.targetSOC?[0].targetSOClevel, let acTargetSoc = evStatus.targetSOC?[1].targetSOClevel, let charge = evStatus.batteryStatus, let isCharging = evStatus.batteryCharge, let pluggedIn = evStatus.batteryPlugin, let chargeTime = evStatus.remainChargeTime?.first?.timeInterval?.value, let drvDistance = vehicleStatus.evStatus?.drvDistance?.first, let range = drvDistance.rangeByFuel?.totalAvailableRange?.value {
+            self.chargeStatusLabel.text = "\(charge)% • \(range)mi"
+            self.batteryContainer.progress = CGFloat(charge)/100.0
+            let largeConfig = UIImage.SymbolConfiguration(scale: .large)
+            self.chargeButton.setImage(UIImage(systemName: !isCharging ? "bolt" : "bolt.slash", withConfiguration: largeConfig), for: .selected)
+            self.setChargeDetails(charging: isCharging, pluggedIn: pluggedIn != 0, ratio: acTargetSoc, chargeTime: chargeTime)
+            MaxCharge.AC = acTargetSoc
+            MaxCharge.DC = dcTargetSoc
         }
+
+        if let climate = vehicleStatus.climate, let climateOn = climate.airCtrl {
+            self.climateOn = climateOn
+            self.temp = Int(climate.airTemp?.value ?? "0") ?? 0
+        }
+        if let locked = vehicleStatus.doorLock {
+            self.isLocked = locked
+        }
+
+        if let doorStatus = vehicleStatus.doorStatus {
+            self.doorLabel.textColor = .red
+            if doorStatus.hood == 0, doorStatus.trunk == 0, doorStatus.frontLeft == 0, doorStatus.frontRight == 0, doorStatus.backLeft == 0, doorStatus.backRight == 0 {
+                self.doorLabel.text = "Closed"
+                self.doorLabel.textColor = .white
+            } else if doorStatus.hood != 0 {
+                self.doorLabel.text = "Hood Open"
+            } else if doorStatus.trunk != 0 {
+                self.doorLabel.text = "Trunk Open"
+            } else {
+                self.doorLabel.text = "Open"
+            }
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMddHHmmss"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        if let syncDateUTC = syncDateUTC, let syncDate = formatter.date(from: syncDateUTC) {
+            formatter.timeZone = TimeZone.current
+            if Calendar.current.isDateInToday(syncDate) {
+                formatter.dateFormat = "h:mm a"
+            } else {
+                formatter.dateFormat = "MM/dd, h:mm a"
+            }
+            let dateString = formatter.string(from: syncDate)
+            self.syncTimeLabel.text = "Synced \(dateString)"
+        }
+    }
+    
+    func getAddress(latitude: Double, longitude: Double, completion: @escaping (String) -> ()) {
+        var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
+        let ceo: CLGeocoder = CLGeocoder()
+        center.latitude = latitude
+        center.longitude = longitude
+        
+        let loc: CLLocation = CLLocation(latitude:center.latitude, longitude: center.longitude)
+        
+        ceo.reverseGeocodeLocation(loc, completionHandler:
+                                    {(placemarks, error) in
+            if let message = error?.localizedDescription {
+                log.error(message, context: nil)
+            }
+            let pm = placemarks! as [CLPlacemark]
+            
+            if pm.count > 0 {
+                let pm = placemarks![0]
+                if let subThoroughfare = pm.subThoroughfare, let thoroughfare = pm.thoroughfare {
+                    completion("\(subThoroughfare) \(thoroughfare)")
+                } else {
+                    completion("")
+                }
+            }
+        })
+    }
+    
+    @objc func openMap() {
+        if let latitude = latitude, let longitude = longitude {
+            let url = "http://maps.apple.com/maps?ll=\(latitude),\(longitude)&q=\(name)"
+            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+        }
+    }
+    
+    // MARK: API Requests
+    func login(completion: (() -> ())?) {
+        var vc: UIViewController = self
+        if let topVC = UIApplication.getTopViewController() {
+           vc = topVC
+        }
+        
+        if let username = keychain.string(forKey: .usernameKey), let password = keychain.string(forKey: .passwordKey) {
+                APIRouter.shared.login(username: username, password: password) { [weak self] error in
+                    if let error = error {
+                        let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+                        let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                            self?.login(completion: completion)
+                        }
+                        errorAlert.addAction(errorAction)
+                        
+                        DispatchQueue.main.async {
+                            vc.present(errorAlert, animated: true, completion: nil)
+                        }
+                    } else {
+                        self?.getVehicles(completion: completion)
+                    }
+                }
+            } else {
+                var usernameField = UITextField()
+                var passwordField = UITextField()
+                
+                let alert = UIAlertController(title: "Login", message: "Your login information is stored securely on your device and is only sent to Kia to login.", preferredStyle: .alert)
+                alert.addTextField { alertTextField in
+                    alertTextField.placeholder = "Email or phone number"
+                    usernameField = alertTextField
+                }
+                alert.addTextField { alertTextField in
+                    alertTextField.placeholder = "Password"
+                    alertTextField.isSecureTextEntry = true
+                    passwordField = alertTextField
+                }
+                
+                let action = UIAlertAction(title: "Done", style: .default) { action in
+                    if let username = usernameField.text, let password = passwordField.text, !username.isEmpty, !password.isEmpty {
+                        APIRouter.shared.login(username: username, password: password) { [weak self] error in
+                            if let error = error {
+                                let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+                                let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                                    self?.login(completion: completion)
+                                }
+                                errorAlert.addAction(errorAction)
+                                
+                                DispatchQueue.main.async {
+                                    vc.present(errorAlert, animated: true, completion: nil)
+                                }
+                            } else {
+                                self?.getVehicles(completion: completion)
+                            }
+                        }
+                    } else {
+                        var message = "Check your login details and try again."
+                        if usernameField.text?.isEmpty == true && passwordField.text?.isEmpty == true {
+                            message = "Please enter your email or phone number and password."
+                        } else if usernameField.text?.isEmpty == true {
+                            message = "Please enter your email or phone number."
+                        } else if passwordField.text?.isEmpty == true {
+                            message = "Please enter your password."
+                        }
+                        let errorAlert = UIAlertController(title: message, message: "", preferredStyle: .alert)
+                        let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                            self.login(completion: completion)
+                        }
+                        errorAlert.addAction(errorAction)
+                        
+                        DispatchQueue.main.async {
+                            vc.present(errorAlert, animated: true, completion: nil)
+                        }
+                    }
+                }
+                
+                alert.addAction(action)
+                DispatchQueue.main.async {
+                    vc.present(alert, animated: true, completion: nil)
+                }
+            }
     }
     
     func getVehicles(completion: (() -> ())?) {
@@ -329,10 +444,6 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             }
             completion?()
         }
-    }
-    
-    @IBAction func sync() {
-        self.updateStatus()
     }
     
     func updateStatus() {
@@ -423,60 +534,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         }
     }
     
-    @objc func openMap() {
-        if let latitude = latitude, let longitude = longitude {
-            let url = "http://maps.apple.com/maps?ll=\(latitude),\(longitude)&q=\(name)"
-            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-        }
-    }
-    
-    func set(vehicleStatus: VehicleStatus, syncDateUTC: String?) {
-        if let evStatus = vehicleStatus.evStatus, let dcTargetSoc = evStatus.targetSOC?[0].targetSOClevel, let acTargetSoc = evStatus.targetSOC?[1].targetSOClevel, let charge = evStatus.batteryStatus, let isCharging = evStatus.batteryCharge, let pluggedIn = evStatus.batteryPlugin, let chargeTime = evStatus.remainChargeTime?.first?.timeInterval?.value, let drvDistance = vehicleStatus.evStatus?.drvDistance?.first, let range = drvDistance.rangeByFuel?.totalAvailableRange?.value {
-            self.chargeStatusLabel.text = "\(charge)% • \(range)mi"
-            self.batteryContainer.progress = CGFloat(charge)/100.0
-            let largeConfig = UIImage.SymbolConfiguration(scale: .large)
-            self.chargeButton.setImage(UIImage(systemName: !isCharging ? "bolt" : "bolt.slash", withConfiguration: largeConfig), for: .selected)
-            self.setChargeDetails(charging: isCharging, pluggedIn: pluggedIn != 0, ratio: acTargetSoc, chargeTime: chargeTime)
-            MaxCharge.AC = acTargetSoc
-            MaxCharge.DC = dcTargetSoc
-        }
-
-        if let climate = vehicleStatus.climate, let climateOn = climate.airCtrl {
-            self.setClimateStatus(climateOn)
-            self.temp = Int(climate.airTemp?.value ?? "0") ?? 0
-        }
-        if let locked = vehicleStatus.doorLock {
-            self.isLocked = locked
-        }
-
-        if let doorStatus = vehicleStatus.doorStatus {
-            self.doorLabel.textColor = .red
-            if doorStatus.hood == 0, doorStatus.trunk == 0, doorStatus.frontLeft == 0, doorStatus.frontRight == 0, doorStatus.backLeft == 0, doorStatus.backRight == 0 {
-                self.doorLabel.text = "Closed"
-                self.doorLabel.textColor = .white
-            } else if doorStatus.hood != 0 {
-                self.doorLabel.text = "Hood Open"
-            } else if doorStatus.trunk != 0 {
-                self.doorLabel.text = "Trunk Open"
-            } else {
-                self.doorLabel.text = "Open"
-            }
-        }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMddHHmmss"
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
-        if let syncDateUTC = syncDateUTC, let syncDate = formatter.date(from: syncDateUTC) {
-            formatter.timeZone = TimeZone.current
-            if Calendar.current.isDateInToday(syncDate) {
-                formatter.dateFormat = "h:mm a"
-            } else {
-                formatter.dateFormat = "MM/dd, h:mm a"
-            }
-            let dateString = formatter.string(from: syncDate)
-            self.syncTimeLabel.text = "Synced \(dateString)"
-        }
-    }
-    
+    // MARK: API Actions
     func setLock(lock: Bool) {
         self.isSyncing = true
         APIRouter.shared.get(endpoint: lock ? .lock : .unlock) { [weak self] response, error in
@@ -486,7 +544,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             }
             if error != nil {
                 self.isSyncing = false
-            } else if  let headers = response?.headers, let xid = headers["Xid"] {
+            } else if let headers = response?.headers, let xid = headers["Xid"] {
                 APIRouter.shared.checkActionStatus(xid: xid) { error in
                     if error == nil {
                         self.commandSuccess(endpoint: lock ? .lock : .unlock)
@@ -530,6 +588,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                     if error == nil {
                         self?.commandSuccess(endpoint: .stopCharge)
                     }
+                    self?.isSyncing = false
                     completion()
                 }
             }
@@ -538,6 +597,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     
     func startClimate(completion: (() -> ())?) {
         self.isSyncing = true
+        var climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
+        climateDuration = climateDuration == 0 ? 30 : climateDuration
         let body = [
             "remoteClimate": [
                 "airCtrl": true,
@@ -553,7 +614,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 ],
                 "ignitionOnDuration": [
                     "unit": 4,
-                    "value": defaults?.integer(forKey: "ClimateDuration") ?? 30
+                    "value": climateDuration
                 ]
             ]
         ]
@@ -572,7 +633,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                         self.commandSuccess(endpoint: .startClimate)
                     }
                     self.isSyncing = false
-                    self.setClimateStatus(true)
+                    self.climateOn = true
                     completion?()
                 }
             }
@@ -596,37 +657,11 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                         self.commandSuccess(endpoint: .stopClimate)
                     }
                     self.isSyncing = false
-                    self.setClimateStatus(false)
+                    self.climateOn = false
                     completion?()
                 }
             }
         }
-    }
-    
-    func getAddress(latitude: Double, longitude: Double, completion: @escaping (String) -> ()) {
-        var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
-        let ceo: CLGeocoder = CLGeocoder()
-        center.latitude = latitude
-        center.longitude = longitude
-        
-        let loc: CLLocation = CLLocation(latitude:center.latitude, longitude: center.longitude)
-        
-        ceo.reverseGeocodeLocation(loc, completionHandler:
-                                    {(placemarks, error) in
-            if let message = error?.localizedDescription {
-                log.error(message, context: nil)
-            }
-            let pm = placemarks! as [CLPlacemark]
-            
-            if pm.count > 0 {
-                let pm = placemarks![0]
-                if let subThoroughfare = pm.subThoroughfare, let thoroughfare = pm.thoroughfare {
-                    completion("\(subThoroughfare) \(thoroughfare)")
-                } else {
-                    completion("")
-                }
-            }
-        })
     }
     
     func commandSuccess(endpoint: Endpoint) {
@@ -725,5 +760,21 @@ extension ViewController {
     
     func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UIApplication {
+    class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+
+        if let nav = base as? UINavigationController {
+            return getTopViewController(base: nav.visibleViewController)
+
+        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
+            return getTopViewController(base: selected)
+
+        } else if let presented = base?.presentedViewController {
+            return getTopViewController(base: presented)
+        }
+        return base
     }
 }
