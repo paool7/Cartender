@@ -8,7 +8,6 @@
 		<dict>
 			<key>IntentsSupported</key>
 			<array>
-				<string>CheckDoorsIntent</string>
 				<string>CurrentChargeIntent</string>
 				<string>CurrentLocationIntent</string>
 				<string>CurrentTemperatureIntent</string>

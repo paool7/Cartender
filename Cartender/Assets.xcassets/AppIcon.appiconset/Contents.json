@@ -1,31 +1,37 @@
 {
   "images" : [
     {
+      "filename" : "Group 16@3x-3.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
+      "filename" : "Group 16@3x-4.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
+      "filename" : "Group 16@3x-5.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
+      "filename" : "Group 16@3x-6.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
+      "filename" : "Group 16@3x-7.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
+      "filename" : "Group 16@3x-8.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
