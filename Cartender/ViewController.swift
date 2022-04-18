@@ -553,7 +553,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 ],
                 "ignitionOnDuration": [
                     "unit": 4,
-                    "value": 30
+                    "value": defaults?.integer(forKey: "ClimateDuration") ?? 30
                 ]
             ]
         ]

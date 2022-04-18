@@ -34,6 +34,10 @@ class SettingsViewController: UIViewController, UIColorPickerViewControllerDeleg
         chargeACLabel.text = "\(MaxCharge.AC)%"
         chargeDCStepper.value = Double(MaxCharge.DC)
         chargeDCLabel.text = "\(MaxCharge.DC)%"
+        
+        let climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
+        airDurationStepper.value = Double(climateDuration)
+        airDurationLabel.text = "\(climateDuration) mins"
     }
     
     @IBAction func dismiss() {
@@ -103,6 +107,7 @@ class SettingsViewController: UIViewController, UIColorPickerViewControllerDeleg
     // MARK: Climate Control
     @IBAction func airDurationChanged() {
         self.airDurationLabel.text = "\(Int(airDurationStepper.value)) mins"
+        defaults?.set(airDurationStepper.value, forKey: "ClimateDuration")
     }
     
     // MARK: Accent Color
