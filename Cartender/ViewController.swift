@@ -667,7 +667,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     func commandSuccess(endpoint: Endpoint) {
         DispatchQueue.main.async {
             let banner = FloatingNotificationBanner(title: "Success!", subtitle: endpoint.successMessage(), style: .success)
-            banner.show()
+            banner.show(cornerRadius: 8)
         }
     }
 }

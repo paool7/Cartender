@@ -47,7 +47,7 @@ enum Endpoint: String {
         case .stopCharge:
             return "Charging stopped"
         case .setChargeLimit:
-            return "Set charge limit"
+            return "Charge limit set"
         case .getLocation:
             return nil
         }        

@@ -170,7 +170,14 @@ extension APIRouter {
     func showError(message: String) {
         DispatchQueue.main.async {
             let banner = FloatingNotificationBanner(title: "Error!", subtitle: message, style: .danger)
-            banner.show()
+            banner.show(cornerRadius: 8)
+        }
+    }
+    
+    func showSuccess(message: String) {
+        DispatchQueue.main.async {
+            let banner = FloatingNotificationBanner(title: "Success!", subtitle: message, style: .success)
+            banner.show(cornerRadius: 8)
         }
     }
 }
