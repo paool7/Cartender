@@ -209,9 +209,9 @@
 		22FBB85B280DB9F8009AA75F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB859280DB7D4009AA75F /* Secrets.swift */; };
 		22FBB85C280DB9F8009AA75F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB859280DB7D4009AA75F /* Secrets.swift */; };
 		22FBB85F280E066A009AA75F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FBB85E280E066A009AA75F /* Reachability.swift */; };
-		292260682CE8E7682F72C688 /* Pods_CartenderIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */; };
-		3D5CA75C921E302C09F57D82 /* Pods_Cartender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */; };
-		A9CAF911D3F244499E75846D /* Pods_CartenderIntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */; };
+		776E745FBA20B3B2AFAEA9FD /* Pods_CartenderIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E9B8E8B6703B005A794E0D /* Pods_CartenderIntents.framework */; };
+		AA5DCB25CC6CCA0D1A4E4DDC /* Pods_Cartender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F5CE97D3A0FD7032A3638 /* Pods_Cartender.framework */; };
+		BA2D7A28908B5F5FF2982AC4 /* Pods_CartenderIntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61553D6FA0F2D9F9BC8E774D /* Pods_CartenderIntentsUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,10 +257,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1133EC380745CB15CE0C489C /* Pods-Cartender-CartenderIntents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntents.debug.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntents/Pods-Cartender-CartenderIntents.debug.xcconfig"; sourceTree = "<group>"; };
-		183CE37A3A6F8F3715FD53CD /* Pods-Cartender-CartenderIntents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntents.release.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntents/Pods-Cartender-CartenderIntents.release.xcconfig"; sourceTree = "<group>"; };
-		18ECD011F70A863D85A010B0 /* Pods-Cartender.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender.release.xcconfig"; path = "Target Support Files/Pods-Cartender/Pods-Cartender.release.xcconfig"; sourceTree = "<group>"; };
-		1BF3ACE97BE2C5AE46E06AD3 /* Pods-Cartender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender.debug.xcconfig"; path = "Target Support Files/Pods-Cartender/Pods-Cartender.debug.xcconfig"; sourceTree = "<group>"; };
 		225701042748526300D4ED45 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		22570175274D229600D4ED45 /* VehicleSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleSummary.swift; sourceTree = "<group>"; };
 		2257017A274D229700D4ED45 /* VehiclesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesResponse.swift; sourceTree = "<group>"; };
@@ -351,18 +347,16 @@
 		22FBB859280DB7D4009AA75F /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		22FBB85D280DF12B009AA75F /* PrivacyPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
 		22FBB85E280E066A009AA75F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		3AA505A4127B010A96792AFA /* Pods-Cartender-CartenderIntentsUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntentsUI.debug.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntentsUI/Pods-Cartender-CartenderIntentsUI.debug.xcconfig"; sourceTree = "<group>"; };
-		43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartenderIntentsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		50C5F6826EB8A2C5ADFDA620 /* Pods-BatteryExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryExtension.debug.xcconfig"; path = "Target Support Files/Pods-BatteryExtension/Pods-BatteryExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cartender.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		98B190B9A1E422B5F06BF924 /* Pods-BatteryExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BatteryExtension.release.xcconfig"; path = "Target Support Files/Pods-BatteryExtension/Pods-BatteryExtension.release.xcconfig"; sourceTree = "<group>"; };
-		9BD312AD5BFE1CD399E24B9A /* Pods_BatteryExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BatteryExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartenderIntents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A59692475BE2CD7A4427BC33 /* Pods-CartenderIntentsUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntentsUI.debug.xcconfig"; path = "Target Support Files/Pods-CartenderIntentsUI/Pods-CartenderIntentsUI.debug.xcconfig"; sourceTree = "<group>"; };
-		A87E86CA94F7DEB01D606686 /* Pods-CartenderIntents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntents.debug.xcconfig"; path = "Target Support Files/Pods-CartenderIntents/Pods-CartenderIntents.debug.xcconfig"; sourceTree = "<group>"; };
-		EA46EE65E3545C870B0C89C2 /* Pods-Cartender-CartenderIntentsUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender-CartenderIntentsUI.release.xcconfig"; path = "Target Support Files/Pods-Cartender-CartenderIntentsUI/Pods-Cartender-CartenderIntentsUI.release.xcconfig"; sourceTree = "<group>"; };
-		EDC72CFD96118B6657F31B35 /* Pods-CartenderIntents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntents.release.xcconfig"; path = "Target Support Files/Pods-CartenderIntents/Pods-CartenderIntents.release.xcconfig"; sourceTree = "<group>"; };
-		FFD43E123148662B9FE23282 /* Pods-CartenderIntentsUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntentsUI.release.xcconfig"; path = "Target Support Files/Pods-CartenderIntentsUI/Pods-CartenderIntentsUI.release.xcconfig"; sourceTree = "<group>"; };
+		22FBB860280E3461009AA75F /* libswift_Concurrency.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswift_Concurrency.tbd; path = usr/lib/swift/libswift_Concurrency.tbd; sourceTree = SDKROOT; };
+		3595FA87C969BFFE9FB6450F /* Pods-Cartender.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender.release.xcconfig"; path = "Target Support Files/Pods-Cartender/Pods-Cartender.release.xcconfig"; sourceTree = "<group>"; };
+		4E7EBB27ECB8D4BA634DB5B3 /* Pods-CartenderIntentsUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntentsUI.debug.xcconfig"; path = "Target Support Files/Pods-CartenderIntentsUI/Pods-CartenderIntentsUI.debug.xcconfig"; sourceTree = "<group>"; };
+		61553D6FA0F2D9F9BC8E774D /* Pods_CartenderIntentsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartenderIntentsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D0ED9CE3B9ABB500A9D7404 /* Pods-CartenderIntentsUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntentsUI.release.xcconfig"; path = "Target Support Files/Pods-CartenderIntentsUI/Pods-CartenderIntentsUI.release.xcconfig"; sourceTree = "<group>"; };
+		77AAABF3DFEB53B538CC4379 /* Pods-CartenderIntents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntents.release.xcconfig"; path = "Target Support Files/Pods-CartenderIntents/Pods-CartenderIntents.release.xcconfig"; sourceTree = "<group>"; };
+		A1E9B8E8B6703B005A794E0D /* Pods_CartenderIntents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CartenderIntents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D64A7885E9BD6674D666249F /* Pods-Cartender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cartender.debug.xcconfig"; path = "Target Support Files/Pods-Cartender/Pods-Cartender.debug.xcconfig"; sourceTree = "<group>"; };
+		EA165730146263859BDFD75B /* Pods-CartenderIntents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CartenderIntents.debug.xcconfig"; path = "Target Support Files/Pods-CartenderIntents/Pods-CartenderIntents.debug.xcconfig"; sourceTree = "<group>"; };
+		EB8F5CE97D3A0FD7032A3638 /* Pods_Cartender.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cartender.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,7 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D5CA75C921E302C09F57D82 /* Pods_Cartender.framework in Frameworks */,
+				AA5DCB25CC6CCA0D1A4E4DDC /* Pods_Cartender.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,7 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22ECC88827FE8C3500955AC7 /* Intents.framework in Frameworks */,
-				292260682CE8E7682F72C688 /* Pods_CartenderIntents.framework in Frameworks */,
+				776E745FBA20B3B2AFAEA9FD /* Pods_CartenderIntents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,7 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22ECC89327FE8C3600955AC7 /* IntentsUI.framework in Frameworks */,
-				A9CAF911D3F244499E75846D /* Pods_CartenderIntentsUI.framework in Frameworks */,
+				BA2D7A28908B5F5FF2982AC4 /* Pods_CartenderIntentsUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,18 +574,12 @@
 		959209F4A9241229766056F1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1BF3ACE97BE2C5AE46E06AD3 /* Pods-Cartender.debug.xcconfig */,
-				18ECD011F70A863D85A010B0 /* Pods-Cartender.release.xcconfig */,
-				1133EC380745CB15CE0C489C /* Pods-Cartender-CartenderIntents.debug.xcconfig */,
-				183CE37A3A6F8F3715FD53CD /* Pods-Cartender-CartenderIntents.release.xcconfig */,
-				3AA505A4127B010A96792AFA /* Pods-Cartender-CartenderIntentsUI.debug.xcconfig */,
-				EA46EE65E3545C870B0C89C2 /* Pods-Cartender-CartenderIntentsUI.release.xcconfig */,
-				A87E86CA94F7DEB01D606686 /* Pods-CartenderIntents.debug.xcconfig */,
-				EDC72CFD96118B6657F31B35 /* Pods-CartenderIntents.release.xcconfig */,
-				A59692475BE2CD7A4427BC33 /* Pods-CartenderIntentsUI.debug.xcconfig */,
-				FFD43E123148662B9FE23282 /* Pods-CartenderIntentsUI.release.xcconfig */,
-				50C5F6826EB8A2C5ADFDA620 /* Pods-BatteryExtension.debug.xcconfig */,
-				98B190B9A1E422B5F06BF924 /* Pods-BatteryExtension.release.xcconfig */,
+				D64A7885E9BD6674D666249F /* Pods-Cartender.debug.xcconfig */,
+				3595FA87C969BFFE9FB6450F /* Pods-Cartender.release.xcconfig */,
+				EA165730146263859BDFD75B /* Pods-CartenderIntents.debug.xcconfig */,
+				77AAABF3DFEB53B538CC4379 /* Pods-CartenderIntents.release.xcconfig */,
+				4E7EBB27ECB8D4BA634DB5B3 /* Pods-CartenderIntentsUI.debug.xcconfig */,
+				6D0ED9CE3B9ABB500A9D7404 /* Pods-CartenderIntentsUI.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -599,14 +587,14 @@
 		D42321935E29DF758C5B79F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				90986C7BD71E51A2D15C2701 /* Pods_Cartender.framework */,
+				22FBB860280E3461009AA75F /* libswift_Concurrency.tbd */,
 				22ECC88727FE8C3500955AC7 /* Intents.framework */,
 				22ECC89227FE8C3600955AC7 /* IntentsUI.framework */,
-				9D849B8FF8516E2EE9A535A3 /* Pods_CartenderIntents.framework */,
-				43E806B186FFC87E8B47DAD0 /* Pods_CartenderIntentsUI.framework */,
 				22BEDD5328088FE100785D3D /* WidgetKit.framework */,
 				22BEDD5528088FE100785D3D /* SwiftUI.framework */,
-				9BD312AD5BFE1CD399E24B9A /* Pods_BatteryExtension.framework */,
+				EB8F5CE97D3A0FD7032A3638 /* Pods_Cartender.framework */,
+				A1E9B8E8B6703B005A794E0D /* Pods_CartenderIntents.framework */,
+				61553D6FA0F2D9F9BC8E774D /* Pods_CartenderIntentsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -618,13 +606,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22921E002743500F0092526E /* Build configuration list for PBXNativeTarget "Cartender" */;
 			buildPhases = (
-				C1BA27DEF8257D8AAF1D0770 /* [CP] Check Pods Manifest.lock */,
+				73FB8CA448B46A500F3EF865 /* [CP] Check Pods Manifest.lock */,
 				22921DE82743500F0092526E /* Sources */,
 				22921DE92743500F0092526E /* Frameworks */,
 				22921DEA2743500F0092526E /* Resources */,
 				22921E072743686D0092526E /* Embed Frameworks */,
-				AE8F2F4C6EF1C7457D18BBBF /* [CP] Embed Pods Frameworks */,
 				22ECC8A727FE8C3600955AC7 /* Embed App Extensions */,
+				EE38CC870DB1A0ADDB5723A2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -641,7 +629,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22ECC8A427FE8C3600955AC7 /* Build configuration list for PBXNativeTarget "CartenderIntents" */;
 			buildPhases = (
-				68A1C37650067DD71FABD5E6 /* [CP] Check Pods Manifest.lock */,
+				DEB5D8A19E39C64EEE7354CB /* [CP] Check Pods Manifest.lock */,
 				22ECC88227FE8C3500955AC7 /* Sources */,
 				22ECC88327FE8C3500955AC7 /* Frameworks */,
 				22ECC88427FE8C3500955AC7 /* Resources */,
@@ -659,7 +647,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22ECC8A127FE8C3600955AC7 /* Build configuration list for PBXNativeTarget "CartenderIntentsUI" */;
 			buildPhases = (
-				DCFD77BAE2C8A36CB920E3D9 /* [CP] Check Pods Manifest.lock */,
+				F91E7ABB8CE2537BEAEF388D /* [CP] Check Pods Manifest.lock */,
 				22ECC88D27FE8C3600955AC7 /* Sources */,
 				22ECC88E27FE8C3600955AC7 /* Frameworks */,
 				22ECC88F27FE8C3600955AC7 /* Resources */,
@@ -745,46 +733,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		68A1C37650067DD71FABD5E6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CartenderIntents-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE8F2F4C6EF1C7457D18BBBF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C1BA27DEF8257D8AAF1D0770 /* [CP] Check Pods Manifest.lock */ = {
+		73FB8CA448B46A500F3EF865 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -806,7 +755,46 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DCFD77BAE2C8A36CB920E3D9 /* [CP] Check Pods Manifest.lock */ = {
+		DEB5D8A19E39C64EEE7354CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CartenderIntents-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE38CC870DB1A0ADDB5723A2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cartender/Pods-Cartender-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F91E7ABB8CE2537BEAEF388D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1121,6 +1109,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1139,6 +1128,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 2022.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1182,6 +1172,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1194,6 +1185,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 2022.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1205,7 +1197,7 @@
 		};
 		22921E012743500F0092526E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BF3ACE97BE2C5AE46E06AD3 /* Pods-Cartender.debug.xcconfig */;
+			baseConfigurationReference = D64A7885E9BD6674D666249F /* Pods-Cartender.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1213,10 +1205,12 @@
 				CODE_SIGN_ENTITLEMENTS = Cartender/Cartender.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = 2RHGHNZ58B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cartender/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Cartender;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1227,7 +1221,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1239,7 +1237,7 @@
 		};
 		22921E022743500F0092526E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18ECD011F70A863D85A010B0 /* Pods-Cartender.release.xcconfig */;
+			baseConfigurationReference = 3595FA87C969BFFE9FB6450F /* Pods-Cartender.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1247,10 +1245,12 @@
 				CODE_SIGN_ENTITLEMENTS = Cartender/Cartender.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = 2RHGHNZ58B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cartender/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Cartender;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1261,7 +1261,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1273,12 +1277,12 @@
 		};
 		22ECC8A227FE8C3600955AC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A59692475BE2CD7A4427BC33 /* Pods-CartenderIntentsUI.debug.xcconfig */;
+			baseConfigurationReference = 4E7EBB27ECB8D4BA634DB5B3 /* Pods-CartenderIntentsUI.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CartenderIntentsUI/CartenderIntentsUI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = 2RHGHNZ58B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CartenderIntentsUI/Info.plist;
@@ -1289,7 +1293,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.1;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender.CartenderIntentsUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1301,12 +1305,12 @@
 		};
 		22ECC8A327FE8C3600955AC7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFD43E123148662B9FE23282 /* Pods-CartenderIntentsUI.release.xcconfig */;
+			baseConfigurationReference = 6D0ED9CE3B9ABB500A9D7404 /* Pods-CartenderIntentsUI.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CartenderIntentsUI/CartenderIntentsUI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = 2RHGHNZ58B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CartenderIntentsUI/Info.plist;
@@ -1317,7 +1321,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.1;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender.CartenderIntentsUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1329,12 +1333,12 @@
 		};
 		22ECC8A527FE8C3600955AC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A87E86CA94F7DEB01D606686 /* Pods-CartenderIntents.debug.xcconfig */;
+			baseConfigurationReference = EA165730146263859BDFD75B /* Pods-CartenderIntents.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CartenderIntents/CartenderIntents.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = 2RHGHNZ58B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CartenderIntents/Info.plist;
@@ -1345,7 +1349,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.1;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender.CartenderIntents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1357,12 +1361,12 @@
 		};
 		22ECC8A627FE8C3600955AC7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EDC72CFD96118B6657F31B35 /* Pods-CartenderIntents.release.xcconfig */;
+			baseConfigurationReference = 77AAABF3DFEB53B538CC4379 /* Pods-CartenderIntents.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CartenderIntents/CartenderIntents.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = 2RHGHNZ58B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CartenderIntents/Info.plist;
@@ -1373,7 +1377,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.1;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.paool.cartender.CartenderIntents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

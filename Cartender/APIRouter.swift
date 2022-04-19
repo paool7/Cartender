@@ -11,11 +11,6 @@ import SwiftKeychainWrapper
 import NotificationBannerSwift
 
 let baseURL = "https://api.owners.kia.com/apigw/v1/"
-let defaults = UserDefaults(suiteName: "group.paool.cartender")
-var keychain: KeychainWrapper {
-    return KeychainWrapper(serviceName: "2RHGHNZ58B.com.paool.cartender", accessGroup: "group.paool.cartender")
-}
-
 class APIRouter {
     static let shared = APIRouter()
     let jsonDecoder = JSONDecoder()
@@ -96,7 +91,7 @@ class APIRouter {
         }
     }
     
-    func login(username: String, password: String, completion: @escaping (String?) -> ()) {
+    func login(username: String, password: String, _ checkError: Bool = true, completion: @escaping (String?) -> ()) {
         post(endpoint: .login, body: ["deviceKey": "",
                                                  "deviceType": 2,
                                                  "userCredential": ["userId": username,
@@ -104,6 +99,8 @@ class APIRouter {
             if let error = error?.message {
                 completion(error)
             } else if let responseHeaders = response?.headers, let sid = responseHeaders["Sid"] {
+                keychain.set(username, forKey: .usernameKey)
+                keychain.set(password, forKey: .passwordKey)
                 self?.sessionId = sid
                 completion(nil)
             } else {
@@ -114,7 +111,7 @@ class APIRouter {
 }
 
 extension APIRouter {
-    func post(endpoint: Endpoint, body: [String : Any]?, authorized: Bool = false, completion: ((Response?, (code: Int, message: String)?) -> ())?) {
+    func post(endpoint: Endpoint, _ retry: Bool = true, body: [String : Any]?, authorized: Bool = false, _ checkError: Bool = true, completion: ((Response?, (code: Int, message: String)?) -> ())?) {
         if Reachability.isConnectedToNetwork() {
             var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
             req.httpMethod = "POST"
@@ -123,56 +120,104 @@ extension APIRouter {
                 req.httpBody = body.json
             }
             HTTP(req).run { [weak self] response in
-                if let error = self?.error(response: response) {
-                    completion?(nil, error)
+                if checkError {
+                    self?.error(response: response, completion: { result, tryAgain in
+                        if let result = result {
+                            if tryAgain == true && retry {
+                                self?.post(endpoint: endpoint, false, body: body, completion: completion)
+                            } else {
+                                completion?(nil, result)
+                            }
+                        } else {
+                            completion?(response, nil)
+                        }
+                    })
                 } else {
                     completion?(response, nil)
                 }
             }
         } else {
             self.showError(message: "No internet connection. Make sure your device is connected to the internet and try again.")
+            completion?(nil, (0, "No internet connection. Make sure your device is connected to the internet and try again."))
         }
     }
     
-    func get(endpoint: Endpoint, _ retry: Bool = true, completion: ((Response?, (code: Int, message: String)?) -> ())?) {
+    func get(endpoint: Endpoint, _ retry: Bool = true, _ checkError: Bool = true, completion: ((Response?, (code: Int, message: String)?) -> ())?) {
         if Reachability.isConnectedToNetwork() {
             var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
             req.httpMethod = "GET"
             req.allHTTPHeaderFields = authorizedHeaders
             HTTP(req).run { [weak self] response in
-                if let error = self?.error(response: response) {
-                    completion?(nil, error)
+                if checkError {
+                    self?.error(response: response, completion: { result, tryAgain in
+                        if let result = result {
+                            if tryAgain == true && retry {
+                                self?.get(endpoint: endpoint, false, completion: completion)
+                            } else {
+                                completion?(nil, result)
+                            }
+                        } else {
+                            completion?(response, nil)
+                        }
+                    })
                 } else {
                     completion?(response, nil)
                 }
             }
         } else {
             self.showError(message: "No internet connection. Make sure your device is connected to the internet and try again.")
+            completion?(nil, (0, "No internet connection. Make sure your device is connected to the internet and try again."))
         }
     }
     
-    func error(response: Response) -> (code: Int, message: String)? {
+    func error(response: Response, completion: (((code: Int, message: String)?, Bool?) -> ())?) {
         if let error = try? self.jsonDecoder.decode(ActionError.self, from: response.data), let code = error.status?.errorCode, let message = error.status?.errorMessage, error.status?.statusCode != 0 {
             var errorMessage = message
-            if let rError = ResponseError(rawValue: code){
-                errorMessage = rError.message
-                if rError == .invalidSession {
+            
+            if let rError = ResponseError(rawValue: code) {
+                errorMessage = rError.message ?? errorMessage
+                if (rError == .invalidSession || rError == .invalidVehicle), let username = keychain.string(forKey: .usernameKey), let password = keychain.string(forKey: .passwordKey) {
                     self.sessionId = nil
-                    self.logoutHandler?()
+                    APIRouter.shared.vinKey = nil
+                    APIRouter.shared.login(username: username, password: password, false) { [weak self] loginError in
+                        if loginError != nil {
+                            self?.logout()
+                            completion?((code, errorMessage), false)
+                        } else {
+                            APIRouter.shared.get(endpoint: .vehicles, false, false) { response, error in
+                                if let data = response?.data, let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
+                                    APIRouter.shared.vinKey = vinKey
+                                    completion?((code, errorMessage), true)
+                                } else {
+                                    completion?((code, errorMessage), false)
+                                }
+                            }
+                        }
+                    }
                 } else if rError == .logout {
-                    keychain.removeObject(forKey: .usernameKey)
-                    keychain.removeObject(forKey: .passwordKey)
+                    self.logout()
+                    completion?((code, errorMessage), false)
                 } else {
-                    self.showError(message: errorMessage)
+                    completion?((code, errorMessage), false)
                 }
-            } else {
-                self.showError(message: errorMessage)
             }
-            log.error(message)
-            return (code, errorMessage)
+            
+            if (code != ResponseError.invalidSession.rawValue && code != ResponseError.invalidVehicle.rawValue) {
+                self.showError(message: errorMessage)
+                log.error("\(code): \(message)")
+            }
+            completion?((code, errorMessage), false)
         } else {
-            return nil
+            completion?(nil, false)
         }
+    }
+    
+    func logout() {
+        self.sessionId = nil
+        APIRouter.shared.vinKey = nil
+        keychain.removeObject(forKey: .usernameKey)
+        keychain.removeObject(forKey: .passwordKey)
+        self.logoutHandler?()
     }
     
     func showError(message: String) {
@@ -198,10 +243,5 @@ extension Dictionary {
         
         return theJSONData
     }
-}
-
-extension String {
-    static let usernameKey = "CartenderUserId"
-    static let passwordKey = "CartenderUserPass"
 }
 

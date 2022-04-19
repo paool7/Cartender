@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -68,7 +68,7 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="179" height="34.5"/>
                                                                                         <subviews>
                                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gauge" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ExI-xi-d6C">
-                                                                                                <rect key="frame" x="0.0" y="-2" width="34.5" height="38.5"/>
+                                                                                                <rect key="frame" x="0.0" y="-3" width="34.5" height="40.5"/>
                                                                                                 <color key="tintColor" name="BodyColor"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="width" secondItem="ExI-xi-d6C" secondAttribute="height" multiplier="1:1" id="LYi-6q-m7R"/>
@@ -87,7 +87,7 @@
                                                                                         <rect key="frame" x="0.0" y="34.5" width="179" height="34"/>
                                                                                         <subviews>
                                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TZL-DV-9VN">
-                                                                                                <rect key="frame" x="0.0" y="-2" width="34.5" height="38"/>
+                                                                                                <rect key="frame" x="0.0" y="-3" width="34.5" height="40"/>
                                                                                                 <color key="tintColor" name="BodyColor"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="width" secondItem="TZL-DV-9VN" secondAttribute="height" multiplier="1:1" id="Jax-lW-iMl"/>
@@ -106,7 +106,7 @@
                                                                                         <rect key="frame" x="0.0" y="68.5" width="179" height="34.5"/>
                                                                                         <subviews>
                                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lqb-L7-2ac">
-                                                                                                <rect key="frame" x="0.0" y="-2" width="34.5" height="38.5"/>
+                                                                                                <rect key="frame" x="0.0" y="-3" width="34.5" height="40.5"/>
                                                                                                 <color key="tintColor" name="BodyColor"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="width" secondItem="lqb-L7-2ac" secondAttribute="height" multiplier="1:1" id="buq-XG-7BS"/>
@@ -636,6 +636,7 @@
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9sR-Qe-USh">
                                         <rect key="frame" x="73.5" y="0.0" width="0.0" height="40"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSz-Hk-iza">
                                         <rect key="frame" x="76.5" y="0.0" width="50" height="40"/>
@@ -649,18 +650,18 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ybz-XZ-7cd" firstAttribute="bottom" secondItem="Z0U-gu-IC0" secondAttribute="bottom" id="1WX-tx-rkO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dKh-es-YJx" secondAttribute="trailing" id="6b7-xj-VXB"/>
                             <constraint firstAttribute="bottom" secondItem="dKh-es-YJx" secondAttribute="bottom" id="7Ez-2S-h5j"/>
                             <constraint firstAttribute="trailing" secondItem="71s-vP-u1u" secondAttribute="trailing" id="7em-NP-dEd"/>
                             <constraint firstItem="71s-vP-u1u" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7in-Ns-IGG"/>
+                            <constraint firstItem="Ybz-XZ-7cd" firstAttribute="centerY" secondItem="Z0U-gu-IC0" secondAttribute="centerY" id="9EE-Cx-uE2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ybz-XZ-7cd" secondAttribute="trailing" constant="8" id="OKl-ug-PDZ"/>
                             <constraint firstItem="71s-vP-u1u" firstAttribute="top" secondItem="Ybz-XZ-7cd" secondAttribute="bottom" constant="24" id="Wrj-af-7J5"/>
                             <constraint firstItem="Z0U-gu-IC0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="ZDd-dM-cR4"/>
                             <constraint firstItem="dKh-es-YJx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aad-QZ-29V"/>
                             <constraint firstItem="Ybz-XZ-7cd" firstAttribute="width" secondItem="Ybz-XZ-7cd" secondAttribute="height" multiplier="1:1" id="asV-fO-W3K"/>
                             <constraint firstItem="dKh-es-YJx" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cgg-DY-2D4"/>
-                            <constraint firstItem="Ybz-XZ-7cd" firstAttribute="top" secondItem="Z0U-gu-IC0" secondAttribute="top" id="i7i-LY-Fc9"/>
+                            <constraint firstItem="Ybz-XZ-7cd" firstAttribute="height" secondItem="Z0U-gu-IC0" secondAttribute="height" id="en7-lW-FNw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="71s-vP-u1u" secondAttribute="bottom" id="pgS-QS-V91"/>
                             <constraint firstItem="Ybz-XZ-7cd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="ujJ-qu-9eU"/>
                         </constraints>
@@ -678,6 +679,7 @@
                         <outlet property="heatedButton" destination="QAl-97-SwF" id="a7A-r5-guN"/>
                         <outlet property="lockLabel" destination="M93-ir-qu1" id="PQK-gj-9gh"/>
                         <outlet property="lockUnlockButton" destination="gA0-vB-p2b" id="GtM-KA-rEt"/>
+                        <outlet property="mainStackView" destination="ZuI-Ym-LNs" id="cl8-LD-kOf"/>
                         <outlet property="mapView" destination="RF6-Gw-uhM" id="FBM-55-tvB"/>
                         <outlet property="nicknameLabel" destination="WMZ-ae-BWS" id="QDs-7C-Ivv"/>
                         <outlet property="odometerLabel" destination="oHl-1S-xjq" id="j6L-uc-ou6"/>
@@ -705,7 +707,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgN-54-UWt">
-                                <rect key="frame" x="8" y="8" width="62" height="31"/>
+                                <rect key="frame" x="8" y="52" width="62" height="31"/>
                                 <color key="tintColor" systemColor="systemTealColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Close">
@@ -716,7 +718,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="05s-xY-Id2">
-                                <rect key="frame" x="16" y="47" width="382" height="410"/>
+                                <rect key="frame" x="16" y="91" width="382" height="410"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ahu-89-22y">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="61"/>
@@ -924,7 +926,7 @@
     </scenes>
     <resources>
         <image name="Defrost" width="500" height="500"/>
-        <image name="Drive-1" width="3831" height="2554"/>
+        <image name="Drive-1" width="1920" height="1280"/>
         <image name="SteeringWheel" width="1150" height="1150"/>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="car.circle" catalog="system" width="128" height="121"/>

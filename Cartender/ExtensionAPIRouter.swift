@@ -10,10 +10,6 @@ import SwiftHTTP
 import SwiftKeychainWrapper
 
 let baseURL = "https://api.owners.kia.com/apigw/v1/"
-let defaults = UserDefaults(suiteName: "group.paool.cartender")
-var keychain: KeychainWrapper {
-    return KeychainWrapper(serviceName: "2RHGHNZ58B.com.paool.cartender", accessGroup: "group.paool.cartender")
-}
 
 class APIRouter {
     static let shared = APIRouter()
@@ -145,8 +141,8 @@ extension APIRouter {
     func error(response: Response) -> (code: Int, message: String)? {
         if let error = try? self.jsonDecoder.decode(ActionError.self, from: response.data), let code = error.status?.errorCode, let message = error.status?.errorMessage, error.status?.statusCode != 0 {
             var errorMessage = message
-            if let rError = ResponseError(rawValue: code){
-                errorMessage = rError.message
+            if let rError = ResponseError(rawValue: code) {
+                errorMessage = rError.message ?? message
                 if rError == .invalidSession {
                     self.sessionId = nil
                     self.logoutHandler?()
@@ -172,9 +168,3 @@ extension Dictionary {
         return theJSONData
     }
 }
-
-extension String {
-    static let usernameKey = "CartenderUserId"
-    static let passwordKey = "CartenderUserPass"
-}
-
