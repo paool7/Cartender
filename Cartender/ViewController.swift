@@ -348,18 +348,30 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     
     @objc func openMap() {
         if let latitude = latitude, let longitude = longitude {
-            let url = "http://maps.apple.com/maps?ll=\(latitude),\(longitude)&q=\(name)"
-            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+            if let urlCheck = URL(string:"comgooglemaps://"), (UIApplication.shared.canOpenURL(urlCheck)) {
+                let urlString = "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)"
+                if let url = URL(string: urlString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    log.error(urlString)
+                }
+            } else {
+                let urlString = "http://maps.apple.com/maps?ll=\(latitude),\(longitude)&q=\(name)"
+                if let url = URL(string: urlString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    log.error(urlString)
+                }
+            }
         }
     }
-    
-    // MARK: API Requests
-    func login(completion: (() -> ())?) {
+
+// MARK: API Requests
+func login(completion: (() -> ())?) {
+    DispatchQueue.main.async {
         var vc: UIViewController = self
-        DispatchQueue.main.async {
-            if let topVC = UIApplication.getTopViewController() {
-                vc = topVC
-            }
+        if let topVC = UIApplication.shared.keyWindowPresentedController {
+            vc = topVC
         }
         
         if let username = keychain.string(forKey: .usernameKey), let password = keychain.string(forKey: .passwordKey) {
@@ -439,245 +451,246 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             }
         }
     }
-    
-    func getVehicles(completion: (() -> ())?) {
-        self.isSyncing = true
-        APIRouter.shared.get(endpoint: .vehicles) { [weak self] response, error in
-            if let data = response?.data, let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
-                APIRouter.shared.vinKey = vinKey
-                self?.vehicleStatus()
-            }
-            completion?()
+}
+
+func getVehicles(completion: (() -> ())?) {
+    self.isSyncing = true
+    APIRouter.shared.get(endpoint: .vehicles) { [weak self] response, error in
+        if let data = response?.data, let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
+            APIRouter.shared.vinKey = vinKey
+            self?.vehicleStatus()
         }
+        completion?()
     }
-    
-    func updateStatus() {
-        self.isSyncing = true
-        APIRouter.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true) { [weak self] response, error in
-            if let data = response?.data, let vehicle = try? APIRouter.shared.jsonDecoder.decode(UpdateStatusResponse.self, from: data) {
-                DispatchQueue.main.async {
-                    self?.isSyncing = false
-                    guard let report = vehicle.payload?.vehicleStatusRpt, let vehicleStatus = report.vehicleStatus else { return }
-                    self?.set(vehicleStatus: vehicleStatus, syncDateUTC: vehicleStatus.evStatus?.syncDate?.utc)
-                }
-            }
-        }
-    }
-    
-    func vehicleStatus() {
-        self.isSyncing = true
-        APIRouter.shared.post(endpoint: .status, body: ["vehicleConfigReq": [
-            "airTempRange": "0",
-            "maintenance": "0",
-            "seatHeatCoolOption": "1",
-            "vehicle": "1",
-            "vehicleFeature": "0"
-        ], "vehicleInfoReq": [
-            "drivingActivty": "0",
-            "dtc": "1",
-            "enrollment": "1",
-            "functionalCards": "0",
-            "location": "1",
-            "vehicleStatus": "1",
-            "weather": "1"],
-            "vinKey": [APIRouter.shared.vinKey]], authorized: true) { [weak self] response, error in
-            guard let self = self else { return }
-            if defaults?.bool(forKey: "VehicleConfigOnFirstLogin") == false {
-                defaults?.set(true, forKey: "VehicleConfigOnFirstLogin")
-                if let text = response?.text {
-                    log.info(text)
-                }
-            }
-            if let data = response?.data, let vehicle = try? APIRouter.shared.jsonDecoder.decode(StatusResponse.self, from: data) {
-                self.updateStatus()
-                DispatchQueue.main.async {
-                    guard let report = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleStatusRpt, let vehicleStatus = report.vehicleStatus else { return }
-                    self.set(vehicleStatus: vehicleStatus, syncDateUTC: vehicleStatus.evStatus?.syncDate?.utc)
-                    
-                    let name = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleNickName ?? vehicle.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.trim?.modelName ?? "Niro"
-                    self.name = name
-                    self.nicknameLabel.text = name
-                    
-                    if let mileage = vehicle.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.mileage {
-                        self.odometerLabel.text = "\(mileage) miles"
-                    }
-                    if let location = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.location, let lat = location.coord?.lat, let long = location.coord?.lon {
-                        self.latitude = lat
-                        self.longitude = long
-                        
-                        let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))
-                        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyyMMddHHmmss"
-                        formatter.timeZone = TimeZone(abbreviation: "UTC")
-                        var atString = ""
-                        if let syncDateUTC = location.syncDate?.utc, let syncDate = formatter.date(from: syncDateUTC) {
-                            formatter.timeZone = TimeZone.current
-                            if Calendar.current.isDateInToday(syncDate) {
-                                formatter.dateFormat = "h:mm a"
-                            } else {
-                                formatter.dateFormat = "MM/dd, h:mm a"
-                            }
-                            let dateString = formatter.string(from: syncDate)
-                            atString = "\nat \(dateString)"
-                        }
-                        self.getAddress(latitude: lat, longitude: long) { address in
-                            let annotation = MKPointAnnotation()
-                            annotation.coordinate = center
-                            annotation.title = "\(address)\(atString)"
-                            self.mapView.addAnnotation(annotation)
-                        }
-                        self.mapView.setRegion(region, animated: true)
-                        
-                        self.mapView.isUserInteractionEnabled = true
-                        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.openMap))
-                        gesture.numberOfTapsRequired = 1
-                        self.mapView.addGestureRecognizer(gesture)
-                    }
-                }
-            }
-        }
-    }
-    
-    // MARK: API Actions
-    func setLock(lock: Bool) {
-        self.isSyncing = true
-        APIRouter.shared.get(endpoint: lock ? .lock : .unlock) { [weak self] response, error in
-            guard let self = self else {
+}
+
+func updateStatus() {
+    self.isSyncing = true
+    APIRouter.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true) { [weak self] response, error in
+        if let data = response?.data, let vehicle = try? APIRouter.shared.jsonDecoder.decode(UpdateStatusResponse.self, from: data) {
+            DispatchQueue.main.async {
                 self?.isSyncing = false
-                self?.isLocked = !lock
-                return
-            }
-            if error != nil {
-                self.isSyncing = false
-                self.isLocked = !lock
-            } else if let headers = response?.headers, let xid = headers["Xid"] {
-                APIRouter.shared.checkActionStatus(xid: xid) { error in
-                    if error == nil {
-                        self.commandSuccess(endpoint: lock ? .lock : .unlock)
-                    }
-                    self.isSyncing = false
-                    self.isLocked = lock
-                }
-            } else {
-                self.isSyncing = false
-                self.isLocked = !lock
+                guard let report = vehicle.payload?.vehicleStatusRpt, let vehicleStatus = report.vehicleStatus else { return }
+                self?.set(vehicleStatus: vehicleStatus, syncDateUTC: vehicleStatus.evStatus?.syncDate?.utc)
             }
         }
     }
-    
-    func startCharge(completion: @escaping () -> ()) {
-        self.isSyncing = true
-        APIRouter.shared.post(endpoint: .startCharge, body: ["chargeRatio": 100], authorized: true) { [weak self] response, error in
-            if error != nil {
-                self?.isSyncing = false
-                completion()
-            } else if let headers = response?.headers, let xid = headers["Xid"] {
-                APIRouter.shared.checkActionStatus(xid: xid) { error in
-                    if error == nil {
-                        self?.commandSuccess(endpoint: .startCharge)
+}
+
+func vehicleStatus() {
+    self.isSyncing = true
+    APIRouter.shared.post(endpoint: .status, body: ["vehicleConfigReq": [
+        "airTempRange": "0",
+        "maintenance": "0",
+        "seatHeatCoolOption": "1",
+        "vehicle": "1",
+        "vehicleFeature": "0"
+    ], "vehicleInfoReq": [
+        "drivingActivty": "0",
+        "dtc": "1",
+        "enrollment": "1",
+        "functionalCards": "0",
+        "location": "1",
+        "vehicleStatus": "1",
+        "weather": "1"],
+                                                    "vinKey": [APIRouter.shared.vinKey]], authorized: true) { [weak self] response, error in
+        guard let self = self else { return }
+        if defaults?.bool(forKey: "VehicleConfigOnFirstLogin") == false {
+            defaults?.set(true, forKey: "VehicleConfigOnFirstLogin")
+            if let text = response?.text {
+                log.info(text)
+            }
+        }
+        if let data = response?.data, let vehicle = try? APIRouter.shared.jsonDecoder.decode(StatusResponse.self, from: data) {
+            self.updateStatus()
+            DispatchQueue.main.async {
+                guard let report = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleStatusRpt, let vehicleStatus = report.vehicleStatus else { return }
+                self.set(vehicleStatus: vehicleStatus, syncDateUTC: vehicleStatus.evStatus?.syncDate?.utc)
+                
+                let name = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleNickName ?? vehicle.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.trim?.modelName ?? "Niro"
+                self.name = name
+                self.nicknameLabel.text = name
+                
+                if let mileage = vehicle.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.mileage {
+                    self.odometerLabel.text = "\(mileage) miles"
+                }
+                if let location = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.location, let lat = location.coord?.lat, let long = location.coord?.lon {
+                    self.latitude = lat
+                    self.longitude = long
+                    
+                    let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))
+                    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyyMMddHHmmss"
+                    formatter.timeZone = TimeZone(abbreviation: "UTC")
+                    var atString = ""
+                    if let syncDateUTC = location.syncDate?.utc, let syncDate = formatter.date(from: syncDateUTC) {
+                        formatter.timeZone = TimeZone.current
+                        if Calendar.current.isDateInToday(syncDate) {
+                            formatter.dateFormat = "h:mm a"
+                        } else {
+                            formatter.dateFormat = "MM/dd, h:mm a"
+                        }
+                        let dateString = formatter.string(from: syncDate)
+                        atString = "\nat \(dateString)"
                     }
-                    self?.isSyncing = false
-                    completion()
+                    self.getAddress(latitude: lat, longitude: long) { address in
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = center
+                        annotation.title = "\(address)\(atString)"
+                        self.mapView.addAnnotation(annotation)
+                    }
+                    self.mapView.setRegion(region, animated: true)
+                    
+                    self.mapView.isUserInteractionEnabled = true
+                    let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.openMap))
+                    gesture.numberOfTapsRequired = 1
+                    self.mapView.addGestureRecognizer(gesture)
                 }
             }
         }
     }
-    
-    func stopCharge(completion: @escaping () -> ()) {
-        self.isSyncing = true
-        APIRouter.shared.get(endpoint: .stopCharge) { [weak self] response, error in
+}
+
+// MARK: API Actions
+func setLock(lock: Bool) {
+    self.isSyncing = true
+    APIRouter.shared.get(endpoint: lock ? .lock : .unlock) { [weak self] response, error in
+        guard let self = self else {
             self?.isSyncing = false
-            if error != nil {
+            self?.isLocked = !lock
+            return
+        }
+        if error != nil {
+            self.isSyncing = false
+            self.isLocked = !lock
+        } else if let headers = response?.headers, let xid = headers["Xid"] {
+            APIRouter.shared.checkActionStatus(xid: xid) { error in
+                if error == nil {
+                    self.commandSuccess(endpoint: lock ? .lock : .unlock)
+                }
+                self.isSyncing = false
+                self.isLocked = lock
+            }
+        } else {
+            self.isSyncing = false
+            self.isLocked = !lock
+        }
+    }
+}
+
+func startCharge(completion: @escaping () -> ()) {
+    self.isSyncing = true
+    APIRouter.shared.post(endpoint: .startCharge, body: ["chargeRatio": 100], authorized: true) { [weak self] response, error in
+        if error != nil {
+            self?.isSyncing = false
+            completion()
+        } else if let headers = response?.headers, let xid = headers["Xid"] {
+            APIRouter.shared.checkActionStatus(xid: xid) { error in
+                if error == nil {
+                    self?.commandSuccess(endpoint: .startCharge)
+                }
                 self?.isSyncing = false
                 completion()
-            } else if let headers = response?.headers, let xid = headers["Xid"] {
-                APIRouter.shared.checkActionStatus(xid: xid) { error in
-                    if error == nil {
-                        self?.commandSuccess(endpoint: .stopCharge)
-                    }
-                    self?.isSyncing = false
-                    completion()
-                }
             }
         }
     }
-    
-    func startClimate(completion: (() -> ())?) {
-        self.isSyncing = true
-        var climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
-        climateDuration = climateDuration == 0 ? 30 : climateDuration
-        let body = [
-            "remoteClimate": [
-                "airCtrl": true,
-                "airTemp": [
-                    "unit": 1,
-                    "value": "\(self.temp)"
-                ],
-                "defrost": self.defrostButton.isSelected,
-                "heatingAccessory": [
-                    "rearWindow": 0,
-                    "sideMirror": 0,
-                    "steeringWheel": self.heatedButton.isSelected ? 1 : 0
-                ],
-                "ignitionOnDuration": [
-                    "unit": 4,
-                    "value": climateDuration
-                ]
+}
+
+func stopCharge(completion: @escaping () -> ()) {
+    self.isSyncing = true
+    APIRouter.shared.get(endpoint: .stopCharge) { [weak self] response, error in
+        self?.isSyncing = false
+        if error != nil {
+            self?.isSyncing = false
+            completion()
+        } else if let headers = response?.headers, let xid = headers["Xid"] {
+            APIRouter.shared.checkActionStatus(xid: xid) { error in
+                if error == nil {
+                    self?.commandSuccess(endpoint: .stopCharge)
+                }
+                self?.isSyncing = false
+                completion()
+            }
+        }
+    }
+}
+
+func startClimate(completion: (() -> ())?) {
+    self.isSyncing = true
+    var climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
+    climateDuration = climateDuration == 0 ? 30 : climateDuration
+    let body = [
+        "remoteClimate": [
+            "airCtrl": true,
+            "airTemp": [
+                "unit": 1,
+                "value": "\(self.temp)"
+            ],
+            "defrost": self.defrostButton.isSelected,
+            "heatingAccessory": [
+                "rearWindow": 0,
+                "sideMirror": 0,
+                "steeringWheel": self.heatedButton.isSelected ? 1 : 0
+            ],
+            "ignitionOnDuration": [
+                "unit": 4,
+                "value": climateDuration
             ]
         ]
-        APIRouter.shared.post(endpoint: .startClimate, body: body, authorized: true) { [weak self] response, error in
-            guard let self = self else {
-                self?.isSyncing = false
-                completion?()
-                return
-            }
-            if error != nil {
-                self.isSyncing = false
-                completion?()
-            } else if let headers = response?.headers, let xid = headers["Xid"] {
-                APIRouter.shared.checkActionStatus(xid: xid) { error in
-                    if error == nil {
-                        self.commandSuccess(endpoint: .startClimate)
-                    }
-                    self.isSyncing = false
-                    self.climateOn = true
-                    completion?()
+    ]
+    APIRouter.shared.post(endpoint: .startClimate, body: body, authorized: true) { [weak self] response, error in
+        guard let self = self else {
+            self?.isSyncing = false
+            completion?()
+            return
+        }
+        if error != nil {
+            self.isSyncing = false
+            completion?()
+        } else if let headers = response?.headers, let xid = headers["Xid"] {
+            APIRouter.shared.checkActionStatus(xid: xid) { error in
+                if error == nil {
+                    self.commandSuccess(endpoint: .startClimate)
                 }
-            }
-        }
-    }
-    
-    func stopClimate(completion: (() -> ())?) {
-        self.isSyncing = true
-        APIRouter.shared.get(endpoint: .stopClimate) { [weak self] response, error in
-            guard let self = self else {
-                self?.isSyncing = false
-                completion?()
-                return
-            }
-            if error != nil {
                 self.isSyncing = false
+                self.climateOn = true
                 completion?()
-            } else if let headers = response?.headers, let xid = headers["Xid"] {
-                APIRouter.shared.checkActionStatus(xid: xid) { error in
-                    if error == nil {
-                        self.commandSuccess(endpoint: .stopClimate)
-                    }
-                    self.isSyncing = false
-                    self.climateOn = false
-                    completion?()
-                }
             }
         }
     }
-    
-    func commandSuccess(endpoint: Endpoint) {
-        DispatchQueue.main.async {
-            let banner = FloatingNotificationBanner(title: "Success!", subtitle: endpoint.successMessage(), style: .success)
-            banner.show(cornerRadius: 8)
+}
+
+func stopClimate(completion: (() -> ())?) {
+    self.isSyncing = true
+    APIRouter.shared.get(endpoint: .stopClimate) { [weak self] response, error in
+        guard let self = self else {
+            self?.isSyncing = false
+            completion?()
+            return
+        }
+        if error != nil {
+            self.isSyncing = false
+            completion?()
+        } else if let headers = response?.headers, let xid = headers["Xid"] {
+            APIRouter.shared.checkActionStatus(xid: xid) { error in
+                if error == nil {
+                    self.commandSuccess(endpoint: .stopClimate)
+                }
+                self.isSyncing = false
+                self.climateOn = false
+                completion?()
+            }
         }
     }
+}
+
+func commandSuccess(endpoint: Endpoint) {
+    DispatchQueue.main.async {
+        let banner = FloatingNotificationBanner(title: "Success!", subtitle: endpoint.successMessage(), style: .success)
+        banner.show(cornerRadius: 8)
+    }
+}
 }
 
 // MARK: Shortcuts
@@ -772,16 +785,28 @@ extension ViewController {
 }
 
 extension UIApplication {
-    class func getTopViewController(base: UIViewController? = nil) -> UIViewController? {
-        if let nav = base as? UINavigationController {
-            return getTopViewController(base: nav.visibleViewController)
-            
-        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
-            return getTopViewController(base: selected)
-            
-        } else if let presented = base?.presentedViewController {
-            return getTopViewController(base: presented)
+    var keyWindowPresentedController: UIViewController? {
+        var viewController = self.keyWindow?.rootViewController
+        
+        // If root `UIViewController` is a `UITabBarController`
+        if let presentedController = viewController as? UITabBarController {
+            // Move to selected `UIViewController`
+            viewController = presentedController.selectedViewController
         }
-        return base
+        
+        // Go deeper to find the last presented `UIViewController`
+        while let presentedController = viewController?.presentedViewController {
+            // If root `UIViewController` is a `UITabBarController`
+            if let presentedController = presentedController as? UITabBarController {
+                // Move to selected `UIViewController`
+                viewController = presentedController.selectedViewController
+            } else {
+                // Otherwise, go deeper
+                viewController = presentedController
+            }
+        }
+        
+        return viewController
     }
+    
 }
