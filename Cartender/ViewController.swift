@@ -349,17 +349,20 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     @objc func openMap() {
         if let latitude = latitude, let longitude = longitude {
             if let urlCheck = URL(string:"comgooglemaps://"), (UIApplication.shared.canOpenURL(urlCheck)) {
-                let urlString = "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)"
+                let urlString = "comgooglemaps://?q=\(latitude),\(longitude)"
                 if let url = URL(string: urlString) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 } else {
                     log.error(urlString)
                 }
             } else {
-                let urlString = "http://maps.apple.com/maps?ll=\(latitude),\(longitude)&q=\(name)"
-                if let url = URL(string: urlString) {
+                let urlString = "maps://?ll=\(latitude),\(longitude)&q=\(name)"
+                let altUrlString = "maps://?saddr=&daddr=\(latitude),\(longitude)"
+                if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                } else {
+                } else if let altUrl = URL(string: altUrlString), UIApplication.shared.canOpenURL(altUrl) {
+                    UIApplication.shared.open(altUrl, options: [:], completionHandler: nil)
+                }else {
                     log.error(urlString)
                 }
             }
