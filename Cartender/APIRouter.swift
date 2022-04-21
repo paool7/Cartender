@@ -120,14 +120,10 @@ extension APIRouter {
                 if let responseHeaders = response.headers, let sid = responseHeaders["Sid"] {
                     self?.sessionId = sid
                 }
-                func checkStatus() {
+                func checkStatus(checkAction: Bool) {
                     if checkAction, let headers = response.headers, let xid = headers["Xid"] {
                         APIRouter.shared.checkActionStatus(xid: xid) { error in
-                            if error == nil {
-                                completion?(response.data, nil)
-                            } else {
-                                completion?(response.data, nil)
-                            }
+                            completion?(response.data, error)
                         }
                     } else {
                         completion?(response.data, nil)
@@ -143,11 +139,11 @@ extension APIRouter {
                                 completion?(Data(), result)
                             }
                         } else {
-                            checkStatus()
+                            checkStatus(checkAction: checkAction)
                         }
                     })
                 } else {
-                    checkStatus()
+                    checkStatus(checkAction: checkAction)
                 }
             }
         } else {
@@ -162,14 +158,10 @@ extension APIRouter {
             req.httpMethod = "GET"
             req.allHTTPHeaderFields = authorizedHeaders
             HTTP(req).run { [weak self] response in
-                func checkStatus() {
+                func checkStatus(checkAction: Bool) {
                     if checkAction, let headers = response.headers, let xid = headers["Xid"] {
                         APIRouter.shared.checkActionStatus(xid: xid) { error in
-                            if error == nil {
-                                completion?(response.data, nil)
-                            } else {
-                                completion?(response.data, nil)
-                            }
+                            completion?(response.data, error)
                         }
                     } else {
                         completion?(response.data, nil)
@@ -185,11 +177,11 @@ extension APIRouter {
                                 completion?(Data(), errorResult)
                             }
                         } else {
-                            checkStatus()
+                            checkStatus(checkAction: checkAction)
                         }
                     })
                 } else {
-                    checkStatus()
+                    checkStatus(checkAction: checkAction)
                 }
             }
         } else {

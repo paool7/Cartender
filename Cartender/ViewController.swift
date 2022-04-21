@@ -503,6 +503,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             "weather": "1"],
                     "vinKey": [APIRouter.shared.vinKey]]
         APIRouter.shared.post(endpoint: .status, body: body, authorized: true, checkAction: false) { [weak self] data, error in
+            self?.isSyncing = false
             self?.updateStatus()
             guard let self = self else { return }
             let vehicle = try? APIRouter.shared.jsonDecoder.decode(StatusResponse.self, from: data)
@@ -554,7 +555,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     // MARK: API Actions
     func setLock(lock: Bool) {
         self.isSyncing = true
-        APIRouter.shared.get(endpoint: lock ? .lock : .unlock, checkAction: true) { [weak self] data, error in
+        APIRouter.shared.get(endpoint: lock ? .lock : .unlock, retry: true, checkError: true, checkAction: true) { [weak self] data, error in
             self?.isSyncing = false
             guard let self = self, error == nil else {
                 self?.isLocked = !lock
