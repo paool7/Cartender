@@ -515,7 +515,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             "functionalCards": "0",
             "location": "1",
             "vehicleStatus": "1",
-            "weather": "1"],
+            "weather": "0"],
                                    "vinKey": [APIRouter.shared.vinKey]]
         APIRouter.shared.post(endpoint: .status, body: body, authorized: true, checkAction: false) { [weak self] data, error in
             self?.isSyncing = false

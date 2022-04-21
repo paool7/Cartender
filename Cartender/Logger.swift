@@ -14,6 +14,7 @@ class Logger {
     
     func start() {
         let platform = SBPlatformDestination(appID: Secrets.SBAppID, appSecret: Secrets.SBAppSecret, encryptionKey: Secrets.SBEncryptionKey)
+        platform.sendingPoints.threshold = 5
         let console = ConsoleDestination()
         let file = FileDestination()
         log.addDestination(platform)

@@ -83,7 +83,7 @@ class APIRouter {
                 if actionStatus.payload?.evStatus == 0, actionStatus.payload?.alertStatus == 0, actionStatus.payload?.locationStatus == 0, actionStatus.payload?.remoteStatus == 0 {
                     completion(nil)
                 } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         self.checkActionStatus(xid: xid, completion: completion)
                      }
                 }
