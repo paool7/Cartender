@@ -76,14 +76,14 @@ class APIRouter {
     }
     
     func checkActionStatus(xid: String, completion: @escaping ((code: Int, message: String)?) -> ()) {
-        post(endpoint: .actionStatus, body: ["xid": xid], authorized: true) { response, error in
+        post(endpoint: .actionStatus, body: ["xid": xid], retry: true, authorized: true, checkError: true, checkAction: false) { data, error in
             if let error = error {
                 completion(error)
-            } else if let data = response?.data, let actionStatus = try? self.jsonDecoder.decode(ActionStatusResponse.self, from: data) {
+            } else if let actionStatus = try? self.jsonDecoder.decode(ActionStatusResponse.self, from: data) {
                 if actionStatus.payload?.evStatus == 0, actionStatus.payload?.alertStatus == 0, actionStatus.payload?.locationStatus == 0, actionStatus.payload?.remoteStatus == 0 {
                     completion(nil)
                 } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         self.checkActionStatus(xid: xid, completion: completion)
                      }
                 }
@@ -95,23 +95,20 @@ class APIRouter {
         post(endpoint: .login, body: ["deviceKey": "",
                                                  "deviceType": 2,
                                                  "userCredential": ["userId": username,
-                                                                    "password": password]], authorized: false) { [weak self] response, error in
+                                                                    "password": password]], retry: true, authorized: false, checkError: checkError, checkAction: false) { response, error in
             if let error = error?.message {
                 completion(error)
-            } else if let responseHeaders = response?.headers, let sid = responseHeaders["Sid"] {
+            } else {
                 keychain.set(username, forKey: .usernameKey)
                 keychain.set(password, forKey: .passwordKey)
-                self?.sessionId = sid
                 completion(nil)
-            } else {
-                completion("Unable to connect, check your internet connection")
             }
         }
     }
 }
 
 extension APIRouter {
-    func post(endpoint: Endpoint, _ retry: Bool = true, body: [String : Any]?, authorized: Bool = false, _ checkError: Bool = true, completion: ((Response?, (code: Int, message: String)?) -> ())?) {
+    func post(endpoint: Endpoint, body: [String : Any]?, retry: Bool = true, authorized: Bool = false, checkError: Bool = true, checkAction: Bool, completion: ((Data, (code: Int, message: String)?) -> ())?) {
         if Reachability.isConnectedToNetwork() {
             var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
             req.httpMethod = "POST"
@@ -120,53 +117,84 @@ extension APIRouter {
                 req.httpBody = body.json
             }
             HTTP(req).run { [weak self] response in
+                if let responseHeaders = response.headers, let sid = responseHeaders["Sid"] {
+                    self?.sessionId = sid
+                }
+                func checkStatus() {
+                    if checkAction, let headers = response.headers, let xid = headers["Xid"] {
+                        APIRouter.shared.checkActionStatus(xid: xid) { error in
+                            if error == nil {
+                                completion?(response.data, nil)
+                            } else {
+                                completion?(response.data, nil)
+                            }
+                        }
+                    } else {
+                        completion?(response.data, nil)
+                    }
+                }
+
                 if checkError {
                     self?.error(response: response, completion: { result, tryAgain in
                         if let result = result {
                             if tryAgain == true && retry {
-                                self?.post(endpoint: endpoint, false, body: body, completion: completion)
+                                self?.post(endpoint: endpoint, body: body, retry: false, checkError: checkError, checkAction: checkAction, completion: completion)
                             } else {
-                                completion?(nil, result)
+                                completion?(Data(), result)
                             }
                         } else {
-                            completion?(response, nil)
+                            checkStatus()
                         }
                     })
                 } else {
-                    completion?(response, nil)
+                    checkStatus()
                 }
             }
         } else {
             self.showError(message: "No internet connection. Make sure your device is connected to the internet and try again.")
-            completion?(nil, (0, "No internet connection. Make sure your device is connected to the internet and try again."))
+            completion?(Data(), (0, "No internet connection. Make sure your device is connected to the internet and try again."))
         }
     }
     
-    func get(endpoint: Endpoint, _ retry: Bool = true, _ checkError: Bool = true, completion: ((Response?, (code: Int, message: String)?) -> ())?) {
+    func get(endpoint: Endpoint, retry: Bool = true, checkError: Bool = true, checkAction: Bool, completion: ((Data, (code: Int, message: String)?) -> ())?) {
         if Reachability.isConnectedToNetwork() {
             var req = URLRequest(urlString: baseURL + endpoint.rawValue)!
             req.httpMethod = "GET"
             req.allHTTPHeaderFields = authorizedHeaders
             HTTP(req).run { [weak self] response in
-                if checkError {
-                    self?.error(response: response, completion: { result, tryAgain in
-                        if let result = result {
-                            if tryAgain == true && retry {
-                                self?.get(endpoint: endpoint, false, completion: completion)
+                func checkStatus() {
+                    if checkAction, let headers = response.headers, let xid = headers["Xid"] {
+                        APIRouter.shared.checkActionStatus(xid: xid) { error in
+                            if error == nil {
+                                completion?(response.data, nil)
                             } else {
-                                completion?(nil, result)
+                                completion?(response.data, nil)
+                            }
+                        }
+                    } else {
+                        completion?(response.data, nil)
+                    }
+                }
+                
+                if checkError {
+                    self?.error(response: response, completion: { errorResult, tryAgain in
+                        if let errorResult = errorResult {
+                            if tryAgain == true && retry {
+                                self?.get(endpoint: endpoint, retry: false, checkAction: checkAction, completion: completion)
+                            } else {
+                                completion?(Data(), errorResult)
                             }
                         } else {
-                            completion?(response, nil)
+                            checkStatus()
                         }
                     })
                 } else {
-                    completion?(response, nil)
+                    checkStatus()
                 }
             }
         } else {
             self.showError(message: "No internet connection. Make sure your device is connected to the internet and try again.")
-            completion?(nil, (0, "No internet connection. Make sure your device is connected to the internet and try again."))
+            completion?(Data(), (0, "No internet connection. Make sure your device is connected to the internet and try again."))
         }
     }
     
@@ -184,8 +212,8 @@ extension APIRouter {
                             self?.logout()
                             completion?((code, errorMessage), false)
                         } else {
-                            APIRouter.shared.get(endpoint: .vehicles, false, false) { response, error in
-                                if let data = response?.data, let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
+                            APIRouter.shared.get(endpoint: .vehicles, retry: false, checkError: false, checkAction: false) { data, error in
+                                if let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
                                     APIRouter.shared.vinKey = vinKey
                                     completion?((code, errorMessage), true)
                                 } else {

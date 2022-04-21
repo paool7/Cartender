@@ -100,7 +100,7 @@ class SettingsViewController: UIViewController, UIColorPickerViewControllerDeleg
     
     func setChargeLimit(completion: @escaping () -> ()) {
         self.setChargeButton(enabled: false)
-        APIRouter.shared.post(endpoint: .setChargeLimit, body: [
+        let body = [
             "targetSOClist": [
                 [
                     "plugType": 0,
@@ -111,17 +111,11 @@ class SettingsViewController: UIViewController, UIColorPickerViewControllerDeleg
                     "targetSOClevel": MaxCharge.AC,
                 ],
             ]
-        ], authorized: true) { response, error in
+        ]
+        APIRouter.shared.post(endpoint: .setChargeLimit, body: body, authorized: true, checkAction: true) { response, error in
             if error != nil {
                 self.setChargeButton(enabled: true)
                 completion()
-            } else if let headers = response?.headers, let xid = headers["Xid"] {
-                APIRouter.shared.checkActionStatus(xid: xid) { error in
-                    if error == nil {
-                        self.commandSuccess(endpoint: .setChargeLimit)
-                    }
-                    completion()
-                }
             } else {
                 self.setChargeButton(enabled: true)
                 completion()

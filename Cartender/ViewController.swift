@@ -166,6 +166,11 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         climateButton.layer.cornerRadius = climateButton.frame.height/2
         lockUnlockButton.layer.cornerRadius = lockUnlockButton.frame.height/2
         backgroundImageView.image = UIImage(named: "Drive-\(Calendar.current.component(.weekday, from: Date()))")
+        
+        self.mapView.isUserInteractionEnabled = true
+        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.openMap))
+        gesture.numberOfTapsRequired = 1
+        self.mapView.addGestureRecognizer(gesture)
     }
     
     // MARK: Actions
@@ -273,8 +278,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         }
     }
     
-    func set(vehicleStatus: VehicleStatus, syncDateUTC: String?) {
-        if let evStatus = vehicleStatus.evStatus, let dcTargetSoc = evStatus.targetSOC?[0].targetSOClevel, let acTargetSoc = evStatus.targetSOC?[1].targetSOClevel, let charge = evStatus.batteryStatus, let isCharging = evStatus.batteryCharge, let pluggedIn = evStatus.batteryPlugin, let chargeTime = evStatus.remainChargeTime?.first?.timeInterval?.value, let drvDistance = vehicleStatus.evStatus?.drvDistance?.first, let range = drvDistance.rangeByFuel?.totalAvailableRange?.value {
+    func set(vehicleStatus: VehicleStatus?) {
+        if let evStatus = vehicleStatus?.evStatus, let dcTargetSoc = evStatus.targetSOC?[0].targetSOClevel, let acTargetSoc = evStatus.targetSOC?[1].targetSOClevel, let charge = evStatus.batteryStatus, let isCharging = evStatus.batteryCharge, let pluggedIn = evStatus.batteryPlugin, let chargeTime = evStatus.remainChargeTime?.first?.timeInterval?.value, let drvDistance = evStatus.drvDistance?.first, let range = drvDistance.rangeByFuel?.totalAvailableRange?.value {
             self.chargeStatusLabel.text = "\(charge)% • \(range)mi"
             self.batteryContainer.progress = CGFloat(charge)/100.0
             let largeConfig = UIImage.SymbolConfiguration(scale: .large)
@@ -284,15 +289,15 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             MaxCharge.DC = dcTargetSoc
         }
         
-        if let climate = vehicleStatus.climate, let climateOn = climate.airCtrl {
+        if let climate = vehicleStatus?.climate, let climateOn = climate.airCtrl {
             self.climateOn = climateOn
             self.temp = Int(climate.airTemp?.value ?? "0") ?? 0
         }
-        if let locked = vehicleStatus.doorLock {
+        if let locked = vehicleStatus?.doorLock {
             self.isLocked = locked
         }
         
-        if let doorStatus = vehicleStatus.doorStatus {
+        if let doorStatus = vehicleStatus?.doorStatus {
             self.doorLabel.textColor = .red
             if doorStatus.hood == 0, doorStatus.trunk == 0, doorStatus.frontLeft == 0, doorStatus.frontRight == 0, doorStatus.backLeft == 0, doorStatus.backRight == 0 {
                 self.doorLabel.text = "Closed"
@@ -308,7 +313,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMddHHmmss"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
-        if let syncDateUTC = syncDateUTC, let syncDate = formatter.date(from: syncDateUTC) {
+        if let syncDateUTC = vehicleStatus?.evStatus?.syncDate?.utc, let syncDate = formatter.date(from: syncDateUTC) {
             formatter.timeZone = TimeZone.current
             if Calendar.current.isDateInToday(syncDate) {
                 formatter.dateFormat = "h:mm a"
@@ -362,7 +367,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 } else if let altUrl = URL(string: altUrlString), UIApplication.shared.canOpenURL(altUrl) {
                     UIApplication.shared.open(altUrl, options: [:], completionHandler: nil)
-                }else {
+                } else {
                     log.error(urlString)
                 }
             }
@@ -458,8 +463,8 @@ func login(completion: (() -> ())?) {
 
 func getVehicles(completion: (() -> ())?) {
     self.isSyncing = true
-    APIRouter.shared.get(endpoint: .vehicles) { [weak self] response, error in
-        if let data = response?.data, let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
+    APIRouter.shared.get(endpoint: .vehicles, checkAction: false) { [weak self] data, error in
+        if let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
             APIRouter.shared.vinKey = vinKey
             self?.vehicleStatus()
         }
@@ -469,12 +474,12 @@ func getVehicles(completion: (() -> ())?) {
 
 func updateStatus() {
     self.isSyncing = true
-    APIRouter.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true) { [weak self] response, error in
-        if let data = response?.data, let vehicle = try? APIRouter.shared.jsonDecoder.decode(UpdateStatusResponse.self, from: data) {
+    APIRouter.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true, checkAction: false) { [weak self] data, error in
+        if let vehicle = try? APIRouter.shared.jsonDecoder.decode(UpdateStatusResponse.self, from: data) {
             DispatchQueue.main.async {
                 self?.isSyncing = false
-                guard let report = vehicle.payload?.vehicleStatusRpt, let vehicleStatus = report.vehicleStatus else { return }
-                self?.set(vehicleStatus: vehicleStatus, syncDateUTC: vehicleStatus.evStatus?.syncDate?.utc)
+                guard let vehicleStatus = vehicle.payload?.vehicleStatusRpt?.vehicleStatus else { return }
+                self?.set(vehicleStatus: vehicleStatus)
             }
         }
     }
@@ -496,19 +501,14 @@ func vehicleStatus() {
         "location": "1",
         "vehicleStatus": "1",
         "weather": "1"],
-                                                    "vinKey": [APIRouter.shared.vinKey]], authorized: true) { [weak self] response, error in
+        "vinKey": [APIRouter.shared.vinKey]], authorized: true, checkAction: false) { [weak self] data, error in
+        self?.updateStatus()
         guard let self = self else { return }
-        if defaults?.bool(forKey: "VehicleConfigOnFirstLogin") == false {
-            defaults?.set(true, forKey: "VehicleConfigOnFirstLogin")
-            if let text = response?.text {
-                log.info(text)
-            }
-        }
-        if let data = response?.data, let vehicle = try? APIRouter.shared.jsonDecoder.decode(StatusResponse.self, from: data) {
-            self.updateStatus()
+        if let vehicle = try? APIRouter.shared.jsonDecoder.decode(StatusResponse.self, from: data) {
             DispatchQueue.main.async {
-                guard let report = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleStatusRpt, let vehicleStatus = report.vehicleStatus else { return }
-                self.set(vehicleStatus: vehicleStatus, syncDateUTC: vehicleStatus.evStatus?.syncDate?.utc)
+                let vehicleStatus = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleStatusRpt?.vehicleStatus
+                
+                self.set(vehicleStatus: vehicleStatus)
                 
                 let name = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleNickName ?? vehicle.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.trim?.modelName ?? "Niro"
                 self.name = name
@@ -544,11 +544,6 @@ func vehicleStatus() {
                         self.mapView.addAnnotation(annotation)
                     }
                     self.mapView.setRegion(region, animated: true)
-                    
-                    self.mapView.isUserInteractionEnabled = true
-                    let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.openMap))
-                    gesture.numberOfTapsRequired = 1
-                    self.mapView.addGestureRecognizer(gesture)
                 }
             }
         }
@@ -558,63 +553,39 @@ func vehicleStatus() {
 // MARK: API Actions
 func setLock(lock: Bool) {
     self.isSyncing = true
-    APIRouter.shared.get(endpoint: lock ? .lock : .unlock) { [weak self] response, error in
-        guard let self = self else {
-            self?.isSyncing = false
+    APIRouter.shared.get(endpoint: lock ? .lock : .unlock, checkAction: true) { [weak self] data, error in
+        self?.isSyncing = false
+        guard let self = self, error == nil else {
             self?.isLocked = !lock
             return
         }
-        if error != nil {
-            self.isSyncing = false
-            self.isLocked = !lock
-        } else if let headers = response?.headers, let xid = headers["Xid"] {
-            APIRouter.shared.checkActionStatus(xid: xid) { error in
-                if error == nil {
-                    self.commandSuccess(endpoint: lock ? .lock : .unlock)
-                }
-                self.isSyncing = false
-                self.isLocked = lock
-            }
-        } else {
-            self.isSyncing = false
-            self.isLocked = !lock
-        }
+        self.commandSuccess(endpoint: lock ? .lock : .unlock)
+        self.isLocked = lock
     }
 }
 
 func startCharge(completion: @escaping () -> ()) {
     self.isSyncing = true
-    APIRouter.shared.post(endpoint: .startCharge, body: ["chargeRatio": 100], authorized: true) { [weak self] response, error in
+    APIRouter.shared.post(endpoint: .startCharge, body: ["chargeRatio": 100], authorized: true, checkAction: true) { [weak self] response, error in
+        self?.isSyncing = false
         if error != nil {
-            self?.isSyncing = false
             completion()
-        } else if let headers = response?.headers, let xid = headers["Xid"] {
-            APIRouter.shared.checkActionStatus(xid: xid) { error in
-                if error == nil {
-                    self?.commandSuccess(endpoint: .startCharge)
-                }
-                self?.isSyncing = false
-                completion()
-            }
+        } else {
+            self?.commandSuccess(endpoint: .startCharge)
+            completion()
         }
     }
 }
 
 func stopCharge(completion: @escaping () -> ()) {
     self.isSyncing = true
-    APIRouter.shared.get(endpoint: .stopCharge) { [weak self] response, error in
+    APIRouter.shared.get(endpoint: .stopCharge, checkAction: true) { [weak self] response, error in
         self?.isSyncing = false
         if error != nil {
-            self?.isSyncing = false
             completion()
-        } else if let headers = response?.headers, let xid = headers["Xid"] {
-            APIRouter.shared.checkActionStatus(xid: xid) { error in
-                if error == nil {
-                    self?.commandSuccess(endpoint: .stopCharge)
-                }
-                self?.isSyncing = false
-                completion()
-            }
+        } else {
+            self?.commandSuccess(endpoint: .stopCharge)
+            completion()
         }
     }
 }
@@ -642,49 +613,29 @@ func startClimate(completion: (() -> ())?) {
             ]
         ]
     ]
-    APIRouter.shared.post(endpoint: .startClimate, body: body, authorized: true) { [weak self] response, error in
-        guard let self = self else {
-            self?.isSyncing = false
+    APIRouter.shared.post(endpoint: .startClimate, body: body, authorized: true, checkAction: true) { [weak self] response, error in
+        self?.isSyncing = false
+        guard let self = self, error == nil else {
             completion?()
             return
         }
-        if error != nil {
-            self.isSyncing = false
-            completion?()
-        } else if let headers = response?.headers, let xid = headers["Xid"] {
-            APIRouter.shared.checkActionStatus(xid: xid) { error in
-                if error == nil {
-                    self.commandSuccess(endpoint: .startClimate)
-                }
-                self.isSyncing = false
-                self.climateOn = true
-                completion?()
-            }
-        }
+        self.commandSuccess(endpoint: .startClimate)
+        self.climateOn = true
+        completion?()
     }
 }
 
 func stopClimate(completion: (() -> ())?) {
     self.isSyncing = true
-    APIRouter.shared.get(endpoint: .stopClimate) { [weak self] response, error in
-        guard let self = self else {
-            self?.isSyncing = false
+    APIRouter.shared.get(endpoint: .stopClimate, checkAction: true) { [weak self] response, error in
+        self?.isSyncing = false
+        guard let self = self, error != nil else {
             completion?()
             return
         }
-        if error != nil {
-            self.isSyncing = false
-            completion?()
-        } else if let headers = response?.headers, let xid = headers["Xid"] {
-            APIRouter.shared.checkActionStatus(xid: xid) { error in
-                if error == nil {
-                    self.commandSuccess(endpoint: .stopClimate)
-                }
-                self.isSyncing = false
-                self.climateOn = false
-                completion?()
-            }
-        }
+        self.commandSuccess(endpoint: .stopClimate)
+        self.climateOn = false
+        completion?()
     }
 }
 
