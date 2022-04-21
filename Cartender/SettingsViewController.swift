@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import MessageUI
 import SwiftHTTP
 import NotificationBannerSwift
-import MessageUI
 
 class SettingsViewController: UIViewController, UIColorPickerViewControllerDelegate, MFMailComposeViewControllerDelegate {
     @IBOutlet var airDurationStepper: UIStepper!

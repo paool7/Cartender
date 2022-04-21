@@ -67,13 +67,6 @@ class APIRouter {
         }
         return authHeaders
     }
-
-    func getImage(name: String, path: String) -> String {
-        let trimmedName = name.replacingOccurrences(of: ".png", with: "")
-        let uppercaseName = trimmedName.uppercased()
-        let trimmedPath = path.replacingOccurrences(of: "vehicle-app", with: "vehicle")
-       return "https://owners.kia.com\(trimmedPath)\(uppercaseName).png/jcr:content/renditions/cq5dam.thumbnail.1280.861.png"
-    }
     
     func checkActionStatus(xid: String, completion: @escaping ((code: Int, message: String)?) -> ()) {
         post(endpoint: .actionStatus, body: ["xid": xid], authorized: true) { response, error in
