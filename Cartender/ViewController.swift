@@ -373,151 +373,152 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             }
         }
     }
-
-// MARK: API Requests
-func login(completion: (() -> ())?) {
-    DispatchQueue.main.async {
-        var vc: UIViewController = self
-        if let topVC = UIApplication.shared.keyWindowPresentedController {
-            vc = topVC
-        }
-        
-        if let username = keychain.string(forKey: .usernameKey), let password = keychain.string(forKey: .passwordKey) {
-            APIRouter.shared.login(username: username, password: password) { [weak self] error in
-                if let error = error {
-                    let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-                    let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
-                        self?.login(completion: completion)
-                    }
-                    errorAlert.addAction(errorAction)
-                    
-                    DispatchQueue.main.async {
-                        vc.present(errorAlert, animated: true, completion: nil)
-                    }
-                } else {
-                    self?.getVehicles(completion: completion)
-                }
+    
+    // MARK: API Requests
+    func login(completion: (() -> ())?) {
+        DispatchQueue.main.async {
+            var vc: UIViewController = self
+            if let topVC = UIApplication.shared.keyWindowPresentedController {
+                vc = topVC
             }
-        } else {
-            DispatchQueue.main.async {
-                var usernameField = UITextField()
-                var passwordField = UITextField()
-                
-                let alert = UIAlertController(title: "Login", message: "Your login information is stored securely on your device and is only sent to Kia to login.", preferredStyle: .alert)
-                alert.addTextField { alertTextField in
-                    alertTextField.placeholder = "Email or phone number"
-                    usernameField = alertTextField
-                }
-                alert.addTextField { alertTextField in
-                    alertTextField.placeholder = "Password"
-                    alertTextField.isSecureTextEntry = true
-                    passwordField = alertTextField
-                }
-                
-                let action = UIAlertAction(title: "Done", style: .default) { action in
-                    if let username = usernameField.text, let password = passwordField.text, !username.isEmpty, !password.isEmpty {
-                        APIRouter.shared.login(username: username, password: password) { [weak self] error in
-                            if let error = error {
-                                let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-                                let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
-                                    self?.login(completion: completion)
-                                }
-                                errorAlert.addAction(errorAction)
-                                
-                                DispatchQueue.main.async {
-                                    vc.present(errorAlert, animated: true, completion: nil)
-                                }
-                            } else {
-                                self?.getVehicles(completion: completion)
-                            }
-                        }
-                    } else {
-                        var message = "Check your login details and try again."
-                        if usernameField.text?.isEmpty == true && passwordField.text?.isEmpty == true {
-                            message = "Please enter your email or phone number and password."
-                        } else if usernameField.text?.isEmpty == true {
-                            message = "Please enter your email or phone number."
-                        } else if passwordField.text?.isEmpty == true {
-                            message = "Please enter your password."
-                        }
-                        let errorAlert = UIAlertController(title: message, message: "", preferredStyle: .alert)
+            
+            if let username = keychain.string(forKey: .usernameKey), let password = keychain.string(forKey: .passwordKey) {
+                APIRouter.shared.login(username: username, password: password) { [weak self] error in
+                    if let error = error {
+                        let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
                         let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
-                            self.login(completion: completion)
+                            self?.login(completion: completion)
                         }
                         errorAlert.addAction(errorAction)
                         
                         DispatchQueue.main.async {
                             vc.present(errorAlert, animated: true, completion: nil)
                         }
+                    } else {
+                        self?.getVehicles(completion: completion)
                     }
                 }
-                
-                alert.addAction(action)
+            } else {
                 DispatchQueue.main.async {
-                    vc.present(alert, animated: true, completion: nil)
+                    var usernameField = UITextField()
+                    var passwordField = UITextField()
+                    
+                    let alert = UIAlertController(title: "Login", message: "Your login information is stored securely on your device and is only sent to Kia to login.", preferredStyle: .alert)
+                    alert.addTextField { alertTextField in
+                        alertTextField.placeholder = "Email or phone number"
+                        usernameField = alertTextField
+                    }
+                    alert.addTextField { alertTextField in
+                        alertTextField.placeholder = "Password"
+                        alertTextField.isSecureTextEntry = true
+                        passwordField = alertTextField
+                    }
+                    
+                    let action = UIAlertAction(title: "Done", style: .default) { action in
+                        if let username = usernameField.text, let password = passwordField.text, !username.isEmpty, !password.isEmpty {
+                            APIRouter.shared.login(username: username, password: password) { [weak self] error in
+                                if let error = error {
+                                    let errorAlert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+                                    let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                                        self?.login(completion: completion)
+                                    }
+                                    errorAlert.addAction(errorAction)
+                                    
+                                    DispatchQueue.main.async {
+                                        vc.present(errorAlert, animated: true, completion: nil)
+                                    }
+                                } else {
+                                    self?.getVehicles(completion: completion)
+                                }
+                            }
+                        } else {
+                            var message = "Check your login details and try again."
+                            if usernameField.text?.isEmpty == true && passwordField.text?.isEmpty == true {
+                                message = "Please enter your email or phone number and password."
+                            } else if usernameField.text?.isEmpty == true {
+                                message = "Please enter your email or phone number."
+                            } else if passwordField.text?.isEmpty == true {
+                                message = "Please enter your password."
+                            }
+                            let errorAlert = UIAlertController(title: message, message: "", preferredStyle: .alert)
+                            let errorAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                                self.login(completion: completion)
+                            }
+                            errorAlert.addAction(errorAction)
+                            
+                            DispatchQueue.main.async {
+                                vc.present(errorAlert, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                    
+                    alert.addAction(action)
+                    DispatchQueue.main.async {
+                        vc.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }
     }
-}
-
-func getVehicles(completion: (() -> ())?) {
-    self.isSyncing = true
-    APIRouter.shared.get(endpoint: .vehicles, checkAction: false) { [weak self] data, error in
-        if let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
-            APIRouter.shared.vinKey = vinKey
-            self?.vehicleStatus()
+    
+    func getVehicles(completion: (() -> ())?) {
+        self.isSyncing = true
+        APIRouter.shared.get(endpoint: .vehicles, checkAction: false) { [weak self] data, error in
+            if let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
+                APIRouter.shared.vinKey = vinKey
+                self?.vehicleStatus()
+            }
+            completion?()
         }
-        completion?()
     }
-}
-
-func updateStatus() {
-    self.isSyncing = true
-    APIRouter.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true, checkAction: false) { [weak self] data, error in
-        if let vehicle = try? APIRouter.shared.jsonDecoder.decode(UpdateStatusResponse.self, from: data) {
-            DispatchQueue.main.async {
-                self?.isSyncing = false
-                guard let vehicleStatus = vehicle.payload?.vehicleStatusRpt?.vehicleStatus else { return }
-                self?.set(vehicleStatus: vehicleStatus)
+    
+    func updateStatus() {
+        self.isSyncing = true
+        APIRouter.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true, checkAction: false) { [weak self] data, error in
+            if let vehicle = try? APIRouter.shared.jsonDecoder.decode(UpdateStatusResponse.self, from: data) {
+                DispatchQueue.main.async {
+                    self?.isSyncing = false
+                    guard let vehicleStatus = vehicle.payload?.vehicleStatusRpt?.vehicleStatus else { return }
+                    self?.set(vehicleStatus: vehicleStatus)
+                }
             }
         }
     }
-}
-
-func vehicleStatus() {
-    self.isSyncing = true
-    APIRouter.shared.post(endpoint: .status, body: ["vehicleConfigReq": [
-        "airTempRange": "0",
-        "maintenance": "0",
-        "seatHeatCoolOption": "1",
-        "vehicle": "1",
-        "vehicleFeature": "0"
-    ], "vehicleInfoReq": [
-        "drivingActivty": "0",
-        "dtc": "1",
-        "enrollment": "1",
-        "functionalCards": "0",
-        "location": "1",
-        "vehicleStatus": "1",
-        "weather": "1"],
-        "vinKey": [APIRouter.shared.vinKey]], authorized: true, checkAction: false) { [weak self] data, error in
-        self?.updateStatus()
-        guard let self = self else { return }
-        if let vehicle = try? APIRouter.shared.jsonDecoder.decode(StatusResponse.self, from: data) {
+    
+    func vehicleStatus() {
+        self.isSyncing = true
+        let body: [String: Any] = ["vehicleConfigReq": [
+            "airTempRange": "0",
+            "maintenance": "0",
+            "seatHeatCoolOption": "1",
+            "vehicle": "1",
+            "vehicleFeature": "0"
+        ], "vehicleInfoReq": [
+            "drivingActivty": "0",
+            "dtc": "1",
+            "enrollment": "1",
+            "functionalCards": "0",
+            "location": "1",
+            "vehicleStatus": "1",
+            "weather": "1"],
+                    "vinKey": [APIRouter.shared.vinKey]]
+        APIRouter.shared.post(endpoint: .status, body: body, authorized: true, checkAction: false) { [weak self] data, error in
+            self?.updateStatus()
+            guard let self = self else { return }
+            let vehicle = try? APIRouter.shared.jsonDecoder.decode(StatusResponse.self, from: data)
             DispatchQueue.main.async {
-                let vehicleStatus = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleStatusRpt?.vehicleStatus
+                let vehicleStatus = vehicle?.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleStatusRpt?.vehicleStatus
                 
                 self.set(vehicleStatus: vehicleStatus)
                 
-                let name = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleNickName ?? vehicle.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.trim?.modelName ?? "Niro"
+                let name = vehicle?.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleNickName ?? vehicle?.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.trim?.modelName ?? "Niro"
                 self.name = name
                 self.nicknameLabel.text = name
                 
-                if let mileage = vehicle.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.mileage {
+                if let mileage = vehicle?.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.mileage {
                     self.odometerLabel.text = "\(mileage) miles"
                 }
-                if let location = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.location, let lat = location.coord?.lat, let long = location.coord?.lon {
+                if let location = vehicle?.payload?.vehicleInfoList?.first?.lastVehicleInfo?.location, let lat = location.coord?.lat, let long = location.coord?.lon {
                     self.latitude = lat
                     self.longitude = long
                     
@@ -546,105 +547,105 @@ func vehicleStatus() {
                     self.mapView.setRegion(region, animated: true)
                 }
             }
+            
         }
     }
-}
-
-// MARK: API Actions
-func setLock(lock: Bool) {
-    self.isSyncing = true
-    APIRouter.shared.get(endpoint: lock ? .lock : .unlock, checkAction: true) { [weak self] data, error in
-        self?.isSyncing = false
-        guard let self = self, error == nil else {
-            self?.isLocked = !lock
-            return
-        }
-        self.commandSuccess(endpoint: lock ? .lock : .unlock)
-        self.isLocked = lock
-    }
-}
-
-func startCharge(completion: @escaping () -> ()) {
-    self.isSyncing = true
-    APIRouter.shared.post(endpoint: .startCharge, body: ["chargeRatio": 100], authorized: true, checkAction: true) { [weak self] response, error in
-        self?.isSyncing = false
-        if error != nil {
-            completion()
-        } else {
-            self?.commandSuccess(endpoint: .startCharge)
-            completion()
+    
+    // MARK: API Actions
+    func setLock(lock: Bool) {
+        self.isSyncing = true
+        APIRouter.shared.get(endpoint: lock ? .lock : .unlock, checkAction: true) { [weak self] data, error in
+            self?.isSyncing = false
+            guard let self = self, error == nil else {
+                self?.isLocked = !lock
+                return
+            }
+            self.commandSuccess(endpoint: lock ? .lock : .unlock)
+            self.isLocked = lock
         }
     }
-}
-
-func stopCharge(completion: @escaping () -> ()) {
-    self.isSyncing = true
-    APIRouter.shared.get(endpoint: .stopCharge, checkAction: true) { [weak self] response, error in
-        self?.isSyncing = false
-        if error != nil {
-            completion()
-        } else {
-            self?.commandSuccess(endpoint: .stopCharge)
-            completion()
+    
+    func startCharge(completion: @escaping () -> ()) {
+        self.isSyncing = true
+        APIRouter.shared.post(endpoint: .startCharge, body: ["chargeRatio": 100], authorized: true, checkAction: true) { [weak self] response, error in
+            self?.isSyncing = false
+            if error != nil {
+                completion()
+            } else {
+                self?.commandSuccess(endpoint: .startCharge)
+                completion()
+            }
         }
     }
-}
-
-func startClimate(completion: (() -> ())?) {
-    self.isSyncing = true
-    var climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
-    climateDuration = climateDuration == 0 ? 30 : climateDuration
-    let body = [
-        "remoteClimate": [
-            "airCtrl": true,
-            "airTemp": [
-                "unit": 1,
-                "value": "\(self.temp)"
-            ],
-            "defrost": self.defrostButton.isSelected,
-            "heatingAccessory": [
-                "rearWindow": 0,
-                "sideMirror": 0,
-                "steeringWheel": self.heatedButton.isSelected ? 1 : 0
-            ],
-            "ignitionOnDuration": [
-                "unit": 4,
-                "value": climateDuration
+    
+    func stopCharge(completion: @escaping () -> ()) {
+        self.isSyncing = true
+        APIRouter.shared.get(endpoint: .stopCharge, checkAction: true) { [weak self] response, error in
+            self?.isSyncing = false
+            if error != nil {
+                completion()
+            } else {
+                self?.commandSuccess(endpoint: .stopCharge)
+                completion()
+            }
+        }
+    }
+    
+    func startClimate(completion: (() -> ())?) {
+        self.isSyncing = true
+        var climateDuration = defaults?.integer(forKey: "ClimateDuration") ?? 30
+        climateDuration = climateDuration == 0 ? 30 : climateDuration
+        let body = [
+            "remoteClimate": [
+                "airCtrl": true,
+                "airTemp": [
+                    "unit": 1,
+                    "value": "\(self.temp)"
+                ],
+                "defrost": self.defrostButton.isSelected,
+                "heatingAccessory": [
+                    "rearWindow": 0,
+                    "sideMirror": 0,
+                    "steeringWheel": self.heatedButton.isSelected ? 1 : 0
+                ],
+                "ignitionOnDuration": [
+                    "unit": 4,
+                    "value": climateDuration
+                ]
             ]
         ]
-    ]
-    APIRouter.shared.post(endpoint: .startClimate, body: body, authorized: true, checkAction: true) { [weak self] response, error in
-        self?.isSyncing = false
-        guard let self = self, error == nil else {
+        APIRouter.shared.post(endpoint: .startClimate, body: body, authorized: true, checkAction: true) { [weak self] response, error in
+            self?.isSyncing = false
+            guard let self = self, error == nil else {
+                completion?()
+                return
+            }
+            self.commandSuccess(endpoint: .startClimate)
+            self.climateOn = true
             completion?()
-            return
         }
-        self.commandSuccess(endpoint: .startClimate)
-        self.climateOn = true
-        completion?()
     }
-}
-
-func stopClimate(completion: (() -> ())?) {
-    self.isSyncing = true
-    APIRouter.shared.get(endpoint: .stopClimate, checkAction: true) { [weak self] response, error in
-        self?.isSyncing = false
-        guard let self = self, error != nil else {
+    
+    func stopClimate(completion: (() -> ())?) {
+        self.isSyncing = true
+        APIRouter.shared.get(endpoint: .stopClimate, checkAction: true) { [weak self] response, error in
+            self?.isSyncing = false
+            guard let self = self, error != nil else {
+                completion?()
+                return
+            }
+            self.commandSuccess(endpoint: .stopClimate)
+            self.climateOn = false
             completion?()
-            return
         }
-        self.commandSuccess(endpoint: .stopClimate)
-        self.climateOn = false
-        completion?()
     }
-}
-
-func commandSuccess(endpoint: Endpoint) {
-    DispatchQueue.main.async {
-        let banner = FloatingNotificationBanner(title: "Success!", subtitle: endpoint.successMessage(), style: .success)
-        banner.show(cornerRadius: 8)
+    
+    func commandSuccess(endpoint: Endpoint) {
+        DispatchQueue.main.async {
+            let banner = FloatingNotificationBanner(title: "Success!", subtitle: endpoint.successMessage(), style: .success)
+            banner.show(cornerRadius: 8)
+        }
     }
-}
 }
 
 // MARK: Shortcuts
