@@ -35,6 +35,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     @IBOutlet var settingsButton: UIButton!
     @IBOutlet var climateButton: UIButton!
     @IBOutlet var defrostButton: UIButton!
+    @IBOutlet var sideMirrorButton: UIButton!
+    @IBOutlet var rearWindowButton: UIButton!
     @IBOutlet var chargeButton: UIButton!
     @IBOutlet var tempUpButton: UIButton!
     @IBOutlet var heatedButton: UIButton!
@@ -66,7 +68,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     
     var isSyncing = false {
         didSet {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.activityIndicator.isHidden = !self.isSyncing
                 self.syncTimeLabel.isHidden = self.isSyncing
                 self.syncButton.isHidden = self.isSyncing
@@ -80,7 +83,9 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 self.settingsButton.alpha = self.isSyncing ? 0.5 : 1.0
                 self.lockUnlockButton.alpha = self.isSyncing ? 0.5 : 1.0
                 self.climateButton.alpha = self.isSyncing ? 0.5 : 1.0
-                
+                self.sideMirrorButton.alpha = self.isSyncing ? 0.5 : 1.0
+                self.rearWindowButton.alpha = self.isSyncing ? 0.5 : 1.0
+
                 self.heatedButton.isEnabled = !self.isSyncing
                 self.defrostButton.isEnabled = !self.isSyncing
                 self.tempUpButton.isEnabled = !self.isSyncing
@@ -88,6 +93,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 self.settingsButton.isEnabled = !self.isSyncing
                 self.lockUnlockButton.isEnabled = !self.isSyncing
                 self.climateButton.isEnabled = !self.isSyncing
+                self.sideMirrorButton.isEnabled = !self.isSyncing
+                self.rearWindowButton.isEnabled = !self.isSyncing
                 
                 if !self.isSyncing {
                     self.activityIndicator.stopAnimating()
@@ -100,7 +107,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     
     var isLocked = true {
         didSet {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 let config = UIImage.SymbolConfiguration(scale: .medium)
                 self.lockUnlockButton.setImage(UIImage(systemName: !self.isLocked ? "lock" : "lock.open", withConfiguration: config), for: .normal)
                 self.lockUnlockButton.setTitle(self.isLocked ? "Unlock" : "Lock", for: .normal)
@@ -112,7 +120,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     
     var temp: Int = 0 {
         didSet {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 if self.temp == 0 {
                     self.tempLabel.setTitle("", for: .normal)
                 } else {
@@ -124,7 +133,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     
     var chargeMax = 50 {
         didSet {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.batteryContainer.target = CGFloat(self.chargeMax)/100.0
             }
         }
@@ -143,7 +153,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             }
         }
         
-        APIRouter.shared.logoutHandler = {
+        APIRouter.shared.logoutHandler = { [weak self] in
+            guard let self = self else { return }
             self.login(completion: nil)
         }
         
@@ -160,10 +171,12 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         syncButton.tintColor = .systemCyan
         heatedButton.layer.cornerRadius = heatedButton.frame.width/2
         tempUpButton.layer.cornerRadius = tempUpButton.frame.width/2
-        tempDownButton.layer.cornerRadius = tempDownButton.frame.width/2
         chargeButton.layer.cornerRadius = chargeButton.frame.height/2
         defrostButton.layer.cornerRadius = defrostButton.frame.width/2
         climateButton.layer.cornerRadius = climateButton.frame.height/2
+        tempDownButton.layer.cornerRadius = tempDownButton.frame.width/2
+        rearWindowButton.layer.cornerRadius = rearWindowButton.frame.height/2
+        sideMirrorButton.layer.cornerRadius = sideMirrorButton.frame.height/2
         lockUnlockButton.layer.cornerRadius = lockUnlockButton.frame.height/2
         backgroundImageView.image = UIImage(named: "Drive-\(Calendar.current.component(.weekday, from: Date()))")
         
@@ -219,6 +232,24 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         }
     }
     
+    @IBAction func tappedRearWindow(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if !sender.isSelected {
+            self.rearWindowButton.tintColor = .white
+        } else {
+            self.rearWindowButton.tintColor = .systemRed
+        }
+    }
+    
+    @IBAction func tappedSideMirror(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if !sender.isSelected {
+            self.sideMirrorButton.tintColor = .white
+        } else {
+            self.sideMirrorButton.tintColor = .systemRed
+        }
+    }
+    
     @IBAction func tappedLockUnlock(_ sender: UIButton) {
         self.lockLabel.text = isLocked ? "Unlocking..." : "Locking..."
         self.setLock(lock: !isLocked)
@@ -238,33 +269,37 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     
     // MARK: API Helpers
     func setChargeDetails(charging: Bool, pluggedIn: Bool, ratio: Int, chargeTime: Int) {
-        var chargeString = ""
-        self.chargeMax = ratio
-        self.setChargeStatus(charging, pluggedIn)
-        if pluggedIn {
-            if charging {
-                if chargeTime == 0 {
-                    chargeString.append("Charged to: \(ratio)%")
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            var chargeString = ""
+            self.chargeMax = ratio
+            self.setChargeStatus(charging, pluggedIn)
+            if pluggedIn {
+                if charging {
+                    if chargeTime == 0 {
+                        chargeString.append("Charged to: \(ratio)%")
+                    } else {
+                        let chargeHours = chargeTime/60
+                        let chargeMinutes = chargeTime-(chargeHours*60)
+                        let unit = chargeHours == 1 ? "hr" : "hrs"
+                        let minuteUnit = chargeHours == 1 ? "min" : "mins"
+                        let minuteString = chargeMinutes > 0 ? " \(chargeMinutes) \(minuteUnit)" : ""
+                        chargeString.append("\(chargeHours) \(unit)\(minuteString) to")
+                    }
                 } else {
-                    let chargeHours = chargeTime/60
-                    let chargeMinutes = chargeTime-(chargeHours*60)
-                    let unit = chargeHours == 1 ? "hr" : "hrs"
-                    let minuteUnit = chargeHours == 1 ? "min" : "mins"
-                    let minuteString = chargeMinutes > 0 ? " \(chargeMinutes) \(minuteUnit)" : ""
-                    chargeString.append("\(chargeHours) \(unit)\(minuteString) to")
+                    chargeString.append("Not Charging")
                 }
+                self.chargeTimeLabel.isHidden = false
             } else {
-                chargeString.append("Not Charging")
+                self.chargeTimeLabel.isHidden = true
             }
-            self.chargeTimeLabel.isHidden = false
-        } else {
-            self.chargeTimeLabel.isHidden = true
+            self.chargeTimeLabel.text = chargeString
         }
-        chargeTimeLabel.text = chargeString
     }
     
     func setChargeStatus(_ isOn: Bool, _ pluggedIn: Bool) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             let config = UIImage.SymbolConfiguration(scale: .medium)
             if pluggedIn {
                 self.chargeButton.setImage(UIImage(systemName: !isOn ? "bolt" : "bolt.slash", withConfiguration: config), for: .normal)
@@ -279,7 +314,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     }
     
     func set(vehicleStatus: VehicleStatus) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if let evStatus = vehicleStatus.evStatus, let dcTargetSoc = evStatus.targetSOC?[0].targetSOClevel, let acTargetSoc = evStatus.targetSOC?[1].targetSOClevel, let charge = evStatus.batteryStatus, let isCharging = evStatus.batteryCharge, let pluggedIn = evStatus.batteryPlugin, let chargeTime = evStatus.remainChargeTime?.first?.timeInterval?.value, let drvDistance = evStatus.drvDistance?.first, let range = drvDistance.rangeByFuel?.totalAvailableRange?.value {
                 self.chargeStatusLabel.text = "\(charge)% • \(range)mi"
                 self.batteryContainer.progress = CGFloat(charge)/100.0
@@ -290,6 +326,18 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 MaxCharge.DC = dcTargetSoc
             } else {
                 log.error("Unable to get battery data: \(vehicleStatus)")
+            }
+            
+            if let accessories = vehicleStatus.climate?.heatingAccessory {
+                if accessories.rearWindow == nil {
+                    self.rearWindowButton.isHidden = true
+                }
+                if accessories.sideMirror == nil {
+                    self.sideMirrorButton.isHidden = true
+                }
+                if accessories.steeringWheel == nil {
+                    self.heatedButton.isHidden = true
+                }
             }
             
             if let climate = vehicleStatus.climate, let climateOn = climate.airCtrl {
@@ -347,7 +395,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         let loc: CLLocation = CLLocation(latitude:center.latitude, longitude: center.longitude)
         
         ceo.reverseGeocodeLocation(loc, completionHandler:
-                                    {(placemarks, error) in
+                                    { (placemarks, error) in
             if let message = error?.localizedDescription {
                 log.error(message, context: nil)
             }
@@ -389,7 +437,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     
     // MARK: API Requests
     func login(completion: (() -> ())?) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             var vc: UIViewController = self
             if let topVC = UIApplication.shared.keyWindowPresentedController {
                 vc = topVC
@@ -469,6 +518,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
         self.isSyncing = true
         APIRouter.shared.get(endpoint: .vehicles, checkAction: false) { [weak self] data, error in
             if let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data) {
+                log.info(vehicles)
                 if let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
                     APIRouter.shared.vinKey = vinKey
                     self?.vehicleStatus()
@@ -492,6 +542,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                         log.error("Unable to get status report in updated vehicle status:\n\(vehicle)")
                         return
                     }
+                    log.info(vehicle)
                     self?.set(vehicleStatus: vehicleStatus)
                 }
             } else {
@@ -507,12 +558,12 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             "maintenance": "0",
             "seatHeatCoolOption": "1",
             "vehicle": "1",
-            "vehicleFeature": "0"
+            "vehicleFeature": "1"
         ], "vehicleInfoReq": [
-            "drivingActivty": "0",
+            "drivingActivty": "1",
             "dtc": "1",
             "enrollment": "1",
-            "functionalCards": "0",
+            "functionalCards": "1",
             "location": "1",
             "vehicleStatus": "1",
             "weather": "0"],
@@ -522,6 +573,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             self?.updateStatus()
             guard let self = self else { return }
             if let vehicle = try? APIRouter.shared.jsonDecoder.decode(StatusResponse.self, from: data) {
+                log.info(vehicle)
                 if let vehicleStatus = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleStatusRpt?.vehicleStatus {
                     self.set(vehicleStatus: vehicleStatus)
                 } else {
@@ -623,8 +675,8 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 ],
                 "defrost": self.defrostButton.isSelected,
                 "heatingAccessory": [
-                    "rearWindow": 0,
-                    "sideMirror": 0,
+                    "rearWindow": self.rearWindowButton.isSelected ? 1 : 0,
+                    "sideMirror": self.sideMirrorButton.isSelected ? 1 : 0,
                     "steeringWheel": self.heatedButton.isSelected ? 1 : 0
                 ],
                 "ignitionOnDuration": [

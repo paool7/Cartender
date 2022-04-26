@@ -377,18 +377,28 @@
                                                                                             </constraints>
                                                                                         </stackView>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2j-MS-7V5">
-                                                                                            <rect key="frame" x="0.0" y="66" width="179" height="18.5"/>
+                                                                                            <rect key="frame" x="0.0" y="66" width="179" height="22.5"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         </view>
-                                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HxM-Uk-S4v">
-                                                                                            <rect key="frame" x="0.0" y="92.5" width="179" height="38.5"/>
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HxM-Uk-S4v">
+                                                                                            <rect key="frame" x="0.0" y="96.5" width="179" height="34.5"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTu-cZ-Zyj">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="39" height="38.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="34.5"/>
                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 </view>
+                                                                                                <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hp2-iP-9bI">
+                                                                                                    <rect key="frame" x="8" y="0.0" width="35" height="34.5"/>
+                                                                                                    <color key="backgroundColor" name="ButtonColor"/>
+                                                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                    <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                                                                    <state key="normal" image="Defrost"/>
+                                                                                                    <connections>
+                                                                                                        <action selector="tappedDefrost:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FFf-Gh-HfF"/>
+                                                                                                    </connections>
+                                                                                                </button>
                                                                                                 <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAl-97-SwF">
-                                                                                                    <rect key="frame" x="47" y="0.0" width="38.5" height="38.5"/>
+                                                                                                    <rect key="frame" x="51" y="0.0" width="34.5" height="34.5"/>
                                                                                                     <color key="backgroundColor" name="ButtonColor"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" secondItem="QAl-97-SwF" secondAttribute="height" multiplier="1:1" id="33f-Jx-5Hn"/>
@@ -400,23 +410,35 @@
                                                                                                         <action selector="tappedHeatedWheel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LSO-wH-sen"/>
                                                                                                     </connections>
                                                                                                 </button>
-                                                                                                <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hp2-iP-9bI">
-                                                                                                    <rect key="frame" x="93.5" y="0.0" width="39" height="38.5"/>
+                                                                                                <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAe-Tj-WhK">
+                                                                                                    <rect key="frame" x="93.5" y="0.0" width="35" height="34.5"/>
                                                                                                     <color key="backgroundColor" name="ButtonColor"/>
                                                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                     <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                                                                    <state key="normal" image="Defrost"/>
+                                                                                                    <state key="normal" image="RearDefrost"/>
                                                                                                     <connections>
-                                                                                                        <action selector="tappedDefrost:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FFf-Gh-HfF"/>
+                                                                                                        <action selector="tappedRearWindow:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ixJ-ia-KNJ"/>
+                                                                                                    </connections>
+                                                                                                </button>
+                                                                                                <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsp-5N-17w">
+                                                                                                    <rect key="frame" x="136.5" y="0.0" width="34.5" height="34.5"/>
+                                                                                                    <color key="backgroundColor" name="ButtonColor"/>
+                                                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                    <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                                                                    <state key="normal" image="SideMirror"/>
+                                                                                                    <connections>
+                                                                                                        <action selector="tappedSideMirror:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WNd-UF-0ar"/>
                                                                                                     </connections>
                                                                                                 </button>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="38I-Yp-PYm">
-                                                                                                    <rect key="frame" x="140.5" y="0.0" width="38.5" height="38.5"/>
+                                                                                                    <rect key="frame" x="179" y="0.0" width="0.0" height="34.5"/>
                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 </view>
                                                                                             </subviews>
                                                                                             <constraints>
                                                                                                 <constraint firstItem="hp2-iP-9bI" firstAttribute="width" secondItem="QAl-97-SwF" secondAttribute="width" id="JhE-37-Zl8"/>
+                                                                                                <constraint firstItem="cAe-Tj-WhK" firstAttribute="width" secondItem="hp2-iP-9bI" secondAttribute="width" id="oLC-Sf-9ju"/>
+                                                                                                <constraint firstItem="nsp-5N-17w" firstAttribute="width" secondItem="cAe-Tj-WhK" secondAttribute="width" id="xRd-ik-QPd"/>
                                                                                                 <constraint firstItem="hp2-iP-9bI" firstAttribute="height" secondItem="QAl-97-SwF" secondAttribute="height" id="yeW-dx-c1L"/>
                                                                                             </constraints>
                                                                                         </stackView>
@@ -684,9 +706,11 @@
                         <outlet property="nicknameLabel" destination="WMZ-ae-BWS" id="QDs-7C-Ivv"/>
                         <outlet property="odometerLabel" destination="oHl-1S-xjq" id="j6L-uc-ou6"/>
                         <outlet property="rangeLabel" destination="DMH-md-7js" id="jua-q2-SBD"/>
+                        <outlet property="rearWindowButton" destination="cAe-Tj-WhK" id="N5n-CA-Gvp"/>
                         <outlet property="settingsButton" destination="Ybz-XZ-7cd" id="tDp-jw-nQz"/>
                         <outlet property="shortcutStackView" destination="QOS-pR-Bih" id="H5i-II-Dr4"/>
                         <outlet property="showMoreArrow" destination="pXw-mC-JWo" id="9Hc-k8-ORg"/>
+                        <outlet property="sideMirrorButton" destination="nsp-5N-17w" id="UDi-WF-Him"/>
                         <outlet property="syncButton" destination="BSe-Zq-osw" id="IiA-St-6oB"/>
                         <outlet property="syncTimeLabel" destination="MSz-Hk-iza" id="cb4-CE-SRN"/>
                         <outlet property="tempDownButton" destination="Ohb-rO-bmc" id="bbr-Tv-biq"/>
@@ -927,6 +951,8 @@
     <resources>
         <image name="Defrost" width="500" height="500"/>
         <image name="Drive-1" width="1920" height="1280"/>
+        <image name="RearDefrost" width="50" height="50"/>
+        <image name="SideMirror" width="66" height="62"/>
         <image name="SteeringWheel" width="1150" height="1150"/>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="car.circle" catalog="system" width="128" height="121"/>

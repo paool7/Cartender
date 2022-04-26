@@ -16,7 +16,7 @@ class APIRouter {
     let jsonDecoder = JSONDecoder()
     var logoutHandler: (() -> ())?
     var vinKey: String?
-
+    
     //Generate a fake but consistent UUID
     var uuid: String {
         get {
@@ -31,20 +31,22 @@ class APIRouter {
             defaults?.set(newValue, forKey: "APIUUID")
         }
     }
-
+    
     var headers: [String: String] {
         return ["to":"APIGW",
                 "secretkey":"98er-w34rf-ibf3-3f6h",
-                "appversion":"1.0",
+                "appversion":"5.5",
                 "language":"0",
                 "clientid":"mwamobile",
-                "osversion":"15",
+                "osversion": UIDevice.current.systemVersion,
                 "ostype":"iOS",
                 "date":"",
                 "deviceid": self.uuid,
                 "offset":"-5",
                 "apptype":"L",
                 "from":"SPA",
+                "tokentype": "G",
+                "host": "api.owners.kia.com",
                 "Content-Type":"application/json"]
     }
     
@@ -67,12 +69,12 @@ class APIRouter {
         }
         return authHeaders
     }
-
+    
     func getImage(name: String, path: String) -> String {
         let trimmedName = name.replacingOccurrences(of: ".png", with: "")
         let uppercaseName = trimmedName.uppercased()
         let trimmedPath = path.replacingOccurrences(of: "vehicle-app", with: "vehicle")
-       return "https://owners.kia.com\(trimmedPath)\(uppercaseName).png/jcr:content/renditions/cq5dam.thumbnail.1280.861.png"
+        return "https://owners.kia.com\(trimmedPath)\(uppercaseName).png/jcr:content/renditions/cq5dam.thumbnail.1280.861.png"
     }
     
     func checkActionStatus(xid: String, completion: @escaping ((code: Int, message: String)?) -> ()) {
@@ -85,7 +87,7 @@ class APIRouter {
                 } else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         self.checkActionStatus(xid: xid, completion: completion)
-                     }
+                    }
                 }
             }
         }
@@ -93,9 +95,9 @@ class APIRouter {
     
     func login(username: String, password: String, _ checkError: Bool = true, completion: @escaping (String?) -> ()) {
         post(endpoint: .login, body: ["deviceKey": "",
-                                                 "deviceType": 2,
-                                                 "userCredential": ["userId": username,
-                                                                    "password": password]], retry: true, authorized: false, checkError: checkError, checkAction: false) { response, error in
+                                      "deviceType": 2,
+                                      "userCredential": ["userId": username,
+                                                         "password": password]], retry: true, authorized: false, checkError: checkError, checkAction: false) { response, error in
             if let error = error?.message {
                 completion(error)
             } else {
@@ -129,7 +131,7 @@ extension APIRouter {
                         completion?(response.data, nil)
                     }
                 }
-
+                
                 if checkError {
                     self?.error(response: response, completion: { result, tryAgain in
                         if let result = result {
@@ -205,7 +207,7 @@ extension APIRouter {
                             completion?((code, errorMessage), false)
                         } else {
                             APIRouter.shared.get(endpoint: .vehicles, retry: false, checkError: false, checkAction: false) { data, error in
-                                if let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey {
+                                if let vehicles = try? APIRouter.shared.jsonDecoder.decode(VehiclesResponse.self, from: data), let vinKey = vehicles.payload?.vehicleSummary?.first?.vehicleKey, !vinKey.isEmpty {
                                     APIRouter.shared.vinKey = vinKey
                                     completion?((code, errorMessage), true)
                                 } else {
