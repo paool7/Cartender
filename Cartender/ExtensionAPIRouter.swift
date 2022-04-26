@@ -35,16 +35,18 @@ class APIRouter {
     var headers: [String: String] {
         return ["to":"APIGW",
                 "secretkey":"98er-w34rf-ibf3-3f6h",
-                "appversion":"1.0",
+                "appversion":"5.5",
                 "language":"0",
                 "clientid":"mwamobile",
-                "osversion":"15",
+                "osversion": UIDevice.current.systemVersion,
                 "ostype":"iOS",
                 "date":"",
                 "deviceid": self.uuid,
                 "offset":"-5",
                 "apptype":"L",
                 "from":"SPA",
+                "tokentype": "G",
+                "host": "api.owners.kia.com",
                 "Content-Type":"application/json"]
     }
     
@@ -76,7 +78,7 @@ class APIRouter {
                 if actionStatus.payload?.evStatus == 0, actionStatus.payload?.alertStatus == 0, actionStatus.payload?.locationStatus == 0, actionStatus.payload?.remoteStatus == 0 {
                     completion(nil)
                 } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         self.checkActionStatus(xid: xid, completion: completion)
                      }
                 }

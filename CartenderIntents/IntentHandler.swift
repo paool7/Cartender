@@ -128,7 +128,7 @@ class IntentHandler: INExtension, CurrentChargeIntentHandling, CurrentLocationIn
                     "unit": 1,
                     "value": "\(temp)"
                 ],
-                "defrost": defrost ? 1 : 0,
+                "defrost": defrost,
                 "heatingAccessory": [
                     "rearWindow": rearDefrost ? 1 : 0,
                     "sideMirror": 0,

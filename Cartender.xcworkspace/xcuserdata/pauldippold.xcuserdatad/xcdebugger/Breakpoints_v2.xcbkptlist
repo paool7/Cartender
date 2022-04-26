@@ -302,8 +302,8 @@
             filePath = "Cartender/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "538"
-            endingLineNumber = "538"
+            startingLineNumber = "542"
+            endingLineNumber = "542"
             landmarkName = "updateStatus()"
             landmarkType = "7">
          </BreakpointContent>
@@ -366,8 +366,8 @@
             filePath = "Cartender/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "688"
-            endingLineNumber = "688"
+            startingLineNumber = "696"
+            endingLineNumber = "696"
             landmarkName = "startClimate(completion:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -526,7 +526,11 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                     log.error("Unable to get vinKey:\n\(vehicles)")
                 }
             } else {
-                log.error("Unable to get vehicles response")
+                if let json = data.json {
+                    log.error("Unable to get vehicles response:\n\(json)")
+                } else {
+                    log.error("Unable to get vehicles response")
+                }
             }
             completion?()
         }
@@ -617,7 +621,11 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                     }
                 }
             } else {
-                log.error("Unable to get vehicle status")
+                if let json = data.json {
+                    log.error("Unable to get vehicle status:\n\(json)")
+                } else {
+                    log.error("Unable to get vehicle status")
+                }
             }
         }
     }

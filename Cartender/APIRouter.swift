@@ -267,3 +267,10 @@ extension Dictionary {
     }
 }
 
+extension Data {
+    var json: [String : Any]? {
+        guard let dataJSON = try? JSONSerialization.jsonObject(with: self, options: []) as? [String : Any] else { return nil }
+        return dataJSON
+    }
+}
+
