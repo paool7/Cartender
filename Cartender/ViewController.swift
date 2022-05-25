@@ -85,7 +85,7 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 self.climateButton.alpha = self.isSyncing ? 0.5 : 1.0
                 self.sideMirrorButton.alpha = self.isSyncing ? 0.5 : 1.0
                 self.rearWindowButton.alpha = self.isSyncing ? 0.5 : 1.0
-
+                
                 self.heatedButton.isEnabled = !self.isSyncing
                 self.defrostButton.isEnabled = !self.isSyncing
                 self.tempUpButton.isEnabled = !self.isSyncing
@@ -314,21 +314,24 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     }
     
     func set(vehicleStatus: VehicleStatus) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if let evStatus = vehicleStatus.evStatus, let dcTargetSoc = evStatus.targetSOC?[0].targetSOClevel, let acTargetSoc = evStatus.targetSOC?[1].targetSOClevel, let charge = evStatus.batteryStatus, let isCharging = evStatus.batteryCharge, let pluggedIn = evStatus.batteryPlugin, let chargeTime = evStatus.remainChargeTime?.first?.timeInterval?.value, let drvDistance = evStatus.drvDistance?.first, let range = drvDistance.rangeByFuel?.totalAvailableRange?.value {
+        if let evStatus = vehicleStatus.evStatus, let dcTargetSoc = evStatus.targetSOC?.first?.targetSOClevel, let acTargetSoc = evStatus.targetSOC?[1].targetSOClevel, let charge = evStatus.batteryStatus, let isCharging = evStatus.batteryCharge, let pluggedIn = evStatus.batteryPlugin, let chargeTime = evStatus.remainChargeTime?.first?.timeInterval?.value, let drvDistance = evStatus.drvDistance?.first, let range = drvDistance.rangeByFuel?.totalAvailableRange?.value {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.chargeStatusLabel.text = "\(charge)% • \(range)mi"
                 self.batteryContainer.progress = CGFloat(charge)/100.0
                 let largeConfig = UIImage.SymbolConfiguration(scale: .large)
                 self.chargeButton.setImage(UIImage(systemName: !isCharging ? "bolt" : "bolt.slash", withConfiguration: largeConfig), for: .selected)
                 self.setChargeDetails(charging: isCharging, pluggedIn: pluggedIn != 0, ratio: acTargetSoc, chargeTime: chargeTime)
-                MaxCharge.AC = acTargetSoc
-                MaxCharge.DC = dcTargetSoc
-            } else {
-                log.error("Unable to get battery data: \(vehicleStatus)")
+                MaxCharge.AC = acTargetSoc < 100 ? acTargetSoc : 100
+                MaxCharge.DC = dcTargetSoc < 100 ? dcTargetSoc : 100
             }
-            
-            if let accessories = vehicleStatus.climate?.heatingAccessory {
+        } else {
+            log.error("Unable to get battery data: \(vehicleStatus)")
+        }
+        
+        if let accessories = vehicleStatus.climate?.heatingAccessory {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 if accessories.rearWindow == nil {
                     self.rearWindowButton.isHidden = true
                 }
@@ -339,20 +342,29 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                     self.heatedButton.isHidden = true
                 }
             }
-            
-            if let climate = vehicleStatus.climate, let climateOn = climate.airCtrl {
+        }
+        
+        if let climate = vehicleStatus.climate, let climateOn = climate.airCtrl {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.climateOn = climateOn
                 self.temp = Int(climate.airTemp?.value ?? "0") ?? 0
-            } else {
-                log.error("Unable to get climate: \(vehicleStatus)")
             }
-            if let locked = vehicleStatus.doorLock {
+        } else {
+            log.error("Unable to get climate: \(vehicleStatus)")
+        }
+        if let locked = vehicleStatus.doorLock {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.isLocked = locked
-            } else {
-                log.error("Unable to get locks: \(vehicleStatus)")
             }
-            
-            if let doorStatus = vehicleStatus.doorStatus {
+        } else {
+            log.error("Unable to get locks: \(vehicleStatus)")
+        }
+        
+        if let doorStatus = vehicleStatus.doorStatus {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.doorLabel.textColor = .red
                 if doorStatus.hood == 0, doorStatus.trunk == 0, doorStatus.frontLeft == 0, doorStatus.frontRight == 0, doorStatus.backLeft == 0, doorStatus.backRight == 0 {
                     self.doorLabel.text = "Closed"
@@ -364,25 +376,28 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                 } else {
                     self.doorLabel.text = "Open"
                 }
-            } else {
-                log.error("Unable to get doors: \(vehicleStatus)")
             }
-            
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMddHHmmss"
-            formatter.timeZone = TimeZone(abbreviation: "UTC")
-            if let syncDateUTC = vehicleStatus.evStatus?.syncDate?.utc, let syncDate = formatter.date(from: syncDateUTC) {
-                formatter.timeZone = TimeZone.current
-                if Calendar.current.isDateInToday(syncDate) {
-                    formatter.dateFormat = "h:mm a"
-                } else {
-                    formatter.dateFormat = "MM/dd, h:mm a"
-                }
-                let dateString = formatter.string(from: syncDate)
+        } else {
+            log.error("Unable to get doors: \(vehicleStatus)")
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMddHHmmss"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        if let syncDateUTC = vehicleStatus.evStatus?.syncDate?.utc, let syncDate = formatter.date(from: syncDateUTC) {
+            formatter.timeZone = TimeZone.current
+            if Calendar.current.isDateInToday(syncDate) {
+                formatter.dateFormat = "h:mm a"
+            } else {
+                formatter.dateFormat = "MM/dd, h:mm a"
+            }
+            let dateString = formatter.string(from: syncDate)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.syncTimeLabel.text = "Synced \(dateString)"
-            } else {
-                log.error("Unable to get sync date: \(vehicleStatus)")
             }
+        } else {
+            log.error("Unable to get sync date: \(vehicleStatus)")
         }
     }
     
@@ -539,16 +554,16 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
     func updateStatus() {
         self.isSyncing = true
         APIRouter.shared.post(endpoint: .updateStatus, body: ["requestType":0], authorized: true, checkAction: false) { [weak self] data, error in
-            self?.isSyncing = false
+            guard let self = self else { return }
+
+            self.isSyncing = false
             if let vehicle = try? APIRouter.shared.jsonDecoder.decode(UpdateStatusResponse.self, from: data) {
-                DispatchQueue.main.async {
-                    guard let vehicleStatus = vehicle.payload?.vehicleStatusRpt?.vehicleStatus else {
-                        log.error("Unable to get status report in updated vehicle status:\n\(vehicle)")
-                        return
-                    }
-                    log.info(vehicle)
-                    self?.set(vehicleStatus: vehicleStatus)
+                guard let vehicleStatus = vehicle.payload?.vehicleStatusRpt?.vehicleStatus else {
+                    log.error("Unable to get status report in updated vehicle status:\n\(vehicle)")
+                    return
                 }
+                log.info(vehicle)
+                self.set(vehicleStatus: vehicleStatus)
             } else {
                 log.error("Unable to update vehicle status")
             }
@@ -562,12 +577,12 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
             "maintenance": "0",
             "seatHeatCoolOption": "1",
             "vehicle": "1",
-            "vehicleFeature": "1"
+            "vehicleFeature": "0"
         ], "vehicleInfoReq": [
-            "drivingActivty": "1",
+            "drivingActivty": "0",
             "dtc": "1",
             "enrollment": "1",
-            "functionalCards": "1",
+            "functionalCards": "0",
             "location": "1",
             "vehicleStatus": "1",
             "weather": "0"],
@@ -597,24 +612,10 @@ class ViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate, INUI
                         
                         let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))
                         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyyMMddHHmmss"
-                        formatter.timeZone = TimeZone(abbreviation: "UTC")
-                        var atString = ""
-                        if let syncDateUTC = location.syncDate?.utc, let syncDate = formatter.date(from: syncDateUTC) {
-                            formatter.timeZone = TimeZone.current
-                            if Calendar.current.isDateInToday(syncDate) {
-                                formatter.dateFormat = "h:mm a"
-                            } else {
-                                formatter.dateFormat = "MM/dd, h:mm a"
-                            }
-                            let dateString = formatter.string(from: syncDate)
-                            atString = "\nat \(dateString)"
-                        }
                         self.getAddress(latitude: lat, longitude: long) { address in
                             let annotation = MKPointAnnotation()
                             annotation.coordinate = center
-                            annotation.title = "\(address)\(atString)"
+                            annotation.title = "\(address)"
                             self.mapView.addAnnotation(annotation)
                         }
                         self.mapView.setRegion(region, animated: true)

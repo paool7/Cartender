@@ -14,8 +14,6 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 struct LastVehicleInfo : Codable {
 	let vehicleNickName : String?
-	let preferredDealer : String?
-	let customerType : Int?
 	let enrollment : Enrollment?
 	let activeDTC : ActiveDTC?
 	let vehicleStatusRpt : VehicleStatusRpt?
@@ -27,8 +25,6 @@ struct LastVehicleInfo : Codable {
 	enum CodingKeys: String, CodingKey {
 
 		case vehicleNickName = "vehicleNickName"
-		case preferredDealer = "preferredDealer"
-		case customerType = "customerType"
 		case enrollment = "enrollment"
 		case activeDTC = "activeDTC"
 		case vehicleStatusRpt = "vehicleStatusRpt"
@@ -41,8 +37,6 @@ struct LastVehicleInfo : Codable {
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		vehicleNickName = try values.decodeIfPresent(String.self, forKey: .vehicleNickName)
-		preferredDealer = try values.decodeIfPresent(String.self, forKey: .preferredDealer)
-		customerType = try values.decodeIfPresent(Int.self, forKey: .customerType)
 		enrollment = try values.decodeIfPresent(Enrollment.self, forKey: .enrollment)
 		activeDTC = try values.decodeIfPresent(ActiveDTC.self, forKey: .activeDTC)
 		vehicleStatusRpt = try values.decodeIfPresent(VehicleStatusRpt.self, forKey: .vehicleStatusRpt)

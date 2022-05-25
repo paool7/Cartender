@@ -11,9 +11,9 @@
 	<key>INIntentDefinitionSystemVersion</key>
 	<string>21D49</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>13A233</string>
+	<string>13E500a</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>13.0</string>
+	<string>13.3.1</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -208,11 +208,11 @@
 				<array>
 					<dict>
 						<key>INIntentResponseCodeConciseFormatString</key>
-						<string>${name} is at ${location}. Last updated at ${time}.</string>
+						<string>${name} is at ${location}.</string>
 						<key>INIntentResponseCodeConciseFormatStringID</key>
 						<string>JkLBeg</string>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>${name} is at ${location}. Last updated at ${time}.</string>
+						<string>${name} is at ${location}.</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>ZCcSvM</string>
 						<key>INIntentResponseCodeName</key>
@@ -255,25 +255,11 @@
 					</dict>
 					<dict>
 						<key>INIntentResponseParameterDisplayName</key>
-						<string>Time</string>
-						<key>INIntentResponseParameterDisplayNameID</key>
-						<string>N34Sn8</string>
-						<key>INIntentResponseParameterDisplayPriority</key>
-						<integer>2</integer>
-						<key>INIntentResponseParameterName</key>
-						<string>time</string>
-						<key>INIntentResponseParameterTag</key>
-						<integer>2</integer>
-						<key>INIntentResponseParameterType</key>
-						<string>String</string>
-					</dict>
-					<dict>
-						<key>INIntentResponseParameterDisplayName</key>
 						<string>Name</string>
 						<key>INIntentResponseParameterDisplayNameID</key>
 						<string>dmGFa3</string>
 						<key>INIntentResponseParameterDisplayPriority</key>
-						<integer>3</integer>
+						<integer>2</integer>
 						<key>INIntentResponseParameterName</key>
 						<string>name</string>
 						<key>INIntentResponseParameterTag</key>
@@ -287,7 +273,7 @@
 						<key>INIntentResponseParameterDisplayNameID</key>
 						<string>pj6s4J</string>
 						<key>INIntentResponseParameterDisplayPriority</key>
-						<integer>4</integer>
+						<integer>3</integer>
 						<key>INIntentResponseParameterName</key>
 						<string>error</string>
 						<key>INIntentResponseParameterTag</key>

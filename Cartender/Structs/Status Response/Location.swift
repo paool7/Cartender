@@ -16,16 +16,12 @@ struct Location : Codable {
 	let coord : Coord?
 	let head : Int?
 	let speed : Speed?
-	let accuracy : Accuracy?
-	let syncDate : SyncDate?
 
 	enum CodingKeys: String, CodingKey {
 
 		case coord = "coord"
 		case head = "head"
 		case speed = "speed"
-		case accuracy = "accuracy"
-		case syncDate = "syncDate"
 	}
 
 	init(from decoder: Decoder) throws {
@@ -33,8 +29,6 @@ struct Location : Codable {
 		coord = try values.decodeIfPresent(Coord.self, forKey: .coord)
 		head = try values.decodeIfPresent(Int.self, forKey: .head)
 		speed = try values.decodeIfPresent(Speed.self, forKey: .speed)
-		accuracy = try values.decodeIfPresent(Accuracy.self, forKey: .accuracy)
-		syncDate = try values.decodeIfPresent(SyncDate.self, forKey: .syncDate)
 	}
 
 }

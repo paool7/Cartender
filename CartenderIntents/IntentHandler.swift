@@ -263,17 +263,10 @@ class IntentHandler: INExtension, CurrentChargeIntentHandling, CurrentLocationIn
         formatter.dateFormat = "yyyyMMddHHmmss"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         
-        guard let location = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.location, let lat = location.coord?.lat, let long = location.coord?.lon, let syncDateUTC = location.syncDate?.utc, let syncDate = formatter.date(from: syncDateUTC) else {
+        guard let location = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.location, let lat = location.coord?.lat, let long = location.coord?.lon else {
             completion(CurrentLocationIntentResponse.failure(error: "Couldn't check location status. Open the app to try again."))
             return
         }
-        formatter.timeZone = TimeZone.current
-        if Calendar.current.isDateInToday(syncDate) {
-            formatter.dateFormat = "h:mm a"
-        } else {
-            formatter.dateFormat = "MM/dd, h:mm a"
-        }
-        let dateString = formatter.string(from: syncDate)
         
         defaults?.set(lat, forKey: "IntentLatitude")
         defaults?.set(long, forKey: "IntentLongitude")
@@ -281,7 +274,7 @@ class IntentHandler: INExtension, CurrentChargeIntentHandling, CurrentLocationIn
         let name = vehicle.payload?.vehicleInfoList?.first?.lastVehicleInfo?.vehicleNickName ?? vehicle.payload?.vehicleInfoList?.first?.vehicleConfig?.vehicleDetail?.vehicle?.trim?.modelName ?? "Niro"
         
         self.getAddress(latitude: lat, longitude: long) { address in
-            completion(CurrentLocationIntentResponse.success(name: name, location: address, time: dateString))
+            completion(CurrentLocationIntentResponse.success(name: name, location: address))
         }
     }
     

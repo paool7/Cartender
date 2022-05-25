@@ -16,7 +16,6 @@
 		228C82CD27FF11A3000C95D6 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22819DF927468BA900D21EED /* ProgressBar.swift */; };
 		228C82CE27FF1438000C95D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22921DF82743500F0092526E /* Assets.xcassets */; };
 		228C82D127FF318E000C95D6 /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949D274D688300E73CEE /* Speed.swift */; };
-		228C82D227FF318E000C95D6 /* Accuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9496274D688200E73CEE /* Accuracy.swift */; };
 		228C82D327FF318E000C95D6 /* SyncDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949A274D688200E73CEE /* SyncDate.swift */; };
 		228C82D427FF318E000C95D6 /* EvModeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B947E274D688100E73CEE /* EvModeRange.swift */; };
 		228C82D527FF318E000C95D6 /* ActiveDTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949F274D688300E73CEE /* ActiveDTC.swift */; };
@@ -31,13 +30,11 @@
 		228C82DE27FF318E000C95D6 /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9493274D688200E73CEE /* Enrollment.swift */; };
 		228C82DF27FF318E000C95D6 /* ReportDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9492274D688200E73CEE /* ReportDate.swift */; };
 		228C82E027FF318E000C95D6 /* AirTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9491274D688200E73CEE /* AirTemp.swift */; };
-		228C82E127FF318E000C95D6 /* ServicePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9497274D688200E73CEE /* ServicePeriod.swift */; };
 		228C82E227FF318E000C95D6 /* StatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A7274D688300E73CEE /* StatusResponse.swift */; };
 		228C82E327FF318E000C95D6 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9485274D688100E73CEE /* TimeInterval.swift */; };
 		228C82E427FF318E000C95D6 /* VehicleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9472274D688000E73CEE /* VehicleDetail.swift */; };
 		228C82E527FF318E000C95D6 /* BillingPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9486274D688100E73CEE /* BillingPeriod.swift */; };
 		228C82E627FF318E000C95D6 /* VehicleStatusRpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9487274D688100E73CEE /* VehicleStatusRpt.swift */; };
-		228C82E727FF318E000C95D6 /* SupportedApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949C274D688200E73CEE /* SupportedApps.swift */; };
 		228C82E827FF318E000C95D6 /* BatteryStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948D274D688100E73CEE /* BatteryStatus.swift */; };
 		228C82E927FF318E000C95D6 /* FreeServiceDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948B274D688100E73CEE /* FreeServiceDate.swift */; };
 		228C82EA27FF318E000C95D6 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9474274D688000E73CEE /* Status.swift */; };
@@ -45,7 +42,6 @@
 		228C82EC27FF318E000C95D6 /* DrvDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A5274D688300E73CEE /* DrvDistance.swift */; };
 		228C82ED27FF318E000C95D6 /* Telematics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A6274D688300E73CEE /* Telematics.swift */; };
 		228C82EE27FF318E000C95D6 /* RangeByFuel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9482274D688100E73CEE /* RangeByFuel.swift */; };
-		228C82EF27FF318E000C95D6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9479274D688000E73CEE /* Device.swift */; };
 		228C82F027FF318E000C95D6 /* VehicleInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9480274D688100E73CEE /* VehicleInfoList.swift */; };
 		228C82F127FF318E000C95D6 /* LastVehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9481274D688100E73CEE /* LastVehicleInfo.swift */; };
 		228C82F227FF318E000C95D6 /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A1274D688300E73CEE /* Coord.swift */; };
@@ -55,9 +51,7 @@
 		228C82F627FF318E000C95D6 /* EvStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948F274D688200E73CEE /* EvStatus.swift */; };
 		228C82F727FF318E000C95D6 /* TotalAvailableRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9488274D688100E73CEE /* TotalAvailableRange.swift */; };
 		228C82F827FF318E000C95D6 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A2274D688300E73CEE /* DateTime.swift */; };
-		228C82F927FF318E000C95D6 /* Modem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A0274D688300E73CEE /* Modem.swift */; };
 		228C82FA27FF318E000C95D6 /* StatusPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9477274D688000E73CEE /* StatusPayload.swift */; };
-		228C82FB27FF318E000C95D6 /* Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9498274D688200E73CEE /* Trim.swift */; };
 		228C82FC27FF318E000C95D6 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949B274D688200E73CEE /* Vehicle.swift */; };
 		228C82FD27FF318E000C95D6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9490274D688200E73CEE /* Location.swift */; };
 		228C82FE27FF3193000C95D6 /* ImagePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3E860274DAB2600906FE2 /* ImagePath.swift */; };
@@ -84,7 +78,6 @@
 		229B94AC274D688300E73CEE /* DoorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9476274D688000E73CEE /* DoorStatus.swift */; };
 		229B94AD274D688300E73CEE /* StatusPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9477274D688000E73CEE /* StatusPayload.swift */; };
 		229B94AE274D688300E73CEE /* VehicleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9478274D688000E73CEE /* VehicleConfig.swift */; };
-		229B94AF274D688300E73CEE /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9479274D688000E73CEE /* Device.swift */; };
 		229B94B4274D688300E73CEE /* EvModeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B947E274D688100E73CEE /* EvModeRange.swift */; };
 		229B94B6274D688300E73CEE /* VehicleInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9480274D688100E73CEE /* VehicleInfoList.swift */; };
 		229B94B7274D688300E73CEE /* LastVehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9481274D688100E73CEE /* LastVehicleInfo.swift */; };
@@ -106,17 +99,12 @@
 		229B94C9274D688300E73CEE /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9493274D688200E73CEE /* Enrollment.swift */; };
 		229B94CA274D688300E73CEE /* GasModeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9494274D688200E73CEE /* GasModeRange.swift */; };
 		229B94CB274D688300E73CEE /* TargetSOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9495274D688200E73CEE /* TargetSOC.swift */; };
-		229B94CC274D688300E73CEE /* Accuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9496274D688200E73CEE /* Accuracy.swift */; };
-		229B94CD274D688300E73CEE /* ServicePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9497274D688200E73CEE /* ServicePeriod.swift */; };
-		229B94CE274D688300E73CEE /* Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9498274D688200E73CEE /* Trim.swift */; };
 		229B94CF274D688300E73CEE /* Climate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9499274D688200E73CEE /* Climate.swift */; };
 		229B94D0274D688300E73CEE /* SyncDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949A274D688200E73CEE /* SyncDate.swift */; };
 		229B94D1274D688300E73CEE /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949B274D688200E73CEE /* Vehicle.swift */; };
-		229B94D2274D688300E73CEE /* SupportedApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949C274D688200E73CEE /* SupportedApps.swift */; };
 		229B94D3274D688300E73CEE /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949D274D688300E73CEE /* Speed.swift */; };
 		229B94D4274D688300E73CEE /* FreeTrialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949E274D688300E73CEE /* FreeTrialExtension.swift */; };
 		229B94D5274D688300E73CEE /* ActiveDTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949F274D688300E73CEE /* ActiveDTC.swift */; };
-		229B94D6274D688300E73CEE /* Modem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A0274D688300E73CEE /* Modem.swift */; };
 		229B94D7274D688300E73CEE /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A1274D688300E73CEE /* Coord.swift */; };
 		229B94D8274D688300E73CEE /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A2274D688300E73CEE /* DateTime.swift */; };
 		229B94DB274D688300E73CEE /* DrvDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A5274D688300E73CEE /* DrvDistance.swift */; };
@@ -155,11 +143,8 @@
 		22ECC8B727FE9F3B00955AC7 /* DrvDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A5274D688300E73CEE /* DrvDistance.swift */; };
 		22ECC8B827FE9F3B00955AC7 /* Dte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948C274D688100E73CEE /* Dte.swift */; };
 		22ECC8B927FE9F3B00955AC7 /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9493274D688200E73CEE /* Enrollment.swift */; };
-		22ECC8BA27FE9F3B00955AC7 /* SupportedApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949C274D688200E73CEE /* SupportedApps.swift */; };
 		22ECC8BB27FE9F3B00955AC7 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9474274D688000E73CEE /* Status.swift */; };
 		22ECC8BC27FE9F3B00955AC7 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9485274D688100E73CEE /* TimeInterval.swift */; };
-		22ECC8BD27FE9F3B00955AC7 /* ServicePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9497274D688200E73CEE /* ServicePeriod.swift */; };
-		22ECC8BE27FE9F3B00955AC7 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9479274D688000E73CEE /* Device.swift */; };
 		22ECC8BF27FE9F3B00955AC7 /* RemainChargeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9483274D688100E73CEE /* RemainChargeTime.swift */; };
 		22ECC8C027FE9F3B00955AC7 /* FreeTrialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949E274D688300E73CEE /* FreeTrialExtension.swift */; };
 		22ECC8C127FE9F3B00955AC7 /* Climate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9499274D688200E73CEE /* Climate.swift */; };
@@ -173,7 +158,6 @@
 		22ECC8C927FE9F3B00955AC7 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949B274D688200E73CEE /* Vehicle.swift */; };
 		22ECC8CA27FE9F3B00955AC7 /* VehicleInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9480274D688100E73CEE /* VehicleInfoList.swift */; };
 		22ECC8CB27FE9F3B00955AC7 /* GasModeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9494274D688200E73CEE /* GasModeRange.swift */; };
-		22ECC8CC27FE9F3B00955AC7 /* Accuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9496274D688200E73CEE /* Accuracy.swift */; };
 		22ECC8CD27FE9F3B00955AC7 /* EvStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B948F274D688200E73CEE /* EvStatus.swift */; };
 		22ECC8CE27FE9F3B00955AC7 /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949D274D688300E73CEE /* Speed.swift */; };
 		22ECC8CF27FE9F3B00955AC7 /* TotalAvailableRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9488274D688100E73CEE /* TotalAvailableRange.swift */; };
@@ -191,11 +175,12 @@
 		22ECC8DB27FE9F3B00955AC7 /* RangeByFuel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9482274D688100E73CEE /* RangeByFuel.swift */; };
 		22ECC8DC27FE9F3B00955AC7 /* VehicleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9478274D688000E73CEE /* VehicleConfig.swift */; };
 		22ECC8DD27FE9F3B00955AC7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9490274D688200E73CEE /* Location.swift */; };
-		22ECC8DE27FE9F3B00955AC7 /* Modem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B94A0274D688300E73CEE /* Modem.swift */; };
 		22ECC8DF27FE9F3B00955AC7 /* BillingPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9486274D688100E73CEE /* BillingPeriod.swift */; };
 		22ECC8E027FE9F3B00955AC7 /* FreeTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9473274D688000E73CEE /* FreeTrial.swift */; };
 		22ECC8E127FE9F3B00955AC7 /* ActiveDTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B949F274D688300E73CEE /* ActiveDTC.swift */; };
-		22ECC8E227FE9F3B00955AC7 /* Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229B9498274D688200E73CEE /* Trim.swift */; };
+		22F783D6283DC189005C2106 /* Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F783D5283DC188005C2106 /* Trim.swift */; };
+		22F783D7283DC1E1005C2106 /* Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F783D5283DC188005C2106 /* Trim.swift */; };
+		22F783D8283DC1E1005C2106 /* Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F783D5283DC188005C2106 /* Trim.swift */; };
 		22F955B8280A48800064FCFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B7280A48800064FCFB /* Logger.swift */; };
 		22F955B9280A48A70064FCFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B7280A48800064FCFB /* Logger.swift */; };
 		22F955BA280A48A80064FCFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F955B7280A48800064FCFB /* Logger.swift */; };
@@ -282,7 +267,6 @@
 		229B9476274D688000E73CEE /* DoorStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorStatus.swift; sourceTree = "<group>"; };
 		229B9477274D688000E73CEE /* StatusPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusPayload.swift; sourceTree = "<group>"; };
 		229B9478274D688000E73CEE /* VehicleConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleConfig.swift; sourceTree = "<group>"; };
-		229B9479274D688000E73CEE /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		229B947E274D688100E73CEE /* EvModeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvModeRange.swift; sourceTree = "<group>"; };
 		229B9480274D688100E73CEE /* VehicleInfoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleInfoList.swift; sourceTree = "<group>"; };
 		229B9481274D688100E73CEE /* LastVehicleInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastVehicleInfo.swift; sourceTree = "<group>"; };
@@ -304,17 +288,12 @@
 		229B9493274D688200E73CEE /* Enrollment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
 		229B9494274D688200E73CEE /* GasModeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasModeRange.swift; sourceTree = "<group>"; };
 		229B9495274D688200E73CEE /* TargetSOC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetSOC.swift; sourceTree = "<group>"; };
-		229B9496274D688200E73CEE /* Accuracy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accuracy.swift; sourceTree = "<group>"; };
-		229B9497274D688200E73CEE /* ServicePeriod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicePeriod.swift; sourceTree = "<group>"; };
-		229B9498274D688200E73CEE /* Trim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trim.swift; sourceTree = "<group>"; };
 		229B9499274D688200E73CEE /* Climate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Climate.swift; sourceTree = "<group>"; };
 		229B949A274D688200E73CEE /* SyncDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncDate.swift; sourceTree = "<group>"; };
 		229B949B274D688200E73CEE /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
-		229B949C274D688200E73CEE /* SupportedApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportedApps.swift; sourceTree = "<group>"; };
 		229B949D274D688300E73CEE /* Speed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		229B949E274D688300E73CEE /* FreeTrialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeTrialExtension.swift; sourceTree = "<group>"; };
 		229B949F274D688300E73CEE /* ActiveDTC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveDTC.swift; sourceTree = "<group>"; };
-		229B94A0274D688300E73CEE /* Modem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modem.swift; sourceTree = "<group>"; };
 		229B94A1274D688300E73CEE /* Coord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
 		229B94A2274D688300E73CEE /* DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
 		229B94A5274D688300E73CEE /* DrvDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrvDistance.swift; sourceTree = "<group>"; };
@@ -340,6 +319,7 @@
 		22ECC89827FE8C3600955AC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		22ECC89A27FE8C3600955AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22ECC8A827FE8C6500955AC7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		22F783D5283DC188005C2106 /* Trim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trim.swift; sourceTree = "<group>"; };
 		22F955B7280A48800064FCFB /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		22F955BD280A5D770064FCFB /* ResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
 		22F955BF280A60AC0064FCFB /* ExtensionAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionAPIRouter.swift; sourceTree = "<group>"; };
@@ -472,7 +452,6 @@
 		229B9471274D686200E73CEE /* Status Response */ = {
 			isa = PBXGroup;
 			children = (
-				229B9496274D688200E73CEE /* Accuracy.swift */,
 				229B949F274D688300E73CEE /* ActiveDTC.swift */,
 				229B9491274D688200E73CEE /* AirTemp.swift */,
 				229B948D274D688100E73CEE /* BatteryStatus.swift */,
@@ -480,7 +459,6 @@
 				229B9499274D688200E73CEE /* Climate.swift */,
 				229B94A1274D688300E73CEE /* Coord.swift */,
 				229B94A2274D688300E73CEE /* DateTime.swift */,
-				229B9479274D688000E73CEE /* Device.swift */,
 				229B9476274D688000E73CEE /* DoorStatus.swift */,
 				229B94A5274D688300E73CEE /* DrvDistance.swift */,
 				229B948C274D688100E73CEE /* Dte.swift */,
@@ -494,21 +472,18 @@
 				229B948A274D688100E73CEE /* HeatingAccessory.swift */,
 				229B9481274D688100E73CEE /* LastVehicleInfo.swift */,
 				229B9490274D688200E73CEE /* Location.swift */,
-				229B94A0274D688300E73CEE /* Modem.swift */,
 				229B9477274D688000E73CEE /* StatusPayload.swift */,
 				229B9482274D688100E73CEE /* RangeByFuel.swift */,
 				229B9483274D688100E73CEE /* RemainChargeTime.swift */,
 				229B9492274D688200E73CEE /* ReportDate.swift */,
-				229B9497274D688200E73CEE /* ServicePeriod.swift */,
 				229B949D274D688300E73CEE /* Speed.swift */,
-				229B949C274D688200E73CEE /* SupportedApps.swift */,
 				229B949A274D688200E73CEE /* SyncDate.swift */,
 				229B9495274D688200E73CEE /* TargetSOC.swift */,
 				229B94A6274D688300E73CEE /* Telematics.swift */,
 				229B9485274D688100E73CEE /* TimeInterval.swift */,
 				229B9475274D688000E73CEE /* TirePressure.swift */,
 				229B9488274D688100E73CEE /* TotalAvailableRange.swift */,
-				229B9498274D688200E73CEE /* Trim.swift */,
+				22F783D5283DC188005C2106 /* Trim.swift */,
 				229B949B274D688200E73CEE /* Vehicle.swift */,
 				229B9478274D688000E73CEE /* VehicleConfig.swift */,
 				229B9472274D688000E73CEE /* VehicleDetail.swift */,
@@ -827,17 +802,14 @@
 				22B3E864274DB4CD00906FE2 /* APIRouter.swift in Sources */,
 				229B9455274D642400E73CEE /* UpdatePayload.swift in Sources */,
 				229B94A8274D688300E73CEE /* VehicleDetail.swift in Sources */,
-				229B94AF274D688300E73CEE /* Device.swift in Sources */,
 				229B94A9274D688300E73CEE /* FreeTrial.swift in Sources */,
 				22FBB85F280E066A009AA75F /* Reachability.swift in Sources */,
 				22ECC8A927FE8C6500955AC7 /* Intents.intentdefinition in Sources */,
-				229B94CE274D688300E73CEE /* Trim.swift in Sources */,
 				229B94D7274D688300E73CEE /* Coord.swift in Sources */,
 				229B94B4274D688300E73CEE /* EvModeRange.swift in Sources */,
 				229B94BC274D688300E73CEE /* BillingPeriod.swift in Sources */,
 				229B94BD274D688300E73CEE /* VehicleStatusRpt.swift in Sources */,
 				229B94AD274D688300E73CEE /* StatusPayload.swift in Sources */,
-				229B94D2274D688300E73CEE /* SupportedApps.swift in Sources */,
 				229B94CA274D688300E73CEE /* GasModeRange.swift in Sources */,
 				22B3E86A274DD4D700906FE2 /* ActionStatusPayload.swift in Sources */,
 				229B94C1274D688300E73CEE /* FreeServiceDate.swift in Sources */,
@@ -847,6 +819,7 @@
 				229B94BB274D688300E73CEE /* TimeInterval.swift in Sources */,
 				22BEDD412800BDA300785D3D /* Shortcut.swift in Sources */,
 				229B94AE274D688300E73CEE /* VehicleConfig.swift in Sources */,
+				22F783D6283DC189005C2106 /* Trim.swift in Sources */,
 				229B94C8274D688300E73CEE /* ReportDate.swift in Sources */,
 				229B94D3274D688300E73CEE /* Speed.swift in Sources */,
 				229B94BA274D688300E73CEE /* VehicleStatus.swift in Sources */,
@@ -854,7 +827,6 @@
 				229B94D5274D688300E73CEE /* ActiveDTC.swift in Sources */,
 				229B94C9274D688300E73CEE /* Enrollment.swift in Sources */,
 				229B94BE274D688300E73CEE /* TotalAvailableRange.swift in Sources */,
-				229B94D6274D688300E73CEE /* Modem.swift in Sources */,
 				22B3E869274DD4D700906FE2 /* ActionStatusResponse.swift in Sources */,
 				229B94B7274D688300E73CEE /* LastVehicleInfo.swift in Sources */,
 				22B3E862274DAB2600906FE2 /* ImagePath.swift in Sources */,
@@ -866,7 +838,6 @@
 				22921DF22743500F0092526E /* SceneDelegate.swift in Sources */,
 				22819DFA27468BA900D21EED /* ProgressBar.swift in Sources */,
 				22570184274D229700D4ED45 /* VehiclesResponse.swift in Sources */,
-				229B94CC274D688300E73CEE /* Accuracy.swift in Sources */,
 				229B94C0274D688300E73CEE /* HeatingAccessory.swift in Sources */,
 				229B94D0274D688300E73CEE /* SyncDate.swift in Sources */,
 				229B94AB274D688300E73CEE /* TirePressure.swift in Sources */,
@@ -883,7 +854,6 @@
 				22FBB85A280DB7D4009AA75F /* Secrets.swift in Sources */,
 				229B94AC274D688300E73CEE /* DoorStatus.swift in Sources */,
 				22819DD027449A8100D21EED /* Endpoint.swift in Sources */,
-				229B94CD274D688300E73CEE /* ServicePeriod.swift in Sources */,
 				22F955BE280A5D770064FCFB /* ResponseError.swift in Sources */,
 				229B94DD274D688300E73CEE /* StatusResponse.swift in Sources */,
 				229B94C5274D688300E73CEE /* EvStatus.swift in Sources */,
@@ -935,14 +905,10 @@
 				22ECC8DF27FE9F3B00955AC7 /* BillingPeriod.swift in Sources */,
 				22ECC8D527FE9F3B00955AC7 /* Telematics.swift in Sources */,
 				22ECC8C527FE9F3B00955AC7 /* TirePressure.swift in Sources */,
-				22ECC8BE27FE9F3B00955AC7 /* Device.swift in Sources */,
 				22ECC8D227FE9F3B00955AC7 /* DoorStatus.swift in Sources */,
 				22ECC8D027FE9F3B00955AC7 /* EvModeRange.swift in Sources */,
 				22ECC8D927FE9F3B00955AC7 /* FreeServiceDate.swift in Sources */,
-				22ECC8CC27FE9F3B00955AC7 /* Accuracy.swift in Sources */,
-				22ECC8BA27FE9F3B00955AC7 /* SupportedApps.swift in Sources */,
 				22ECC88B27FE8C3500955AC7 /* IntentHandler.swift in Sources */,
-				22ECC8DE27FE9F3B00955AC7 /* Modem.swift in Sources */,
 				22FBB85B280DB9F8009AA75F /* Secrets.swift in Sources */,
 				22ECC8C727FE9F3B00955AC7 /* DateTime.swift in Sources */,
 				22ECC8DA27FE9F3B00955AC7 /* AirTemp.swift in Sources */,
@@ -950,9 +916,8 @@
 				22ECC8D327FE9F3B00955AC7 /* StatusPayload.swift in Sources */,
 				22ECC8E027FE9F3B00955AC7 /* FreeTrial.swift in Sources */,
 				22ECC8D427FE9F3B00955AC7 /* SyncDate.swift in Sources */,
+				22F783D7283DC1E1005C2106 /* Trim.swift in Sources */,
 				22ECC8DC27FE9F3B00955AC7 /* VehicleConfig.swift in Sources */,
-				22ECC8E227FE9F3B00955AC7 /* Trim.swift in Sources */,
-				22ECC8BD27FE9F3B00955AC7 /* ServicePeriod.swift in Sources */,
 				22ECC8E127FE9F3B00955AC7 /* ActiveDTC.swift in Sources */,
 				22ECC8B927FE9F3B00955AC7 /* Enrollment.swift in Sources */,
 				22ECC8B627FE9F2E00955AC7 /* VehicleStatusRpt.swift in Sources */,
@@ -974,11 +939,8 @@
 				228C82DE27FF318E000C95D6 /* Enrollment.swift in Sources */,
 				228C82EC27FF318E000C95D6 /* DrvDistance.swift in Sources */,
 				22ECC8AB27FE931100955AC7 /* Intents.intentdefinition in Sources */,
-				228C82E727FF318E000C95D6 /* SupportedApps.swift in Sources */,
-				228C82F927FF318E000C95D6 /* Modem.swift in Sources */,
 				228C82E327FF318E000C95D6 /* TimeInterval.swift in Sources */,
 				228C82DD27FF318E000C95D6 /* TargetSOC.swift in Sources */,
-				228C82FB27FF318E000C95D6 /* Trim.swift in Sources */,
 				228C82F127FF318E000C95D6 /* LastVehicleInfo.swift in Sources */,
 				228C82F327FF318E000C95D6 /* RemainChargeTime.swift in Sources */,
 				228C82F827FF318E000C95D6 /* DateTime.swift in Sources */,
@@ -1001,7 +963,6 @@
 				22F955BA280A48A80064FCFB /* Logger.swift in Sources */,
 				228C82D127FF318E000C95D6 /* Speed.swift in Sources */,
 				228C82EB27FF318E000C95D6 /* VehicleStatus.swift in Sources */,
-				228C82EF27FF318E000C95D6 /* Device.swift in Sources */,
 				228C82D927FF318E000C95D6 /* Climate.swift in Sources */,
 				228C82D727FF318E000C95D6 /* HeatingAccessory.swift in Sources */,
 				228C82F227FF318E000C95D6 /* Coord.swift in Sources */,
@@ -1019,12 +980,11 @@
 				228C82E027FF318E000C95D6 /* AirTemp.swift in Sources */,
 				228C82E427FF318E000C95D6 /* VehicleDetail.swift in Sources */,
 				228C82E827FF318E000C95D6 /* BatteryStatus.swift in Sources */,
+				22F783D8283DC1E1005C2106 /* Trim.swift in Sources */,
 				228C82EE27FF318E000C95D6 /* RangeByFuel.swift in Sources */,
 				228C82ED27FF318E000C95D6 /* Telematics.swift in Sources */,
-				228C82D227FF318E000C95D6 /* Accuracy.swift in Sources */,
 				228C82DB27FF318E000C95D6 /* FreeTrialExtension.swift in Sources */,
 				22ECC89627FE8C3600955AC7 /* IntentViewController.swift in Sources */,
-				228C82E127FF318E000C95D6 /* ServicePeriod.swift in Sources */,
 				228C82D327FF318E000C95D6 /* SyncDate.swift in Sources */,
 				228C82D527FF318E000C95D6 /* ActiveDTC.swift in Sources */,
 				228C82FD27FF318E000C95D6 /* Location.swift in Sources */,
@@ -1109,7 +1069,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1172,7 +1132,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

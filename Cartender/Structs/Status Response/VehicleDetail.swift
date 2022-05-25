@@ -14,18 +14,14 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 struct VehicleDetail : Codable {
 	let vehicle : Vehicle?
-	let device : Device?
 
 	enum CodingKeys: String, CodingKey {
-
 		case vehicle = "vehicle"
-		case device = "device"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		vehicle = try values.decodeIfPresent(Vehicle.self, forKey: .vehicle)
-		device = try values.decodeIfPresent(Device.self, forKey: .device)
 	}
 
 }

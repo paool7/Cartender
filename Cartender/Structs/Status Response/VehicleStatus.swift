@@ -14,56 +14,38 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 struct VehicleStatus : Codable {
 	let climate : Climate?
-	let engine : Bool?
 	let doorLock : Bool?
 	let doorStatus : DoorStatus?
-	let lowFuelLight : Bool?
 	let evStatus : EvStatus?
-	let ign3 : Bool?
-	let transCond : Bool?
 	let tirePressure : TirePressure?
 	let dateTime : DateTime?
 	let syncDate : SyncDate?
 	let batteryStatus : BatteryStatus?
 	let sleepMode : Bool?
-	let remoteControlAvailable : Int?
-	let valetParkingMode : Int?
 
 	enum CodingKeys: String, CodingKey {
 		case climate = "climate"
-		case engine = "engine"
 		case doorLock = "doorLock"
 		case doorStatus = "doorStatus"
-		case lowFuelLight = "lowFuelLight"
 		case evStatus = "evStatus"
-		case ign3 = "ign3"
-		case transCond = "transCond"
 		case tirePressure = "tirePressure"
 		case dateTime = "dateTime"
 		case syncDate = "syncDate"
 		case batteryStatus = "batteryStatus"
 		case sleepMode = "sleepMode"
-		case remoteControlAvailable = "remoteControlAvailable"
-		case valetParkingMode = "valetParkingMode"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		climate = try values.decodeIfPresent(Climate.self, forKey: .climate)
-		engine = try values.decodeIfPresent(Bool.self, forKey: .engine)
 		doorLock = try values.decodeIfPresent(Bool.self, forKey: .doorLock)
 		doorStatus = try values.decodeIfPresent(DoorStatus.self, forKey: .doorStatus)
-		lowFuelLight = try values.decodeIfPresent(Bool.self, forKey: .lowFuelLight)
 		evStatus = try values.decodeIfPresent(EvStatus.self, forKey: .evStatus)
-		ign3 = try values.decodeIfPresent(Bool.self, forKey: .ign3)
-		transCond = try values.decodeIfPresent(Bool.self, forKey: .transCond)
 		tirePressure = try values.decodeIfPresent(TirePressure.self, forKey: .tirePressure)
 		dateTime = try values.decodeIfPresent(DateTime.self, forKey: .dateTime)
 		syncDate = try values.decodeIfPresent(SyncDate.self, forKey: .syncDate)
 		batteryStatus = try values.decodeIfPresent(BatteryStatus.self, forKey: .batteryStatus)
 		sleepMode = try values.decodeIfPresent(Bool.self, forKey: .sleepMode)
-		remoteControlAvailable = try values.decodeIfPresent(Int.self, forKey: .remoteControlAvailable)
-		valetParkingMode = try values.decodeIfPresent(Int.self, forKey: .valetParkingMode)
 	}
 
 }

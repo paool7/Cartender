@@ -15,20 +15,17 @@ import Foundation
 struct BillingPeriod : Codable {
 	let freeTrial : FreeTrial?
 	let freeTrialExtension : FreeTrialExtension?
-	let servicePeriod : ServicePeriod?
 
 	enum CodingKeys: String, CodingKey {
 
 		case freeTrial = "freeTrial"
 		case freeTrialExtension = "freeTrialExtension"
-		case servicePeriod = "servicePeriod"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		freeTrial = try values.decodeIfPresent(FreeTrial.self, forKey: .freeTrial)
 		freeTrialExtension = try values.decodeIfPresent(FreeTrialExtension.self, forKey: .freeTrialExtension)
-		servicePeriod = try values.decodeIfPresent(ServicePeriod.self, forKey: .servicePeriod)
 	}
 
 }

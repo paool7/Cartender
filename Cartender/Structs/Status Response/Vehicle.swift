@@ -14,48 +14,20 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 struct Vehicle : Codable {
 	let vin : String?
-	let trim : Trim?
-	let telematics : Int?
 	let mileage : String?
-	let mileageSyncDate : String?
-	let exteriorColor : String?
-	let exteriorColorCode : String?
-	let fuelType : Int?
-	let invDealerCode : String?
-	let testVehicle : String?
-	let supportedApps : [SupportedApps]?
-	let activationType : Int?
+    let trim : Trim?
 
 	enum CodingKeys: String, CodingKey {
-
 		case vin = "vin"
-		case trim = "trim"
-		case telematics = "telematics"
 		case mileage = "mileage"
-		case mileageSyncDate = "mileageSyncDate"
-		case exteriorColor = "exteriorColor"
-		case exteriorColorCode = "exteriorColorCode"
-		case fuelType = "fuelType"
-		case invDealerCode = "invDealerCode"
-		case testVehicle = "testVehicle"
-		case supportedApps = "supportedApps"
-		case activationType = "activationType"
+        case trim = "trim"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		vin = try values.decodeIfPresent(String.self, forKey: .vin)
-		trim = try values.decodeIfPresent(Trim.self, forKey: .trim)
-		telematics = try values.decodeIfPresent(Int.self, forKey: .telematics)
 		mileage = try values.decodeIfPresent(String.self, forKey: .mileage)
-		mileageSyncDate = try values.decodeIfPresent(String.self, forKey: .mileageSyncDate)
-		exteriorColor = try values.decodeIfPresent(String.self, forKey: .exteriorColor)
-		exteriorColorCode = try values.decodeIfPresent(String.self, forKey: .exteriorColorCode)
-		fuelType = try values.decodeIfPresent(Int.self, forKey: .fuelType)
-		invDealerCode = try values.decodeIfPresent(String.self, forKey: .invDealerCode)
-		testVehicle = try values.decodeIfPresent(String.self, forKey: .testVehicle)
-		supportedApps = try values.decodeIfPresent([SupportedApps].self, forKey: .supportedApps)
-		activationType = try values.decodeIfPresent(Int.self, forKey: .activationType)
+        trim = try values.decodeIfPresent(Trim.self, forKey: .trim)
 	}
 
 }
